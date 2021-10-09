@@ -14,12 +14,14 @@ class CreateEquipmentTable extends Migration
     public function up()
     {
         Schema::create('itr_eqpt', function (Blueprint $table) {
-            $table->id('cd_eqpt');
-            $table->string('nm_eqpt');
-            $table->text('dc_tipo_eqpt');
-            $table->integer('qt_eqpt');
-            $table->boolean('ic_tipo_prps');
-            $table->integer('qt_psgr');
+            $table->string('cd_eqpt', 3);
+            $table->string('nm_eqpt', 38);
+            $table->string('dc_tipo_eqpt', 13);
+            $table->decimal('qt_motor', 1, 0)->nullable();
+            $table->string('ic_tipo_prps', 1)->nullable();
+            $table->decimal('qt_psgr', 3, 0)->nullable();
+
+            $table->primary('cd_eqpt');
         });
     }
 

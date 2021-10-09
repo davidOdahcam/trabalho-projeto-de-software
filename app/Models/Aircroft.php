@@ -11,6 +11,7 @@ class Aircroft extends Model
 
     protected $table = 'itr_arnv';
     protected $primaryKey = 'cd_arnv';
+    protected $timestamps = false;
 
     protected $fillable = [
         'cd_eqpt',

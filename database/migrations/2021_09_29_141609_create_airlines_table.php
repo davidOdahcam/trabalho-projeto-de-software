@@ -14,9 +14,12 @@ class CreateAirlinesTable extends Migration
     public function up()
     {
         Schema::create('itr_cmpn_aerea', function (Blueprint $table) {
-            $table->id('cd_cmpn_aerea');
-            $table->string('nm_cmpn_aerea');
-            $table->unsignedBigInteger('cd_pais');
+            $table->string('cd_cmpn_aerea', 2);
+            $table->string('nm_cmpn_aerea', 22);
+            $table->string('cd_pais', 2)->nullable()->default(null);
+
+            $table->primary('cd_cmpn_aerea');
+            $table->foreign('cd_pais')->references('cd_pais')->on('itr_pais')->onDelete('restrict');
         });
     }
 

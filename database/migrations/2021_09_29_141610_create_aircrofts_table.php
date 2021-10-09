@@ -14,9 +14,13 @@ class CreateAircroftsTable extends Migration
     public function up()
     {
         Schema::create('itr_arnv', function (Blueprint $table) {
-            $table->id('cd_arnv');
-            $table->unsignedBigInteger('cd_eqpt');
-            $table->unsignedBigInteger('cd_cmpn_aerea');
+            $table->string('cd_arnv', 5);
+            $table->string('cd_eqpt', 3);
+            $table->string('cd_cmpn_aerea', 2);
+
+            $table->primary('cd_arnv');
+            $table->foreign('cd_eqpt')->references('cd_eqpt')->on('itr_eqpt')->onDelete('restrict');
+            $table->foreign('cd_cmpn_aerea')->references('cd_cmpn_aerea')->on('itr_cmpn_aerea')->onDelete('restrict');
         });
     }
 

@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Flight extends Model
+class State extends Model
 {
     use HasFactory;
 
-    protected $table = 'itr_voo';
-    protected $primaryKey = ['nr_voo', 'dt_saida_voo'];
+    protected $table = 'itr_uf';
+    protected $primaryKey = 'sg_uf';
     protected $timestamps = false;
 
     protected $fillable = [
-        'nr_rota_voo',
-        'cd_arnv'
+        'nm_uf'
     ];
 }

@@ -11,6 +11,7 @@ class Airline extends Model
 
     protected $table = 'itr_cmpn_aerea';
     protected $primaryKey = 'cd_cmpn_aerea';
+    protected $timestamps = false;
 
     protected $fillable = [
         'nm_cmpn_aerea',

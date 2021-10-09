@@ -11,6 +11,7 @@ class Passenger extends Model
 
     protected $table = 'itr_psgr';
     protected $primaryKey = 'cd_psgr';
+    protected $timestamps = false;
 
     protected $fillable = [
         'nm_psgr',
