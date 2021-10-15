@@ -11,10 +11,28 @@ class Aircroft extends Model
 
     protected $table = 'itr_arnv';
     protected $primaryKey = 'cd_arnv';
-    protected $timestamps = false;
+    public $timestamps = false;
 
     protected $fillable = [
+        'cd_arnv',
         'cd_eqpt',
         'cd_cmpn_aerea'
     ];
+
+    protected $casts = [
+        'cd_arnv' => 'string',
+        'cd_eqpt' => 'string',
+        'cd_cmpn_aerea' => 'string'
+    ];
+
+    /**
+     * Relationships
+     */
+    public function airline() {
+        return $this->hasOne(Airline::class, 'cd_cmpn_aerea', 'cd_cmpn_aerea');
+    }
+
+    public function equipment() {
+        return $this->hasOne(Equipment::class, 'cd_eqpt', 'cd_eqpt');
+    }
 }

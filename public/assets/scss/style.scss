@@ -1,0 +1,17 @@
+// sass --watch public/assets/scss/style.scss:public/assets/css/style.css
+
+@import 'variables';
+
+$theme-colors: (
+    "first": $first,
+    "second": $second,
+    "terciary": $terciary
+);
+
+@import '../adminlte/scss/adminlte';
+
+@import 'login';
+
+body {
+    font-family: 'Roboto', sans-serif;
+}

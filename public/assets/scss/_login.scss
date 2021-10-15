@@ -1,0 +1,37 @@
+.form-login {
+    min-width: 300px;
+
+    .logo {
+        text-align: center;
+        margin-bottom: 1rem;
+
+        i {
+            font-size: 3rem;
+            color: $second;
+            transform: rotate(-45deg);
+        }
+    }
+
+    .title {
+        font-style: normal;
+        font-weight: 900;
+        font-size: 36px;
+        line-height: 42px;
+        text-align: center;
+        color: #364547;
+    }
+
+    .sub-title {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1rem;
+        line-height: 13px;
+        text-align: center;
+        color: #869DA0;
+        margin-bottom: 2rem;
+    }
+
+    [class*=icheck-]>input:first-child+input[type=hidden]+label::before, [class*=icheck-]>input:first-child+label::before {
+        border-radius: 8px;
+    }
+}

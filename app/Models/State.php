@@ -11,9 +11,14 @@ class State extends Model
 
     protected $table = 'itr_uf';
     protected $primaryKey = 'sg_uf';
-    protected $timestamps = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'nm_uf'
+    ];
+
+    protected $casts = [
+        'sg_uf' => 'string',
+        'nm_uf' => 'string'
     ];
 }

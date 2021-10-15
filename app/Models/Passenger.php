@@ -11,7 +11,7 @@ class Passenger extends Model
 
     protected $table = 'itr_psgr';
     protected $primaryKey = 'cd_psgr';
-    protected $timestamps = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'nm_psgr',
@@ -20,5 +20,15 @@ class Passenger extends Model
         'cd_pais',
         'ic_estd_civil',
         'cd_psgr_resp'
+    ];
+
+    protected $casts = [
+        'cd_psgr' => 'int',
+        'nm_psgr' => 'string',
+        'ic_sexo_psgr' => 'string',
+        'dt_nasc_psgr' => 'date',
+        'cd_pais' => 'string',
+        'ic_estd_civil' => 'string',
+        'cd_psgr_resp' => 'int'
     ];
 }

@@ -11,10 +11,19 @@ class Flight extends Model
 
     protected $table = 'itr_voo';
     protected $primaryKey = ['nr_voo', 'dt_saida_voo'];
-    protected $timestamps = false;
+    public $timestamps = false;
 
     protected $fillable = [
+        'nr_voo',
+        'dt_saida_voo',
         'nr_rota_voo',
         'cd_arnv'
+    ];
+
+    protected $casts = [
+        'nr_voo' => 'int',
+        'dt_saida_voo' => 'date',
+        'nr_rota_voo' => 'int',
+        'cd_arnv' => 'string'
     ];
 }

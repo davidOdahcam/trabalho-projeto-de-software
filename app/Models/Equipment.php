@@ -20,4 +20,20 @@ class Equipment extends Model
         'ic_tipo_prps',
         'qt_psgr'
     ];
+
+    protected $casts = [
+        'cd_eqpt' => 'string',
+        'nm_eqpt' => 'string',
+        'dc_tipo_eqpt' => 'string',
+        'qt_motor' => 'int',
+        'ic_tipo_prps' => 'string',
+        'qt_psgr' => 'int'
+    ];
+
+    /**
+     * Relationships
+     */
+    public function aircroft() {
+        return $this->belongsTo(Aircroft::class, 'cd_eqpt', 'cd_eqpt');
+    }
 }

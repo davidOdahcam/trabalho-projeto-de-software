@@ -11,10 +11,16 @@ class Country extends Model
 
     protected $table = 'itr_pais';
     protected $primaryKey = 'cd_pais';
-    protected $timestamps = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'nm_pais',
         'qt_pplc_pais'
+    ];
+
+    protected $casts = [
+        'cd_pais' => 'string',
+        'nm_pais' => 'string',
+        'qt_pplc_pais' => 'int',
     ];
 }
