@@ -14,6 +14,7 @@ class Country extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'cd_pais',
         'nm_pais',
         'qt_pplc_pais'
     ];
@@ -23,4 +24,11 @@ class Country extends Model
         'nm_pais' => 'string',
         'qt_pplc_pais' => 'int',
     ];
+
+    /**
+     * Relationships
+     */
+    public function airlines() {
+        return $this->belongsTo(Airline::class, 'cd_pais', 'cd_pais');
+    }
 }

@@ -14,6 +14,7 @@ class Airline extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'cd_cmpn_aerea',
         'nm_cmpn_aerea',
         'cd_pais'
     ];
@@ -23,4 +24,11 @@ class Airline extends Model
         'nm_cmpn_aerea' => 'string',
         'cd_pais' => 'string'
     ];
+
+    /**
+     * Relationships
+     */
+    public function country() {
+        return $this->hasOne(Country::class, 'cd_pais', 'cd_pais');
+    }
 }

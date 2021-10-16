@@ -92,7 +92,8 @@ class PSDelete {
      *
      * @return DataTable
      */
-    constructor(title, form, action) {
+    constructor(selector, title, form, action) {
+        this.selector = selector;
         this.title = title;
         this.form = form;
         this.action = action;
@@ -102,7 +103,7 @@ class PSDelete {
     init() {
         const self = this;
 
-        $('.form-delete-aircroft').on('submit', function (e) {
+        $(self.selector).on('submit', function (e) {
             e.preventDefault();
             const form = e.currentTarget;
             const tr = $(form).parents('tr');

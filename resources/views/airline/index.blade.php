@@ -14,13 +14,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Aeronaves</h1>
+                <h1 class="m-0">Companhias aéreas</h1>
             </div>
 
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Painel</a></li>
-                    <li class="breadcrumb-item active">Aeronaves</li>
+                    <li class="breadcrumb-item active">Companhias aéreas</li>
                 </ol>
             </div>
         </div>
@@ -31,7 +31,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="text-right mb-3">
-            <a href="{{ route('aircroft.create') }}" class="btn bg-gradient-primary px-5">Nova aeronave</a>
+            <a href="{{ route('airline.create') }}" class="btn bg-gradient-primary px-5">Nova companhia aérea</a>
         </div>
 
         <div class="card card-primary card-outline">
@@ -42,28 +42,28 @@
                     <thead>
                         <tr>
                             <th>Código</th>
-                            <th>Equipamento</th>
-                            <th>Companhia Aérea</th>
+                            <th>Nome</th>
+                            <th>País</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($aircrofts as $aircroft)
+                        @foreach ($airlines as $airline)
                             <tr>
-                                <td>{{ $aircroft->cd_arnv ?? '' }}</td>
-                                <td>{{ $aircroft->equipment->nm_eqpt ?? '' }}</td>
-                                <td>{{ $aircroft->airline->nm_cmpn_aerea ?? '' }}</td>
+                                <td>{{ $airline->cd_cmpn_aerea ?? '' }}</td>
+                                <td>{{ $airline->nm_cmpn_aerea ?? '' }}</td>
+                                <td>{{ $airline->country->nm_pais ?? '' }}</td>
                                 <td>
-                                    <a href="{{ route('aircroft.show', $aircroft->cd_arnv) }}" class="btn btn-success btn-sm">
+                                    <a href="{{ route('airline.show', $airline->cd_cmpn_aerea) }}" class="btn btn-success btn-sm">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('aircroft.edit', $aircroft->cd_arnv) }}" class="btn btn-info btn-sm">
+                                    <a href="{{ route('airline.edit', $airline->cd_cmpn_aerea) }}" class="btn btn-info btn-sm">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ $aircroft->cd_arnv }}" value="{{ $aircroft->cd_arnv }}" data-toggle="tooltip" title="Excluir aeronave">
+                                    <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ $airline->cd_cmpn_aerea }}" value="{{ $airline->cd_cmpn_aerea }}" data-toggle="tooltip" title="Excluir companhia aérea">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                    <form method="post" action="{{ route('aircroft.destroy', $aircroft->cd_arnv) }}" id="delete_{{ $aircroft->cd_arnv }}" class="form-delete-aircroft">
+                                    <form method="post" action="{{ route('airline.destroy', $airline->cd_cmpn_aerea) }}" id="delete_{{ $airline->cd_cmpn_aerea }}" class="form-delete-airline">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                     </form>
@@ -107,15 +107,15 @@
     <script>
         $(document).ready(function () {
             const ps_datatable = new PSDataTable(
-                '{{ config("app.name") }} - Aeronaves',
+                '{{ config("app.name") }} - Companhias aéreas',
                 [0, 1, 2],
                 "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 '#main-datatable',
                 '#export-datatable');
 
             const ps_delete = new PSDelete(
-                '.form-delete-aircroft',
-                'Tem certeza de que deseja deletar esta aeronave?',
+                '.form-delete-airline',
+                'Tem certeza de que deseja deletar esta companhia aérea?',
                 'Você não poderá voltar atrás!',
                 'warning'
             );

@@ -21,7 +21,7 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], fu
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::resource('/aeronaves', 'AircroftController')->names('aircroft')->parameters(['aeronave' => 'aircroft']);
-    Route::resource('/companhias-aereas', 'AirlineController')->names('airline')->parameters(['companhia' => 'airline']);
+    Route::resource('/companhias-aereas', 'AirlineController')->names('airline')->parameters(['companhias_aerea' => 'airline']);
     Route::resource('/aeroportos', 'AirportController')->names('airport')->parameters(['aeroporto' => 'airport']);
     Route::resource('/reservas', 'BookingController')->names('booking')->parameters(['reserva' => 'booking']);
     Route::resource('/paises', 'CountryController')->names('country')->parameters(['pais' => 'country']);
