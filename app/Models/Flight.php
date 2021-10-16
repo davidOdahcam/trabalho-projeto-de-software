@@ -10,7 +10,7 @@ class Flight extends Model
     use HasFactory;
 
     protected $table = 'itr_voo';
-    protected $primaryKey = ['nr_voo', 'dt_saida_voo'];
+    protected $primaryKey = 'nr_voo';
     public $timestamps = false;
 
     protected $fillable = [

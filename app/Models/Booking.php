@@ -10,7 +10,7 @@ class Booking extends Model
     use HasFactory;
 
     protected $table = 'itr_resv';
-    protected $primaryKey = false;
+    protected $primaryKey = 'dt_saida_voo';
     public $timestamps = false;
 
     protected $fillable = [
