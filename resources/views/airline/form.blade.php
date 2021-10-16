@@ -14,7 +14,7 @@
         <label for="nm_cmpn_aerea">Nome da companhia aérea</label>
         <input type="text" name="nm_cmpn_aerea" id="nm_cmpn_aerea" class="form-control" value="{{ $airline->nm_cmpn_aerea ?? old('nm_cmpn_aerea') }}">
 
-        @error('qt_pplc_pais')
+        @error('nm_cmpn_aerea')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>

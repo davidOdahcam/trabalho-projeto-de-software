@@ -14,6 +14,7 @@ class Equipment extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'cd_eqpt',
         'nm_eqpt',
         'dc_tipo_eqpt',
         'qt_motor',
