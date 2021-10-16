@@ -17,7 +17,7 @@ class CreateBookingsTable extends Migration
             $table->decimal('cd_psgr', 4, 0);
             $table->decimal('nr_voo', 3, 0);
             $table->date('dt_saida_voo');
-            $table->decimal('pc_desc_pasg', 5, 2);
+            $table->decimal('pc_desc_pasg', 5, 2)->nullable();
 
             $table->primary(['cd_psgr', 'nr_voo', 'dt_saida_voo']);
             $table->foreign('cd_psgr')->references('cd_psgr')->on('itr_psgr');

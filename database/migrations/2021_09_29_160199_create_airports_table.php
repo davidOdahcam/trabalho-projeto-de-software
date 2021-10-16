@@ -16,7 +16,7 @@ class CreateAirportsTable extends Migration
         Schema::create('itr_arpt', function (Blueprint $table) {
             $table->string('cd_arpt', 3);
             $table->string('cd_pais', 2);
-            $table->string('sg_uf', 2);
+            $table->string('sg_uf', 2)->nullable();
             $table->string('nm_cidd', 30);
 
             $table->primary('cd_arpt');
