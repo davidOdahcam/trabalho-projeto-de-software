@@ -14,6 +14,7 @@ class Passenger extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'cd_psgr',
         'nm_psgr',
         'ic_sexo_psgr',
         'dt_nasc_psgr',

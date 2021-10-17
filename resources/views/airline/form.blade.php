@@ -36,15 +36,4 @@
             </span>
         @enderror
     </div>
-
-    {{-- <div class="form-group col-md-4">
-        <label for="qt_pplc_pais">Código da aeronave</label>
-        <input type="number" name="qt_pplc_pais" id="qt_pplc_pais" class="form-control" value="{{ $airline->qt_pplc_pais ?? old('qt_pplc_pais') }}">
-
-        @error('qt_pplc_pais')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-    </div> --}}
 </div>
