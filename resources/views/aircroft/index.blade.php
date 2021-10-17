@@ -50,9 +50,9 @@
                     <tbody>
                         @foreach ($aircrofts as $aircroft)
                             <tr>
-                                <td>{{ $aircroft->cd_arnv ?? '' }}</td>
-                                <td>{{ $aircroft->equipment->nm_eqpt ?? '' }}</td>
-                                <td>{{ $aircroft->airline->nm_cmpn_aerea ?? '' }}</td>
+                                <td>{{ $aircroft->cd_arnv ?? config('general.format.empty') }}</td>
+                                <td>{{ $aircroft->equipment->nm_eqpt ?? config('general.format.empty') }}</td>
+                                <td>{{ $aircroft->airline->nm_cmpn_aerea ?? config('general.format.empty') }}</td>
                                 <td>
                                     <a href="{{ route('aircroft.show', $aircroft->cd_arnv) }}" class="btn btn-success btn-sm"  data-toggle="tooltip" title="Visualizar aeronave">
                                         <i class="fas fa-eye"></i>
@@ -114,7 +114,7 @@
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',
                 buttons: '#export-datatable',
-                perPage: {{ config('assets.datatable.per_page') }}
+                perPage: {{ config('general.datatable.per_page') }}
             });
 
             const ps_delete = new PSDelete(

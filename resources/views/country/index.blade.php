@@ -50,9 +50,9 @@
                     <tbody>
                         @foreach ($countries as $country)
                             <tr>
-                                <td>{{ $country->cd_pais ?? '' }}</td>
-                                <td>{{ $country->nm_pais ?? '' }}</td>
-                                <td>{{ ($country->qt_pplc_pais) ? number_format($country->qt_pplc_pais, 0, '', '.') : config('assets.format.data.empty') }}</td>
+                                <td>{{ $country->cd_pais ?? config('general.format.empty') }}</td>
+                                <td>{{ $country->nm_pais ?? config('general.format.empty') }}</td>
+                                <td>{{ ($country->qt_pplc_pais) ? number_format($country->qt_pplc_pais, 0, '', '.') : config('general.format.empty') }}</td>
                                 <td>
                                     <a href="{{ route('country.show', $country->cd_pais) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar país">
                                         <i class="fas fa-eye"></i>
@@ -114,7 +114,7 @@
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',
                 buttons: '#export-datatable',
-                perPage: {{ config('assets.datatable.per_page') }}
+                perPage: {{ config('general.datatable.per_page') }}
             });
 
             const ps_delete = new PSDelete(

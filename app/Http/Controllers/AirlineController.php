@@ -18,7 +18,7 @@ class AirlineController extends Controller
      */
     public function index()
     {
-        $airlines = Airline::paginate(config('assets.datatable.per_page'));
+        $airlines = Airline::paginate(config('general.datatable.per_page'));
 
         return view('airline.index', [
             'airlines' => $airlines

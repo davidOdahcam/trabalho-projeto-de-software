@@ -14,13 +14,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Companhias aéreas</h1>
+                <h1 class="m-0">Voos</h1>
             </div>
 
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Painel</a></li>
-                    <li class="breadcrumb-item active">Companhias aéreas</li>
+                    <li class="breadcrumb-item active">Voos</li>
                 </ol>
             </div>
         </div>
@@ -31,7 +31,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="text-right mb-3">
-            <a href="{{ route('airline.create') }}" class="btn bg-gradient-primary px-5">Nova companhia aérea</a>
+            <a href="{{ route('flight.create') }}" class="btn bg-gradient-primary px-5">Novo voo</a>
         </div>
 
         <div class="card card-primary card-outline">
@@ -41,29 +41,31 @@
                 <table id="main-datatable" class="table table-striped text-center" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Código</th>
-                            <th>Nome</th>
-                            <th>País</th>
+                            <th>Número do voo</th>
+                            <th>Data de saída</th>
+                            <th>Rota</th>
+                            <th>Aeronave</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($airlines as $airline)
+                        @foreach ($flights as $flight)
                             <tr>
-                                <td>{{ $airline->cd_cmpn_aerea ?? config('general.format.empty') }}</td>
-                                <td>{{ $airline->nm_cmpn_aerea ?? config('general.format.empty') }}</td>
-                                <td>{{ $airline->country->nm_pais ?? config('general.format.empty') }}</td>
+                                <td>{{ $flight->nr_voo ?? config('general.format.empty') }}</td>
+                                <td>{{ date(config('general.format.dateBR'), strtotime($flight->dt_saida_voo)) ?? config('general.format.empty') }}</td>
+                                <td>{{ $flight->route->origin->nm_cidd }} — {{ $flight->route->destiny->nm_cidd }}</td>
+                                <td>{{ $flight->cd_arnv ?? config('general.format.empty') }}</td>
                                 <td>
-                                    <a href="{{ route('airline.show', $airline->cd_cmpn_aerea) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar companhia aérea">
+                                    <a href="{{ route('flight.show', ['nr_voo' => $flight->nr_voo, 'dt_saida_voo' => date(config('general.format.date'), strtotime($flight->dt_saida_voo))]) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar voo">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('airline.edit', $airline->cd_cmpn_aerea) }}" class="btn btn-info btn-sm" data-toggle="tooltip" title="Editar companhia aérea">
+                                    <a href="{{ route('flight.edit', ['nr_voo' => $flight->nr_voo, 'dt_saida_voo' => date(config('general.format.date'), strtotime($flight->dt_saida_voo))]) }}" class="btn btn-info btn-sm" data-toggle="tooltip" title="Editar voo">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ $airline->cd_cmpn_aerea }}" value="{{ $airline->cd_cmpn_aerea }}" data-toggle="tooltip" title="Excluir companhia aérea">
+                                    <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ $flight->nr_voo }}_{{ date('Y_m_d', strtotime($flight->dt_saida_voo)) }}" value="{{ $flight->nr_voo }}" data-toggle="tooltip" title="Excluir voo">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                    <form method="post" action="{{ route('airline.destroy', $airline->cd_cmpn_aerea) }}" id="delete_{{ $airline->cd_cmpn_aerea }}" class="form-delete-airline">
+                                    <form method="post" action="{{ route('flight.destroy', ['nr_voo' => $flight->nr_voo, 'dt_saida_voo' => date(config('general.format.date'), strtotime($flight->dt_saida_voo))]) }}" id="delete_{{ $flight->nr_voo }}_{{ date('Y_m_d', strtotime($flight->dt_saida_voo)) }}" class="form-delete-flight">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                     </form>
@@ -73,7 +75,7 @@
                     </tbody>
                 </table>
 
-                {{ $airlines->links('includes.pagination', ['paginator' => $airlines]) }}
+                {{ $flights->links('includes.pagination', ['paginator' => $flights]) }}
             </div>
         </div>
     </div>
@@ -109,7 +111,7 @@
     <script>
         $(document).ready(function () {
             const ps_datatable = new PSDataTable({
-                title: '{{ config("app.name") }} - Companhias aéreas, página {{ $airlines->currentPage() }}',
+                title: '{{ config("app.name") }} - Voos, página {{ $flights->currentPage() }}',
                 columns: [0, 1, 2],
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',
@@ -118,8 +120,8 @@
             });
 
             const ps_delete = new PSDelete(
-                '.form-delete-airline',
-                'Tem certeza de que deseja deletar esta companhia aérea?',
+                '.form-delete-flight',
+                'Tem certeza de que deseja deletar esta voo?',
                 'Você não poderá voltar atrás!',
                 'warning'
             );

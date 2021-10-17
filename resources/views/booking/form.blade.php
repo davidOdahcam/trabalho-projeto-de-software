@@ -1,6 +1,6 @@
 <div class="form-row">
     <input type="hidden" name="nr_voo" value="{{ $booking->nr_voo ?? old('nr_voo') }}">
-    <input type="hidden" name="dt_saida_voo" value="{{ $booking->dt_saida_voo ?? old('dt_saida_voo') }}">
+    <input type="hidden" name="dt_saida_voo" value="{{ (isset($booking)) ? date(config('general.format.date'), strtotime($booking->dt_saida_voo)) : old('dt_saida_voo') }}">
 
     <div class="form-group col-md-4">
         <label for="cd_psgr">Passageiro</label>
@@ -23,7 +23,7 @@
         <select id="nr_voo" class="form-control">
             <option value="">- Selecione um voo -</option>
             @foreach ($flights as $flight)
-                <option value="{{ $flight->nr_voo }}/{{ date(config('assets.format.date'), strtotime($flight->dt_saida_voo)) }}" @if (isset($booking->nr_voo) && $booking->nr_voo == $flight->nr_voo && $booking->dt_saida_voo == $flight->dt_saida_voo) selected @endif>{{ date('d/m/Y', strtotime($flight->dt_saida_voo)) }}: {{ $flight->route->origin->nm_cidd }} — {{ $flight->route->destiny->nm_cidd }}</option>
+                <option value="{{ $flight->nr_voo }}/{{ date(config('general.format.date'), strtotime($flight->dt_saida_voo)) }}" @if (isset($booking->nr_voo) && $booking->nr_voo == $flight->nr_voo && $booking->dt_saida_voo == $flight->dt_saida_voo) selected @endif>{{ date(config('general.format.dateBR'), strtotime($flight->dt_saida_voo)) }}: {{ $flight->route->origin->nm_cidd }} — {{ $flight->route->destiny->nm_cidd }}</option>
             @endforeach
         </select>
 

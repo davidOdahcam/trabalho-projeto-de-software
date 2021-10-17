@@ -50,9 +50,9 @@
                     <tbody>
                         @foreach ($equipments as $equipment)
                             <tr>
-                                <td>{{ $equipment->cd_eqpt ?? '' }}</td>
-                                <td>{{ $equipment->nm_eqpt ?? '' }}</td>
-                                <td>{{ $equipment->ic_tipo_prps ?? '' }}</td>
+                                <td>{{ $equipment->cd_eqpt ?? config('general.format.empty') }}</td>
+                                <td>{{ $equipment->nm_eqpt ?? config('general.format.empty') }}</td>
+                                <td>{{ $equipment->ic_tipo_prps ?? config('general.format.empty') }}</td>
                                 <td>
                                     <a href="{{ route('equipment.show', $equipment->cd_eqpt) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar equipamento">
                                         <i class="fas fa-eye"></i>
@@ -114,7 +114,7 @@
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',
                 buttons: '#export-datatable',
-                perPage: {{ config('assets.datatable.per_page') }}
+                perPage: {{ config('general.datatable.per_page') }}
             });
 
             const ps_delete = new PSDelete(

@@ -51,10 +51,10 @@
                     <tbody>
                         @foreach ($airports as $airport)
                             <tr>
-                                <td>{{ $airport->cd_arpt ?? '' }}</td>
-                                <td>{{ $airport->country->nm_pais ?? '' }}</td>
-                                <td>{{ $airport->state->nm_uf ?? '' }}</td>
-                                <td>{{ $airport->nm_cidd ?? '' }}</td>
+                                <td>{{ $airport->cd_arpt ?? config('general.format.empty') }}</td>
+                                <td>{{ $airport->country->nm_pais ?? config('general.format.empty') }}</td>
+                                <td>{{ $airport->state->nm_uf ?? config('general.format.empty') }}</td>
+                                <td>{{ $airport->nm_cidd ?? config('general.format.empty') }}</td>
                                 <td>
                                     <a href="{{ route('airport.show', $airport->cd_arpt) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar aeroporto">
                                         <i class="fas fa-eye"></i>
@@ -116,7 +116,7 @@
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',
                 buttons: '#export-datatable',
-                perPage: {{ config('assets.datatable.per_page') }}
+                perPage: {{ config('general.datatable.per_page') }}
             });
 
             const ps_delete = new PSDelete(

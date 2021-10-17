@@ -2,9 +2,8 @@
     return [
         'format' => [
             'date' => 'Y-m-d',
-            'data' => [
-                'empty' => '-'
-            ]
+            'dateBR' => 'd/m/Y',
+            'empty' => '-'
         ],
         'datatable' => [
             'per_page' => 20

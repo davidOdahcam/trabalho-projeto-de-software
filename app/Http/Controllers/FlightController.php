@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aircroft;
+use App\Models\Flight;
+use App\Models\Route;
 use Illuminate\Http\Request;
+use DB;
+use Session;
+use Redirect;
 
 class FlightController extends Controller
 {
@@ -13,7 +19,11 @@ class FlightController extends Controller
      */
     public function index()
     {
-        //
+        $flights = Flight::orderBy('dt_saida_voo', 'DESC')->paginate(config('general.datatable.per_page'));
+
+        return view('flight.index', [
+            'flights' => $flights
+        ]);
     }
 
     /**
@@ -23,7 +33,13 @@ class FlightController extends Controller
      */
     public function create()
     {
-        //
+        $aircrofts = Aircroft::all();
+        $routes = Route::all();
+
+        return view('flight.create', [
+            'aircrofts' => $aircrofts,
+            'routes' => $routes
+        ]);
     }
 
     /**
@@ -34,7 +50,21 @@ class FlightController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+
+        $input = $request->all();
+
+        $created = Flight::create($input);
+
+        if ($created) {
+            DB::commit();
+            Session::flash('success', 'Aeroporto cadastrado com sucesso!');
+        } else {
+            DB::rollBack();
+            Session::flash('error', 'Erro ao cadastrar o aeroporto!');
+        }
+
+        return Redirect::route('flight.index');
     }
 
     /**
@@ -43,9 +73,13 @@ class FlightController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($nr_voo, $dt_saida_voo)
     {
-        //
+        $flight = Flight::where(['nr_voo' => $nr_voo, 'dt_saida_voo' => $dt_saida_voo])->first();
+
+        return view('flight.show', [
+            'flight' => $flight
+        ]);
     }
 
     /**
@@ -54,9 +88,17 @@ class FlightController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($nr_voo, $dt_saida_voo)
     {
-        //
+        $flight = Flight::where(['nr_voo' => $nr_voo, 'dt_saida_voo' => $dt_saida_voo])->first();
+        $aircrofts = Aircroft::all();
+        $routes = Route::all();
+
+        return view('flight.edit', [
+            'flight' => $flight,
+            'aircrofts' => $aircrofts,
+            'routes' => $routes
+        ]);
     }
 
     /**
@@ -66,9 +108,23 @@ class FlightController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $nr_voo, $dt_saida_voo)
     {
-        //
+        DB::beginTransaction();
+
+        $input = $request->only(['nr_voo', 'dt_saida_voo', 'nr_rota_voo', 'cd_arnv']);
+        $flight = Flight::where(['nr_voo' => $nr_voo, 'dt_saida_voo' => $dt_saida_voo])->first();
+        $updated = $flight->update($input);
+
+        if ($updated) {
+            DB::commit();
+            Session::flash('success', 'Aeroporto atualizado com sucesso!');
+        } else {
+            DB::rollBack();
+            Session::flash('error', 'Erro ao atualizar o aeroporto!');
+        }
+
+        return Redirect::route('flight.index');
     }
 
     /**
@@ -77,8 +133,21 @@ class FlightController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($nr_voo, $dt_saida_voo)
     {
-        //
+        $flight = Flight::where(['nr_voo' => $nr_voo, 'dt_saida_voo' => $dt_saida_voo])->first();
+        $deleted = $flight->delete();
+
+        if ($deleted) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Aeroporto deletado com sucesso!'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Ocorreu uma falha ao deletar  aeroporto!'
+            ]);
+        }
     }
 }
