@@ -56,10 +56,10 @@
                                 <td>{{ $airport->state->nm_uf ?? '' }}</td>
                                 <td>{{ $airport->nm_cidd ?? '' }}</td>
                                 <td>
-                                    <a href="{{ route('airport.show', $airport->cd_arpt) }}" class="btn btn-success btn-sm">
+                                    <a href="{{ route('airport.show', $airport->cd_arpt) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar aeroporto">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('airport.edit', $airport->cd_arpt) }}" class="btn btn-info btn-sm">
+                                    <a href="{{ route('airport.edit', $airport->cd_arpt) }}" class="btn btn-info btn-sm" data-toggle="tooltip" title="Editar aeroporto">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ $airport->cd_arpt }}" value="{{ $airport->cd_arpt }}" data-toggle="tooltip" title="Excluir aeroporto">
@@ -111,7 +111,7 @@
     <script>
         $(document).ready(function () {
             const ps_datatable = new PSDataTable({
-                title: '{{ config("app.name") }} - Aeroportos',
+                title: '{{ config("app.name") }} - Aeroportos, página {{ $airports->currentPage() }}',
                 columns: [0, 1, 2],
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',

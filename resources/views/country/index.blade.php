@@ -14,13 +14,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Equipamentos</h1>
+                <h1 class="m-0">Países</h1>
             </div>
 
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Painel</a></li>
-                    <li class="breadcrumb-item active">Equipamentos</li>
+                    <li class="breadcrumb-item active">Países</li>
                 </ol>
             </div>
         </div>
@@ -31,7 +31,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="text-right mb-3">
-            <a href="{{ route('equipment.create') }}" class="btn bg-gradient-primary px-5">Novo equipamento</a>
+            <a href="{{ route('country.create') }}" class="btn bg-gradient-primary px-5">Novo país</a>
         </div>
 
         <div class="card card-primary card-outline">
@@ -43,27 +43,27 @@
                         <tr>
                             <th>Código</th>
                             <th>Nome</th>
-                            <th>Tipo</th>
+                            <th>População</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($equipments as $equipment)
+                        @foreach ($countries as $country)
                             <tr>
-                                <td>{{ $equipment->cd_eqpt ?? '' }}</td>
-                                <td>{{ $equipment->nm_eqpt ?? '' }}</td>
-                                <td>{{ $equipment->ic_tipo_prps ?? '' }}</td>
+                                <td>{{ $country->cd_pais ?? '' }}</td>
+                                <td>{{ $country->nm_pais ?? '' }}</td>
+                                <td>{{ ($country->qt_pplc_pais) ? number_format($country->qt_pplc_pais, 0, '', '.') : config('assets.format.data.empty') }}</td>
                                 <td>
-                                    <a href="{{ route('equipment.show', $equipment->cd_eqpt) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar equipamento">
+                                    <a href="{{ route('country.show', $country->cd_pais) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar país">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('equipment.edit', $equipment->cd_eqpt) }}" class="btn btn-info btn-sm" data-toggle="tooltip" title="Editar equipamento">
+                                    <a href="{{ route('country.edit', $country->cd_pais) }}" class="btn btn-info btn-sm" data-toggle="tooltip" title="Editar país">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ $equipment->cd_eqpt }}" value="{{ $equipment->cd_eqpt }}" data-toggle="tooltip" title="Excluir equipamento">
+                                    <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ $country->cd_pais }}" value="{{ $country->cd_pais }}" data-toggle="tooltip" title="Excluir país">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                    <form method="post" action="{{ route('equipment.destroy', $equipment->cd_eqpt) }}" id="delete_{{ $equipment->cd_eqpt }}" class="form-delete-equipment">
+                                    <form method="post" action="{{ route('country.destroy', $country->cd_pais) }}" id="delete_{{ $country->cd_pais }}" class="form-delete-country">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                     </form>
@@ -73,7 +73,7 @@
                     </tbody>
                 </table>
 
-                {{ $equipments->links('includes.pagination', ['paginator' => $equipments]) }}
+                {{ $countries->links('includes.pagination', ['paginator' => $countries]) }}
             </div>
         </div>
     </div>
@@ -109,7 +109,7 @@
     <script>
         $(document).ready(function () {
             const ps_datatable = new PSDataTable({
-                title: '{{ config("app.name") }} - Equipamentos, página {{ $equipments->currentPage() }}',
+                title: '{{ config("app.name") }} - Países, página {{ $countries->currentPage() }}',
                 columns: [0, 1, 2],
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',
@@ -118,8 +118,8 @@
             });
 
             const ps_delete = new PSDelete(
-                '.form-delete-equipment',
-                'Tem certeza de que deseja deletar esta equipamento?',
+                '.form-delete-country',
+                'Tem certeza de que deseja deletar esta país?',
                 'Você não poderá voltar atrás!',
                 'warning'
             );

@@ -5,13 +5,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Reservas</h1>
+                    <h1 class="m-0">Países</h1>
                 </div>
 
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}">Painel</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('booking.index') }}">Reservas</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('country.index') }}">Países</a></li>
                         <li class="breadcrumb-item active">Adicionar</li>
                     </ol>
                 </div>
@@ -26,17 +26,17 @@
                 <h3 class="card-title">Formulário de cadastro</h3>
                 </div>
 
-                <form action="{{ route('booking.update', ['cd_psgr' => $booking->cd_psgr, 'nr_voo' => $booking->nr_voo, 'dt_saida_voo' => date(config('assets.format.date'), strtotime($booking->dt_saida_voo))]) }}" id="delete_{{ $booking->dt_saida_voo }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('country.update', $country->cd_pais) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     {{ method_field('PUT') }}
 
                     <div class="card-body">
-                        @include('booking.form')
+                        @include('country.form')
                     </div>
 
                     <div class="card-footer">
-                        <a href="{{ route('booking.index') }}" class="btn btn-sm bg-gradient-danger">Cancelar</a>
-                        <button class="btn btn-sm bg-gradient-second">Editar</button>
+                        <a href="{{ route('country.index') }}" class="btn btn-sm bg-gradient-danger">Cancelar</a>
+                        <button class="btn btn-sm bg-gradient-second">Adicionar</button>
                     </div>
                 </form>
             </div>

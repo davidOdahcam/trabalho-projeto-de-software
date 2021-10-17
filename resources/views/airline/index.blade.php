@@ -54,10 +54,10 @@
                                 <td>{{ $airline->nm_cmpn_aerea ?? '' }}</td>
                                 <td>{{ $airline->country->nm_pais ?? '' }}</td>
                                 <td>
-                                    <a href="{{ route('airline.show', $airline->cd_cmpn_aerea) }}" class="btn btn-success btn-sm">
+                                    <a href="{{ route('airline.show', $airline->cd_cmpn_aerea) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar companhia aérea">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('airline.edit', $airline->cd_cmpn_aerea) }}" class="btn btn-info btn-sm">
+                                    <a href="{{ route('airline.edit', $airline->cd_cmpn_aerea) }}" class="btn btn-info btn-sm" data-toggle="tooltip" title="Editar companhia aérea">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ $airline->cd_cmpn_aerea }}" value="{{ $airline->cd_cmpn_aerea }}" data-toggle="tooltip" title="Excluir companhia aérea">
@@ -109,7 +109,7 @@
     <script>
         $(document).ready(function () {
             const ps_datatable = new PSDataTable({
-                title: '{{ config("app.name") }} - Companhias aéreas',
+                title: '{{ config("app.name") }} - Companhias aéreas, página {{ $airlines->currentPage() }}',
                 columns: [0, 1, 2],
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',

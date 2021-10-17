@@ -54,10 +54,10 @@
                                 <td>{{ $aircroft->equipment->nm_eqpt ?? '' }}</td>
                                 <td>{{ $aircroft->airline->nm_cmpn_aerea ?? '' }}</td>
                                 <td>
-                                    <a href="{{ route('aircroft.show', $aircroft->cd_arnv) }}" class="btn btn-success btn-sm">
+                                    <a href="{{ route('aircroft.show', $aircroft->cd_arnv) }}" class="btn btn-success btn-sm"  data-toggle="tooltip" title="Visualizar aeronave">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('aircroft.edit', $aircroft->cd_arnv) }}" class="btn btn-info btn-sm">
+                                    <a href="{{ route('aircroft.edit', $aircroft->cd_arnv) }}" class="btn btn-info btn-sm"  data-toggle="tooltip" title="Editar aeronave">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ $aircroft->cd_arnv }}" value="{{ $aircroft->cd_arnv }}" data-toggle="tooltip" title="Excluir aeronave">
@@ -109,7 +109,7 @@
     <script>
         $(document).ready(function () {
             const ps_datatable = new PSDataTable({
-                title: '{{ config("app.name") }} - Aeronaves',
+                title: '{{ config("app.name") }} - Aeronaves, página {{ $aircrofts->currentPage() }}',
                 columns: [0, 1, 2],
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',

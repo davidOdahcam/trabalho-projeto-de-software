@@ -64,16 +64,16 @@
                                 <td>{{ date('d/m/Y', strtotime($booking->dt_saida_voo)) ?? '' }}</td>
                                 <td>{{ number_format($booking->pc_desc_pasg, 2) ?? '' }}</td>
                                 <td>
-                                    <a href="{{ route('booking.show', ['cd_psgr' => $booking->cd_psgr, 'nr_voo' => $booking->nr_voo, 'dt_saida_voo' => date('Y-m-d', strtotime($booking->dt_saida_voo))]) }}" id="delete_{{ $booking->dt_saida_voo }}" class="btn btn-success btn-sm">
+                                    <a href="{{ route('booking.show', ['cd_psgr' => $booking->cd_psgr, 'nr_voo' => $booking->nr_voo, 'dt_saida_voo' => date(config('assets.format.date'), strtotime($booking->dt_saida_voo))]) }}" id="delete_{{ $booking->dt_saida_voo }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar reserva">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('booking.edit', ['cd_psgr' => $booking->cd_psgr, 'nr_voo' => $booking->nr_voo, 'dt_saida_voo' => date('Y-m-d', strtotime($booking->dt_saida_voo))]) }}" id="delete_{{ $booking->dt_saida_voo }}" class="btn btn-info btn-sm">
+                                    <a href="{{ route('booking.edit', ['cd_psgr' => $booking->cd_psgr, 'nr_voo' => $booking->nr_voo, 'dt_saida_voo' => date(config('assets.format.date'), strtotime($booking->dt_saida_voo))]) }}" id="delete_{{ $booking->dt_saida_voo }}" class="btn btn-info btn-sm" data-toggle="tooltip" title="Editar reserva">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ date('Y-m-d', strtotime($booking->dt_saida_voo)) }}" value="{{ $booking->dt_saida_voo }}" data-toggle="tooltip" title="Excluir reserva">
+                                    <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ date(config('assets.format.date'), strtotime($booking->dt_saida_voo)) }}" value="{{ $booking->dt_saida_voo }}" data-toggle="tooltip" title="Excluir reserva">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                    <form method="post" action="{{ route('booking.destroy', ['cd_psgr' => $booking->cd_psgr, 'nr_voo' => $booking->nr_voo, 'dt_saida_voo' => date('Y-m-d', strtotime($booking->dt_saida_voo))]) }}" id="delete_{{ date('Y-m-d', strtotime($booking->dt_saida_voo)) }}" class="form-delete-booking">
+                                    <form method="post" action="{{ route('booking.destroy', ['cd_psgr' => $booking->cd_psgr, 'nr_voo' => $booking->nr_voo, 'dt_saida_voo' => date(config('assets.format.date'), strtotime($booking->dt_saida_voo))]) }}" id="delete_{{ date(config('assets.format.date'), strtotime($booking->dt_saida_voo)) }}" class="form-delete-booking">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                     </form>
@@ -82,9 +82,6 @@
                         @endforeach
                     </tbody>
                 </table>
-                cd_psgr
-                nr_voo
-                dt_saida_voo
 
                 {{ $bookings->links('includes.pagination', ['paginator' => $bookings]) }}
             </div>
@@ -122,7 +119,7 @@
     <script>
         $(document).ready(function () {
             const ps_datatable = new PSDataTable({
-                title: '{{ config("app.name") }} - Reservas',
+                title: '{{ config("app.name") }} - Reservas, página {{ $bookings->currentPage() }}',
                 columns: [0, 1, 2, 3],
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',

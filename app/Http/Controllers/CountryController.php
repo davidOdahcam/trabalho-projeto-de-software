@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Country;
 use Illuminate\Http\Request;
+use DB;
+use Session;
+use Redirect;
 
 class CountryController extends Controller
 {
@@ -14,7 +17,11 @@ class CountryController extends Controller
      */
     public function index()
     {
-        //
+        $countries = Country::orderBy('nm_pais', 'ASC')->paginate(config('assets.datatable.per_page'));
+
+        return view('country.index', [
+            'countries' => $countries
+        ]);
     }
 
     /**
@@ -24,7 +31,8 @@ class CountryController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('country.create');
     }
 
     /**
@@ -35,51 +43,100 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+
+        $input = $request->all();
+
+        $created = Country::create($input);
+
+        if ($created) {
+            DB::commit();
+            Session::flash('success', 'País cadastrado com sucesso!');
+        } else {
+            DB::rollBack();
+            Session::flash('error', 'Erro ao cadastrar o país!');
+        }
+
+        return Redirect::route('country.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Country  $country
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Country $country)
+    public function show($id)
     {
-        //
+        $country = Country::find($id);
+
+        return view('country.show', [
+            'country' => $country
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Country  $country
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Country $country)
+    public function edit($id)
     {
-        //
+        $country = Country::find($id);
+
+        return view('country.edit', [
+            'country' => $country
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Country  $country
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Country $country)
+    public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+
+        $input = $request->all();
+        $country = Country::find($id);
+        $updated = $country->update($input);
+
+        if ($updated) {
+            DB::commit();
+            Session::flash('success', 'País atualizado com sucesso!');
+        } else {
+            DB::rollBack();
+            Session::flash('error', 'Erro ao atualizar o país!');
+        }
+
+        return Redirect::route('country.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Country  $country
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Country $country)
+    public function destroy($id)
     {
-        //
+        $country = Country::find($id);
+        $deleted = $country->delete();
+
+        if ($deleted) {
+            return response()->json([
+                'success' => true,
+                'message' => 'País deletado com sucesso!'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Ocorreu uma falha ao deletar o país!'
+            ]);
+        }
     }
 }

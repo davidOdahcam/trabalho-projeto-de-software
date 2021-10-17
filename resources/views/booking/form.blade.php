@@ -23,7 +23,7 @@
         <select id="nr_voo" class="form-control">
             <option value="">- Selecione um voo -</option>
             @foreach ($flights as $flight)
-                <option value="{{ $flight->nr_voo }}/{{ date('Y-m-d', strtotime($flight->dt_saida_voo)) }}" @if (isset($booking->nr_voo) && $booking->nr_voo == $flight->nr_voo && $booking->dt_saida_voo == $flight->dt_saida_voo) selected @endif>{{ date('d/m/Y', strtotime($flight->dt_saida_voo)) }}: {{ $flight->route->origin->nm_cidd }} — {{ $flight->route->destiny->nm_cidd }}</option>
+                <option value="{{ $flight->nr_voo }}/{{ date(config('assets.format.date'), strtotime($flight->dt_saida_voo)) }}" @if (isset($booking->nr_voo) && $booking->nr_voo == $flight->nr_voo && $booking->dt_saida_voo == $flight->dt_saida_voo) selected @endif>{{ date('d/m/Y', strtotime($flight->dt_saida_voo)) }}: {{ $flight->route->origin->nm_cidd }} — {{ $flight->route->destiny->nm_cidd }}</option>
             @endforeach
         </select>
 
