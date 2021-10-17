@@ -10,22 +10,25 @@ class PSDataTable {
      *
      * @return DataTable
      */
-    constructor(title, columns, lang, datatable = '#main-datatable', buttons = false) {
-        this.title = title;
-        this.columns = columns;
-        this.lang = lang;
-        this.datatable = datatable;
-        this.buttons = buttons;
+    constructor(options) {
+        this.title = options.title;
+        this.columns = options.columns;
+        this.lang = options.lang;
+        this.datatable = (options.datatable) ? options.datatable : '#main-datatable';
+        this.buttons = (options.buttons) ? options.buttons : false;
+        this.perPage = (options.perPage) ? options.perPage : 30;
         this.domJquery;
 
         this.init();
     }
     init() {
         $(this.datatable).DataTable({
-            "dom": 'Bfrtip',
+            "dom": 'Bfri',
             "responsive": true,
-            "lengthChange": false,
+            "info": false,
             "autoWidth": false,
+            "pageLength": this.perPage,
+            "lengthChange": false,
             "language": {
                 "url": this.lang
             },

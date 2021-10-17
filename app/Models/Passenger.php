@@ -31,4 +31,20 @@ class Passenger extends Model
         'ic_estd_civil' => 'string',
         'cd_psgr_resp' => 'int'
     ];
+
+    /**
+     * Relationships
+     */
+
+    // Auto-Relationship
+    public function responsible()
+    {
+        return $this->hasOne(Passenger::class, 'cd_psgr', 'cd_psgr_resp');
+    }
+
+    // Country
+    public function country()
+    {
+        return $this->hasOne(Country::class, 'cd_pais', 'cd_pais');
+    }
 }

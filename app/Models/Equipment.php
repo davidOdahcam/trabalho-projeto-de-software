@@ -34,7 +34,14 @@ class Equipment extends Model
     /**
      * Relationships
      */
-    public function aircroft() {
+    public function aircroft()
+    {
         return $this->belongsTo(Aircroft::class, 'cd_eqpt', 'cd_eqpt');
+    }
+
+
+    public function aircrofts()
+    {
+        return $this->hasMany(Aircroft::class, 'cd_eqpt', 'cd_eqpt');
     }
 }

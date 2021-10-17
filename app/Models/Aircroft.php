@@ -28,11 +28,16 @@ class Aircroft extends Model
     /**
      * Relationships
      */
-    public function airline() {
+    public function equipment()
+    {
+        return $this->hasOne(Equipment::class, 'cd_eqpt', 'cd_eqpt');
+    }
+
+
+    public function airline()
+    {
         return $this->hasOne(Airline::class, 'cd_cmpn_aerea', 'cd_cmpn_aerea');
     }
 
-    public function equipment() {
-        return $this->hasOne(Equipment::class, 'cd_eqpt', 'cd_eqpt');
-    }
+    // airlines belongsToMany
 }

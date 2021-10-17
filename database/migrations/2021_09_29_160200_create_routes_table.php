@@ -15,13 +15,13 @@ class CreateRoutesTable extends Migration
     {
         Schema::create('itr_rota_voo', function (Blueprint $table) {
             $table->decimal('nr_rota_voo');
-            $table->string('cd_aprt_orig', 3);
-            $table->string('cd_aprt_dest', 3);
+            $table->string('cd_arpt_orig', 3);
+            $table->string('cd_arpt_dest', 3);
             $table->decimal('vr_pasg', 8, 2)->nullable();
 
             $table->primary('nr_rota_voo');
-            $table->foreign('cd_aprt_orig')->references('cd_arpt')->on('itr_arpt');
-            $table->foreign('cd_aprt_dest')->references('cd_arpt')->on('itr_arpt');
+            $table->foreign('cd_arpt_orig')->references('cd_arpt')->on('itr_arpt');
+            $table->foreign('cd_arpt_dest')->references('cd_arpt')->on('itr_arpt');
         });
     }
 

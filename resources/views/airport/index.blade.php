@@ -14,13 +14,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Companhias aéreas</h1>
+                <h1 class="m-0">Aeroportos</h1>
             </div>
 
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Painel</a></li>
-                    <li class="breadcrumb-item active">Companhias aéreas</li>
+                    <li class="breadcrumb-item active">Aeroportos</li>
                 </ol>
             </div>
         </div>
@@ -31,7 +31,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="text-right mb-3">
-            <a href="{{ route('airline.create') }}" class="btn bg-gradient-primary px-5">Nova companhia aérea</a>
+            <a href="{{ route('airport.create') }}" class="btn bg-gradient-primary px-5">Novo aeroporto</a>
         </div>
 
         <div class="card card-primary card-outline">
@@ -42,28 +42,30 @@
                     <thead>
                         <tr>
                             <th>Código</th>
-                            <th>Nome</th>
                             <th>País</th>
+                            <th>Unidade Federativa</th>
+                            <th>Nome</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($airlines as $airline)
+                        @foreach ($airports as $airport)
                             <tr>
-                                <td>{{ $airline->cd_cmpn_aerea ?? '' }}</td>
-                                <td>{{ $airline->nm_cmpn_aerea ?? '' }}</td>
-                                <td>{{ $airline->country->nm_pais ?? '' }}</td>
+                                <td>{{ $airport->cd_arpt ?? '' }}</td>
+                                <td>{{ $airport->country->nm_pais ?? '' }}</td>
+                                <td>{{ $airport->state->nm_uf ?? '' }}</td>
+                                <td>{{ $airport->nm_cidd ?? '' }}</td>
                                 <td>
-                                    <a href="{{ route('airline.show', $airline->cd_cmpn_aerea) }}" class="btn btn-success btn-sm">
+                                    <a href="{{ route('airport.show', $airport->cd_arpt) }}" class="btn btn-success btn-sm">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('airline.edit', $airline->cd_cmpn_aerea) }}" class="btn btn-info btn-sm">
+                                    <a href="{{ route('airport.edit', $airport->cd_arpt) }}" class="btn btn-info btn-sm">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ $airline->cd_cmpn_aerea }}" value="{{ $airline->cd_cmpn_aerea }}" data-toggle="tooltip" title="Excluir companhia aérea">
+                                    <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ $airport->cd_arpt }}" value="{{ $airport->cd_arpt }}" data-toggle="tooltip" title="Excluir aeroporto">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                    <form method="post" action="{{ route('airline.destroy', $airline->cd_cmpn_aerea) }}" id="delete_{{ $airline->cd_cmpn_aerea }}" class="form-delete-airline">
+                                    <form method="post" action="{{ route('airport.destroy', $airport->cd_arpt) }}" id="delete_{{ $airport->cd_arpt }}" class="form-delete-airport">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                     </form>
@@ -73,7 +75,7 @@
                     </tbody>
                 </table>
 
-                {{ $airlines->links('includes.pagination', ['paginator' => $airlines]) }}
+                {{ $airports->links('includes.pagination', ['paginator' => $airports]) }}
             </div>
         </div>
     </div>
@@ -109,7 +111,7 @@
     <script>
         $(document).ready(function () {
             const ps_datatable = new PSDataTable({
-                title: '{{ config("app.name") }} - Companhias aéreas',
+                title: '{{ config("app.name") }} - Aeroportos',
                 columns: [0, 1, 2],
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',
@@ -118,8 +120,8 @@
             });
 
             const ps_delete = new PSDelete(
-                '.form-delete-airline',
-                'Tem certeza de que deseja deletar esta companhia aérea?',
+                '.form-delete-airport',
+                'Tem certeza de que deseja deletar esta aeroporto?',
                 'Você não poderá voltar atrás!',
                 'warning'
             );

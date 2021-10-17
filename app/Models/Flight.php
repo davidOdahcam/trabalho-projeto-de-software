@@ -26,4 +26,18 @@ class Flight extends Model
         'nr_rota_voo' => 'int',
         'cd_arnv' => 'string'
     ];
+
+    /**
+     * Relationships
+     */
+    public function aircroft()
+    {
+        return $this->hasOne(Aircroft::class, 'cd_arnv', 'cd_arnv');
+    }
+
+
+    public function route()
+    {
+        return $this->hasOne(Route::class, 'nr_rota_voo', 'nr_rota_voo');
+    }
 }

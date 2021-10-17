@@ -14,6 +14,7 @@ class State extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'sg_uf',
         'nm_uf'
     ];
 

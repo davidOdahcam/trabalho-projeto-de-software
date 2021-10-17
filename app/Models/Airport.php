@@ -14,18 +14,30 @@ class Airport extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'nm_pais',
-        'qt_pplc_pais'
+        'cd_arpt',
+        'cd_pais',
+        'sg_uf',
+        'nm_cidd'
     ];
 
     protected $casts = [
         'cd_arpt' => 'string',
-        'nm_pais' => 'string',
-        'qt_pplc_pais' => 'int'
+        'cd_pais' => 'string',
+        'sg_uf' => 'string',
+        'nm_cidd' => 'string'
     ];
 
+    /**
+     * Relationships
+     */
     public function country()
     {
-        return $this->belongsTo(Country::class, 'nm_pais', 'id');
+        return $this->hasOne(Country::class, 'cd_pais', 'cd_pais');
+    }
+
+
+    public function state()
+    {
+        return $this->hasOne(State::class, 'sg_uf', 'sg_uf');
     }
 }

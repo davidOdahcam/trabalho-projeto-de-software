@@ -72,6 +72,8 @@
                         @endforeach
                     </tbody>
                 </table>
+
+                {{ $equipments->links('includes.pagination', ['paginator' => $equipments]) }}
             </div>
         </div>
     </div>
@@ -106,12 +108,14 @@
     <script src="{{ asset('assets/js/own-assets.js') }}"></script>
     <script>
         $(document).ready(function () {
-            const ps_datatable = new PSDataTable(
-                '{{ config("app.name") }} - Equipamentos',
-                [0, 1, 2],
-                "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
-                '#main-datatable',
-                '#export-datatable');
+            const ps_datatable = new PSDataTable({
+                title: '{{ config("app.name") }} - Equipamentos',
+                columns: [0, 1, 2],
+                lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
+                datatable: '#main-datatable',
+                buttons: '#export-datatable',
+                perPage: {{ config('assets.datatable.per_page') }}
+            });
 
             const ps_delete = new PSDelete(
                 '.form-delete-equipment',

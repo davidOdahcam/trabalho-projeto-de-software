@@ -23,7 +23,15 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], fu
     Route::resource('/aeronaves', 'AircroftController')->names('aircroft')->parameters(['aeronave' => 'aircroft']);
     Route::resource('/companhias-aereas', 'AirlineController')->names('airline')->parameters(['companhias_aerea' => 'airline']);
     Route::resource('/aeroportos', 'AirportController')->names('airport')->parameters(['aeroporto' => 'airport']);
-    Route::resource('/reservas', 'BookingController')->names('booking')->parameters(['reserva' => 'booking']);
+
+    Route::get('/reservas', 'BookingController@index')->name('booking.index');
+    Route::get('/reservas/cadastrar', 'BookingController@create')->name('booking.create');
+    Route::post('/reservas', 'BookingController@store')->name('booking.store');
+    Route::get('/reservas/{cd_psgr}/{nr_voo}/{dt_saida_voo}', 'BookingController@show')->name('booking.show');
+    Route::get('/reservas/{cd_psgr}/{nr_voo}/{dt_saida_voo}/editar', 'BookingController@edit')->name('booking.edit');
+    Route::put('/reservas/{cd_psgr}/{nr_voo}/{dt_saida_voo}', 'BookingController@update')->name('booking.update');
+    Route::delete('/reservas/{cd_psgr}/{nr_voo}/{dt_saida_voo}', 'BookingController@destroy')->name('booking.destroy');
+
     Route::resource('/paises', 'CountryController')->names('country')->parameters(['pais' => 'country']);
     Route::resource('/equipamentos', 'EquipmentController')->names('equipment')->parameters(['equipamento' => 'equipment']);
     Route::resource('/voos', 'FlightController')->names('flight')->parameters(['voo' => 'flight']);
@@ -31,3 +39,21 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], fu
     Route::resource('/rotas', 'RouteController')->names('route')->parameters(['rota' => 'route']);
     Route::resource('/unidades-federais', 'StateController')->names('state')->parameters(['uf' => 'uf']);
 });
+
+
+// Route::get('/seed', function () {
+//     $group = State::all();
+
+//     foreach ($group as $item) {
+//         echo 'State::create([<br/>';
+//         foreach ($item->getAttributes() as $attribute => $value) {
+//             if ((gettype($item[$attribute]) === 'string') || (gettype($item[$attribute]) === 'object'))
+//                 echo "&nbsp;&nbsp;&nbsp;&nbsp;'{$attribute}' => '{$value}',<br/>";
+//             elseif ($value == null)
+//                 echo "&nbsp;&nbsp;&nbsp;&nbsp;'{$attribute}' => null,<br/>";
+//             else
+//                 echo "&nbsp;&nbsp;&nbsp;&nbsp;'{$attribute}' => {$value},<br/>";
+//         }
+//         echo "]);<br/><br/>";
+//     }
+// });

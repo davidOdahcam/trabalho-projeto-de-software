@@ -17,7 +17,7 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        $equipments = Equipment::all();
+        $equipments = Equipment::paginate(config('assets.datatable.per_page'));
 
         return view('equipment.index', [
             'equipments' => $equipments

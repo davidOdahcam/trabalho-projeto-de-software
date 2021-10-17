@@ -14,15 +14,30 @@ class Route extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'cd_aprt_orig',
-        'cd_aprt_dest',
+        'nr_rota_voo',
+        'cd_arpt_orig',
+        'cd_arpt_dest',
         'vr_pasg'
     ];
 
     protected $casts = [
         'nr_rota_voo' => 'float',
-        'cd_aprt_orig' => 'string',
-        'cd_aprt_dest' => 'string',
+        'cd_arpt_orig' => 'string',
+        'cd_arpt_dest' => 'string',
         'vr_pasg' => 'float'
     ];
+
+    /**
+     * Relationships
+     */
+    public function origin()
+    {
+        return $this->hasOne(Airport::class, 'cd_arpt', 'cd_arpt_orig');
+    }
+
+
+    public function destiny()
+    {
+        return $this->hasOne(Airport::class, 'cd_arpt', 'cd_arpt_dest');
+    }
 }

@@ -19,7 +19,7 @@ class AircroftController extends Controller
      */
     public function index()
     {
-        $aircrofts = Aircroft::all();
+        $aircrofts = Aircroft::paginate(config('assets.datatable.per_page'));
 
         return view('aircroft.index', [
             'aircrofts' => $aircrofts

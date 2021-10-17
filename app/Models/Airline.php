@@ -25,10 +25,14 @@ class Airline extends Model
         'cd_pais' => 'string'
     ];
 
+
     /**
      * Relationships
      */
-    public function country() {
+
+    // Country
+    public function country()
+    {
         return $this->hasOne(Country::class, 'cd_pais', 'cd_pais');
     }
 }

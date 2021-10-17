@@ -26,4 +26,12 @@ class Booking extends Model
         'dt_saida_voo' => 'date',
         'pc_desc_pasg' => 'double'
     ];
+
+    /**
+     * Relationships
+     */
+    public function passenger()
+    {
+        return $this->hasOne(Passenger::class, 'cd_psgr', 'cd_psgr');
+    }
 }

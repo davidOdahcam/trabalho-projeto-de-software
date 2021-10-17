@@ -1,3 +1,7 @@
+@php
+    use App\Models\Flight;
+@endphp
+
 @extends('layouts.app')
 
 @push('css')
@@ -14,13 +18,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Companhias aéreas</h1>
+                <h1 class="m-0">Reservas</h1>
             </div>
 
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Painel</a></li>
-                    <li class="breadcrumb-item active">Companhias aéreas</li>
+                    <li class="breadcrumb-item active">Reservas</li>
                 </ol>
             </div>
         </div>
@@ -31,7 +35,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="text-right mb-3">
-            <a href="{{ route('airline.create') }}" class="btn bg-gradient-primary px-5">Nova companhia aérea</a>
+            <a href="{{ route('booking.create') }}" class="btn bg-gradient-primary px-5">Nova reserva</a>
         </div>
 
         <div class="card card-primary card-outline">
@@ -41,29 +45,35 @@
                 <table id="main-datatable" class="table table-striped text-center" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Código</th>
-                            <th>Nome</th>
-                            <th>País</th>
+                            <th>Passageiro</th>
+                            <th>Voo <small>(origem — destino)</small></th>
+                            <th>Data de saída</th>
+                            <th>Porcentagem de desconto <small>(%)</small></th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($airlines as $airline)
+                        @foreach ($bookings as $booking)
+                            @php
+                                $flight = Flight::where(['nr_voo' => $booking->nr_voo, 'dt_saida_voo' => $booking->dt_saida_voo])->first();
+                            @endphp
+
                             <tr>
-                                <td>{{ $airline->cd_cmpn_aerea ?? '' }}</td>
-                                <td>{{ $airline->nm_cmpn_aerea ?? '' }}</td>
-                                <td>{{ $airline->country->nm_pais ?? '' }}</td>
+                                <td>{{ $booking->passenger->nm_psgr ?? '' }}</td>
+                                <td>{{ $flight->route->origin->nm_cidd }} — {{ $flight->route->destiny->nm_cidd }}</td>
+                                <td>{{ date('d/m/Y', strtotime($booking->dt_saida_voo)) ?? '' }}</td>
+                                <td>{{ number_format($booking->pc_desc_pasg, 2) ?? '' }}</td>
                                 <td>
-                                    <a href="{{ route('airline.show', $airline->cd_cmpn_aerea) }}" class="btn btn-success btn-sm">
+                                    <a href="{{ route('booking.show', ['cd_psgr' => $booking->cd_psgr, 'nr_voo' => $booking->nr_voo, 'dt_saida_voo' => date('Y-m-d', strtotime($booking->dt_saida_voo))]) }}" id="delete_{{ $booking->dt_saida_voo }}" class="btn btn-success btn-sm">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('airline.edit', $airline->cd_cmpn_aerea) }}" class="btn btn-info btn-sm">
+                                    <a href="{{ route('booking.edit', ['cd_psgr' => $booking->cd_psgr, 'nr_voo' => $booking->nr_voo, 'dt_saida_voo' => date('Y-m-d', strtotime($booking->dt_saida_voo))]) }}" id="delete_{{ $booking->dt_saida_voo }}" class="btn btn-info btn-sm">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ $airline->cd_cmpn_aerea }}" value="{{ $airline->cd_cmpn_aerea }}" data-toggle="tooltip" title="Excluir companhia aérea">
+                                    <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ date('Y-m-d', strtotime($booking->dt_saida_voo)) }}" value="{{ $booking->dt_saida_voo }}" data-toggle="tooltip" title="Excluir reserva">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                    <form method="post" action="{{ route('airline.destroy', $airline->cd_cmpn_aerea) }}" id="delete_{{ $airline->cd_cmpn_aerea }}" class="form-delete-airline">
+                                    <form method="post" action="{{ route('booking.destroy', ['cd_psgr' => $booking->cd_psgr, 'nr_voo' => $booking->nr_voo, 'dt_saida_voo' => date('Y-m-d', strtotime($booking->dt_saida_voo))]) }}" id="delete_{{ date('Y-m-d', strtotime($booking->dt_saida_voo)) }}" class="form-delete-booking">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                     </form>
@@ -72,8 +82,11 @@
                         @endforeach
                     </tbody>
                 </table>
+                cd_psgr
+                nr_voo
+                dt_saida_voo
 
-                {{ $airlines->links('includes.pagination', ['paginator' => $airlines]) }}
+                {{ $bookings->links('includes.pagination', ['paginator' => $bookings]) }}
             </div>
         </div>
     </div>
@@ -109,8 +122,8 @@
     <script>
         $(document).ready(function () {
             const ps_datatable = new PSDataTable({
-                title: '{{ config("app.name") }} - Companhias aéreas',
-                columns: [0, 1, 2],
+                title: '{{ config("app.name") }} - Reservas',
+                columns: [0, 1, 2, 3],
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',
                 buttons: '#export-datatable',
@@ -118,8 +131,8 @@
             });
 
             const ps_delete = new PSDelete(
-                '.form-delete-airline',
-                'Tem certeza de que deseja deletar esta companhia aérea?',
+                '.form-delete-booking',
+                'Tem certeza de que deseja deletar esta reserva?',
                 'Você não poderá voltar atrás!',
                 'warning'
             );
