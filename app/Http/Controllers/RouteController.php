@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Airport;
 use App\Models\Route;
 use Illuminate\Http\Request;
+use DB;
+use Session;
+use Redirect;
 
 class RouteController extends Controller
 {
@@ -14,7 +18,11 @@ class RouteController extends Controller
      */
     public function index()
     {
-        //
+        $routes = Route::paginate(config('general.datatable.per_page'));
+
+        return view('route.index', [
+            'routes' => $routes
+        ]);
     }
 
     /**
@@ -24,7 +32,11 @@ class RouteController extends Controller
      */
     public function create()
     {
-        //
+        $airports = Airport::select(['cd_arpt', 'nm_cidd'])->get();
+
+        return view('route.create', [
+            'airports' => $airports
+        ]);
     }
 
     /**
@@ -35,51 +47,102 @@ class RouteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+
+        $input = $request->all();
+
+        $created = Route::create($input);
+
+        if ($created) {
+            DB::commit();
+            Session::flash('success', 'Rota de voo cadastrada com sucesso!');
+        } else {
+            DB::rollBack();
+            Session::flash('error', 'Erro ao cadastrar a rota de voo!');
+        }
+
+        return Redirect::route('route.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Route  $route
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Route $route)
+    public function show($id)
     {
-        //
+        $route = Route::find($id);
+
+        return view('route.show', [
+            'route' => $route
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Route  $route
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Route $route)
+    public function edit($id)
     {
-        //
+        $airports = Airport::select(['cd_arpt', 'nm_cidd'])->get();
+        $route = Route::find($id);
+
+        return view('route.edit', [
+            'route' => $route,
+            'airports' => $airports
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Route  $route
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Route $route)
+    public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+
+        $input = $request->all();
+        $route = Route::find($id);
+        $updated = $route->update($input);
+
+        if ($updated) {
+            DB::commit();
+            Session::flash('success', 'Rota de voo atualizada com sucesso!');
+        } else {
+            DB::rollBack();
+            Session::flash('error', 'Erro ao atualizar a rota de voo!');
+        }
+
+        return Redirect::route('route.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Route  $route
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Route $route)
+    public function destroy($id)
     {
-        //
+        $route = Route::find($id);
+        $deleted = $route->delete();
+
+        if ($deleted) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Rota de voo deletada com sucesso!'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Ocorreu uma falha ao deletar a rota de voo!'
+            ]);
+        }
     }
 }
