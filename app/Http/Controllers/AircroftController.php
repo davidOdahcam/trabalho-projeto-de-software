@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AircroftRequest;
 use App\Models\Aircroft;
 use App\Models\Airline;
 use App\Models\Equipment;
@@ -48,7 +49,7 @@ class AircroftController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AircroftRequest $request)
     {
         DB::beginTransaction();
 
@@ -108,7 +109,7 @@ class AircroftController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AircroftRequest $request, $id)
     {
         DB::beginTransaction();
 
