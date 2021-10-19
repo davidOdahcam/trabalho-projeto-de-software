@@ -60,7 +60,8 @@
 
                             <tr>
                                 <td>{{ $booking->passenger->nm_psgr ?? config('general.format.empty') }}</td>
-                                <td>{{ $flight->route->origin->nm_cidd }} — {{ $flight->route->destiny->nm_cidd }}</td>
+                                <td>
+                                    {{ $flight->route->origin->cd_arpt }} <small>({{ $flight->route->origin->nm_cidd }})</small> — {{ $flight->route->origin->cd_arpt }} <small>({{ $flight->route->destiny->nm_cidd }})</small></td>
                                 <td>{{ date(config('general.format.dateBR'), strtotime($booking->dt_saida_voo)) ?? config('general.format.empty') }}</td>
                                 <td>{{ number_format($booking->pc_desc_pasg, 2) ?? config('general.format.empty') }}</td>
                                 <td>
