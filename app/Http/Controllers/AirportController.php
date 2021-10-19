@@ -75,7 +75,7 @@ class AirportController extends Controller
      */
     public function show($id)
     {
-        $airport = Airport::find($id);
+        $airport = Airport::findOrFail($id);
 
         return view('airport.show', [
             'airport' => $airport
@@ -90,7 +90,7 @@ class AirportController extends Controller
      */
     public function edit($id)
     {
-        $airport = Airport::find($id);
+        $airport = Airport::findOrFail($id);
         $countries = Country::select(['cd_pais', 'nm_pais'])->get();
         $states = State::all();
 
@@ -113,7 +113,7 @@ class AirportController extends Controller
         DB::beginTransaction();
 
         $input = $request->all();
-        $airport = Airport::find($id);
+        $airport = Airport::findOrFail($id);
         $updated = $airport->update($input);
 
         if ($updated) {
@@ -135,34 +135,28 @@ class AirportController extends Controller
      */
     public function destroy($id)
     {
-        // DB::beginTransaction();
+        try {
+            $airport = Airport::findOrFail($id);
+            $deleted = $airport->delete();
 
-        // $airport = Airport::find($id);
-        // $deleted = $airport->delete();
-
-        // if ($deleted) {
-        //     DB::commit();
-        //     Session::flash('success', 'Aeronave deletada com sucesso!');
-        // } else {
-        //     DB::rollBack();
-        //     Session::flash('error', 'Erro ao deletar a aeronave!');
-        // }
-
-        // return Redirect::route('airport.index');
-
-        $airport = Airport::find($id);
-        $deleted = $airport->delete();
-
-        if ($deleted) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Aeroporto deletado com sucesso!'
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Ocorreu uma falha ao deletar  aeroporto!'
-            ]);
+            if ($deleted) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Aeroporto deletado com sucesso!'
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Ocorreu uma falha ao deletar  aeroporto!'
+                ]);
+            }
+        } catch (\Throwable $th) {
+            if ($th->getCode() === '23000') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Impossível deletar este aeroporto, pois ele está relacionado a outras entidades!'
+                ]);
+            }
         }
     }
 }

@@ -67,7 +67,7 @@ class EquipmentController extends Controller
      */
     public function show($id)
     {
-        $equipment = Equipment::find($id);
+        $equipment = Equipment::findOrFail($id);
 
         return view('equipment.show', [
             'equipment' => $equipment
@@ -82,7 +82,7 @@ class EquipmentController extends Controller
      */
     public function edit($id)
     {
-        $equipment = Equipment::find($id);
+        $equipment = Equipment::findOrFail($id);
 
         return view('equipment.edit', [
             'equipment' => $equipment
@@ -101,7 +101,7 @@ class EquipmentController extends Controller
         DB::beginTransaction();
 
         $input = $request->all();
-        $equipment = Equipment::find($id);
+        $equipment = Equipment::findOrFail($id);
         $updated = $equipment->update($input);
 
         if ($updated) {
@@ -123,34 +123,28 @@ class EquipmentController extends Controller
      */
     public function destroy($id)
     {
-        // DB::beginTransaction();
+        try {
+            $equipment = Equipment::findOrFail($id);
+            $deleted = $equipment->delete();
 
-        // $equipment = Equipment::find($id);
-        // $deleted = $equipment->delete();
-
-        // if ($deleted) {
-        //     DB::commit();
-        //     Session::flash('success', 'Aeronave deletada com sucesso!');
-        // } else {
-        //     DB::rollBack();
-        //     Session::flash('error', 'Erro ao deletar a aeronave!');
-        // }
-
-        // return Redirect::route('equipment.index');
-
-        $equipment = Equipment::find($id);
-        $deleted = $equipment->delete();
-
-        if ($deleted) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Equipamento deletado com sucesso!'
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Ocorreu uma falha ao deletar o equipamento!'
-            ]);
+            if ($deleted) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Equipamento deletado com sucesso!'
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Ocorreu uma falha ao deletar o equipamento!'
+                ]);
+            }
+        } catch (\Throwable $th) {
+            if ($th->getCode() === '23000') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Impossível deletar este equipamento, pois ele está relacionado a outras entidades!'
+                ]);
+            }
         }
     }
 }

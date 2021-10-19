@@ -14,13 +14,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Rotas de voo</h1>
+                <h1 class="m-0">Estados</h1>
             </div>
 
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Painel</a></li>
-                    <li class="breadcrumb-item active">Rotas de voo</li>
+                    <li class="breadcrumb-item active">Estados</li>
                 </ol>
             </div>
         </div>
@@ -31,7 +31,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="text-right mb-3">
-            <a href="{{ route('route.create') }}" class="btn bg-gradient-primary px-5">Nova rota de voo</a>
+            <a href="{{ route('state.create') }}" class="btn bg-gradient-primary px-5">Novo estado</a>
         </div>
 
         <div class="card card-primary card-outline">
@@ -41,31 +41,27 @@
                 <table id="main-datatable" class="table table-striped text-center" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Código</th>
-                            <th>Valor</th>
-                            <th>Origem</th>
-                            <th>Destino</th>
+                            <th>Sigla</th>
+                            <th>Nome</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($routes as $route)
+                        @foreach ($states as $state)
                             <tr>
-                                <td>{{ $route->nr_rota_voo ?? config('general.format.empty') }}</td>
-                                <td>{{ config('general.format.currency') }} {{ number_format($route->vr_pasg, 2, ',', '.') ?? config('general.format.empty') }}</td>
-                                <td>{{ $route->origin->nm_cidd ?? config('general.format.empty') }}</td>
-                                <td>{{ $route->destiny->nm_cidd ?? config('general.format.empty') }}</td>
+                                <td>{{ $state->sg_uf ?? config('general.format.empty') }}</td>
+                                <td>{{ $state->nm_uf ?? config('general.format.empty') }}</td>
                                 <td>
-                                    <a href="{{ route('route.show', $route->nr_rota_voo) }}" class="btn btn-success btn-sm"  data-toggle="tooltip" title="Visualizar rota de voo">
+                                    <a href="{{ route('state.show', $state->sg_uf) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar estado">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('route.edit', $route->nr_rota_voo) }}" class="btn btn-info btn-sm"  data-toggle="tooltip" title="Editar rota de voo">
+                                    <a href="{{ route('state.edit', $state->sg_uf) }}" class="btn btn-info btn-sm" data-toggle="tooltip" title="Editar estado">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ $route->nr_rota_voo }}" value="{{ $route->nr_rota_voo }}" data-toggle="tooltip" title="Excluir rota de voo">
+                                    <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ $state->sg_uf }}" value="{{ $state->sg_uf }}" data-toggle="tooltip" title="Excluir estado">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                    <form method="post" action="{{ route('route.destroy', $route->nr_rota_voo) }}" id="delete_{{ $route->nr_rota_voo }}" class="form-delete-route">
+                                    <form method="post" action="{{ route('state.destroy', $state->sg_uf) }}" id="delete_{{ $state->sg_uf }}" class="form-delete-state">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                     </form>
@@ -75,7 +71,7 @@
                     </tbody>
                 </table>
 
-                {{ $routes->links('includes.pagination', ['paginator' => $routes]) }}
+                {{ $states->links('includes.pagination', ['paginator' => $states]) }}
             </div>
         </div>
     </div>
@@ -111,8 +107,8 @@
     <script>
         $(document).ready(function () {
             const ps_datatable = new PSDataTable({
-                title: '{{ config("app.name") }} - Rotas de voo, página {{ $routes->currentPage() }}',
-                columns: [0, 1, 2],
+                title: '{{ config("app.name") }} - Estados, página {{ $states->currentPage() }}',
+                columns: [0, 1],
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',
                 buttons: '#export-datatable',
@@ -120,8 +116,8 @@
             });
 
             const ps_delete = new PSDelete(
-                '.form-delete-route',
-                'Tem certeza de que deseja deletar esta rota de voo?',
+                '.form-delete-state',
+                'Tem certeza de que deseja deletar esta estado?',
                 'Você não poderá voltar atrás!',
                 'warning'
             );

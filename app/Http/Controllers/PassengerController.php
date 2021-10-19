@@ -74,7 +74,7 @@ class PassengerController extends Controller
      */
     public function show($id)
     {
-        $passenger = Passenger::find($id);
+        $passenger = Passenger::findOrFail($id);
 
         return view('passenger.show', [
             'passenger' => $passenger
@@ -89,7 +89,7 @@ class PassengerController extends Controller
      */
     public function edit($id)
     {
-        $passenger = Passenger::find($id);
+        $passenger = Passenger::findOrFail($id);
         $countries = Country::select(['cd_pais', 'nm_pais'])->get();
         $responsibles = Passenger::select(['cd_psgr', 'nm_psgr'])->get();
 
@@ -112,7 +112,7 @@ class PassengerController extends Controller
         DB::beginTransaction();
 
         $input = $request->all();
-        $passenger = Passenger::find($id);
+        $passenger = Passenger::findOrFail($id);
         $updated = $passenger->update($input);
 
         if ($updated) {
@@ -136,7 +136,7 @@ class PassengerController extends Controller
     {
         // DB::beginTransaction();
 
-        // $passenger = Passenger::find($id);
+        // $passenger = Passenger::findOrFail($id);
         // $deleted = $passenger->delete();
 
         // if ($deleted) {
@@ -149,7 +149,7 @@ class PassengerController extends Controller
 
         // return Redirect::route('passenger.index');
 
-        $passenger = Passenger::find($id);
+        $passenger = Passenger::findOrFail($id);
         $deleted = $passenger->delete();
 
         if ($deleted) {

@@ -68,7 +68,7 @@ class CountryController extends Controller
      */
     public function show($id)
     {
-        $country = Country::find($id);
+        $country = Country::findOrFail($id);
 
         return view('country.show', [
             'country' => $country
@@ -83,7 +83,7 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        $country = Country::find($id);
+        $country = Country::findOrFail($id);
 
         return view('country.edit', [
             'country' => $country
@@ -102,7 +102,7 @@ class CountryController extends Controller
         DB::beginTransaction();
 
         $input = $request->all();
-        $country = Country::find($id);
+        $country = Country::findOrFail($id);
         $updated = $country->update($input);
 
         if ($updated) {
@@ -124,19 +124,28 @@ class CountryController extends Controller
      */
     public function destroy($id)
     {
-        $country = Country::find($id);
-        $deleted = $country->delete();
+        try {
+            $country = Country::findOrFail($id);
+            $deleted = $country->delete();
 
-        if ($deleted) {
-            return response()->json([
-                'success' => true,
-                'message' => 'País deletado com sucesso!'
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Ocorreu uma falha ao deletar o país!'
-            ]);
+            if ($deleted) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'País deletado com sucesso!'
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Ocorreu uma falha ao deletar o país!'
+                ]);
+            }
+        } catch (\Throwable $th) {
+            if ($th->getCode() === '23000') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Impossível deletar este país, pois ele está relacionado a outras entidades!'
+                ]);
+            }
         }
     }
 }

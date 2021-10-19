@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\State;
 use Illuminate\Http\Request;
+use DB;
+use Session;
+use Redirect;
 
 class StateController extends Controller
 {
@@ -14,7 +17,11 @@ class StateController extends Controller
      */
     public function index()
     {
-        //
+        $states = State::paginate(config('general.datatable.per_page'));
+
+        return view('state.index', [
+            'states' => $states
+        ]);
     }
 
     /**
@@ -24,7 +31,7 @@ class StateController extends Controller
      */
     public function create()
     {
-        //
+        return view('state.create');
     }
 
     /**
@@ -35,51 +42,109 @@ class StateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+
+        $input = $request->all();
+
+        $created = State::create($input);
+
+        if ($created) {
+            DB::commit();
+            Session::flash('success', 'Aeroporto cadastrado com sucesso!');
+        } else {
+            DB::rollBack();
+            Session::flash('error', 'Erro ao cadastrar o aeroporto!');
+        }
+
+        return Redirect::route('state.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\State  $state
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(State $state)
+    public function show($id)
     {
-        //
+        $state = State::findOrFail($id);
+
+        return view('state.show', [
+            'state' => $state
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\State  $state
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(State $state)
+    public function edit($id)
     {
-        //
+        $state = State::findOrFail($id);
+
+        return view('state.edit', [
+            'state' => $state
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\State  $state
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, State $state)
+    public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+
+        $input = $request->all();
+        $state = State::findOrFail($id);
+        $updated = $state->update($input);
+
+        if ($updated) {
+            DB::commit();
+            Session::flash('success', 'Aeroporto atualizado com sucesso!');
+        } else {
+            DB::rollBack();
+            Session::flash('error', 'Erro ao atualizar o aeroporto!');
+        }
+
+        return Redirect::route('state.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\State  $state
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(State $state)
+    public function destroy($id)
     {
-        //
+        try {
+            $state = State::findOrFail($id);
+            $deleted = $state->delete();
+
+            if ($deleted) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Aeroporto deletado com sucesso!'
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Ocorreu uma falha ao deletar aeroporto!'
+                ]);
+            }
+        } catch (\Throwable $th) {
+            if ($th->getCode() === '23000') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Impossível deletar este estado, pois ele está relacionado a outras entidades!'
+                ]);
+            }
+        }
     }
 }

@@ -76,7 +76,7 @@ class AircroftController extends Controller
      */
     public function show($id)
     {
-        $aircroft = Aircroft::find($id);
+        $aircroft = Aircroft::findOrFail($id);
 
         return view('aircroft.show', [
             'aircroft' => $aircroft
@@ -93,7 +93,7 @@ class AircroftController extends Controller
     {
         $equipments = Equipment::select(['cd_eqpt', 'nm_eqpt'])->get();
         $airlines = Airline::select(['cd_cmpn_aerea', 'nm_cmpn_aerea'])->get();
-        $aircroft = Aircroft::find($id);
+        $aircroft = Aircroft::findOrFail($id);
 
         return view('aircroft.edit', [
             'aircroft' => $aircroft,
@@ -114,7 +114,7 @@ class AircroftController extends Controller
         DB::beginTransaction();
 
         $input = $request->all();
-        $aircroft = Aircroft::find($id);
+        $aircroft = Aircroft::findOrFail($id);
         $updated = $aircroft->update($input);
 
         if ($updated) {
@@ -136,34 +136,28 @@ class AircroftController extends Controller
      */
     public function destroy($id)
     {
-        // DB::beginTransaction();
+        try {
+            $aircroft = Aircroft::findOrFail($id);
+            $deleted = $aircroft->delete();
 
-        // $aircroft = Aircroft::find($id);
-        // $deleted = $aircroft->delete();
-
-        // if ($deleted) {
-        //     DB::commit();
-        //     Session::flash('success', 'Aeronave deletada com sucesso!');
-        // } else {
-        //     DB::rollBack();
-        //     Session::flash('error', 'Erro ao deletar a aeronave!');
-        // }
-
-        // return Redirect::route('aircroft.index');
-
-        $aircroft = Aircroft::find($id);
-        $deleted = $aircroft->delete();
-
-        if ($deleted) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Aeronave deletada com sucesso!'
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Ocorreu uma falha ao deletar a aeronave!'
-            ]);
+            if ($deleted) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Aeronave deletada com sucesso!'
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Ocorreu uma falha ao deletar a aeronave!'
+                ]);
+            }
+        } catch (\Throwable $th) {
+            if ($th->getCode() === '23000') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Impossível deletar esta aeronave, pois ela está relacionada a outras entidades!'
+                ]);
+            }
         }
     }
 }

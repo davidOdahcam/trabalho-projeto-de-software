@@ -72,7 +72,7 @@ class AirlineController extends Controller
      */
     public function show($id)
     {
-        $airline = Airline::find($id);
+        $airline = Airline::findOrFail($id);
 
         return view('airline.show', [
             'airline' => $airline
@@ -87,7 +87,7 @@ class AirlineController extends Controller
      */
     public function edit($id)
     {
-        $airline = Airline::find($id);
+        $airline = Airline::findOrFail($id);
         $countries = Country::select(['cd_pais', 'nm_pais'])->get();
 
         return view('airline.edit', [
@@ -108,7 +108,7 @@ class AirlineController extends Controller
         DB::beginTransaction();
 
         $input = $request->all();
-        $airline = Airline::find($id);
+        $airline = Airline::findOrFail($id);
         $updated = $airline->update($input);
 
         if ($updated) {
@@ -130,34 +130,28 @@ class AirlineController extends Controller
      */
     public function destroy($id)
     {
-        // DB::beginTransaction();
+        try {
+            $airline = Airline::findOrFail($id);
+            $deleted = $airline->delete();
 
-        // $airline = Airline::find($id);
-        // $deleted = $airline->delete();
-
-        // if ($deleted) {
-        //     DB::commit();
-        //     Session::flash('success', 'Aeronave deletada com sucesso!');
-        // } else {
-        //     DB::rollBack();
-        //     Session::flash('error', 'Erro ao deletar a aeronave!');
-        // }
-
-        // return Redirect::route('airline.index');
-
-        $airline = Airline::find($id);
-        $deleted = $airline->delete();
-
-        if ($deleted) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Companhia aérea deletada com sucesso!'
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Ocorreu uma falha ao deletar a companhia aérea!'
-            ]);
+            if ($deleted) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Companhia aérea deletada com sucesso!'
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Ocorreu uma falha ao deletar a companhia aérea!'
+                ]);
+            }
+        } catch (\Throwable $th) {
+            if ($th->getCode() === '23000') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Impossível deletar esta companhia aérea, pois ela está relacionada a outras entidades!'
+                ]);
+            }
         }
     }
 }

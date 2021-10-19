@@ -72,7 +72,7 @@ class RouteController extends Controller
      */
     public function show($id)
     {
-        $route = Route::find($id);
+        $route = Route::findOrFail($id);
 
         return view('route.show', [
             'route' => $route
@@ -88,7 +88,7 @@ class RouteController extends Controller
     public function edit($id)
     {
         $airports = Airport::select(['cd_arpt', 'nm_cidd'])->get();
-        $route = Route::find($id);
+        $route = Route::findOrFail($id);
 
         return view('route.edit', [
             'route' => $route,
@@ -108,7 +108,7 @@ class RouteController extends Controller
         DB::beginTransaction();
 
         $input = $request->all();
-        $route = Route::find($id);
+        $route = Route::findOrFail($id);
         $updated = $route->update($input);
 
         if ($updated) {
@@ -130,7 +130,7 @@ class RouteController extends Controller
      */
     public function destroy($id)
     {
-        $route = Route::find($id);
+        $route = Route::findOrFail($id);
         $deleted = $route->delete();
 
         if ($deleted) {
