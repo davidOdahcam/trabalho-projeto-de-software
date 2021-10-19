@@ -4,7 +4,7 @@
         <input type="number" name="cd_psgr" id="cd_psgr" class="form-control" value="{{ $passenger->cd_psgr ?? old('cd_psgr') }}">
 
         @error('cd_psgr')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -15,7 +15,7 @@
         <input type="text" name="nm_psgr" id="nm_psgr" class="form-control" value="{{ $passenger->nm_psgr ?? old('nm_psgr') }}">
 
         @error('nm_psgr')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -30,7 +30,7 @@
         </select>
 
         @error('ic_sexo_psgr')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -41,7 +41,7 @@
         <input type="date" name="dt_nasc_psgr" id="dt_nasc_psgr" class="form-control" value="{{ (isset($passenger)) ? date(config('general.format.date'), strtotime($passenger->dt_nasc_psgr)) : old('dt_nasc_psgr') }}">
 
         @error('dt_nasc_psgr')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -57,7 +57,7 @@
         </select>
 
         @error('cd_pais')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -72,7 +72,7 @@
         </select>
 
         @error('ic_estd_civil')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -88,7 +88,7 @@
         </select>
 
         @error('cd_psgr_resp')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror

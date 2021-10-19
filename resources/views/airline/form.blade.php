@@ -4,7 +4,7 @@
         <input type="text" name="cd_cmpn_aerea" id="cd_cmpn_aerea" class="form-control" value="{{ $airline->cd_cmpn_aerea ?? old('cd_cmpn_aerea') }}">
 
         @error('cd_cmpn_aerea')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -15,7 +15,7 @@
         <input type="text" name="nm_cmpn_aerea" id="nm_cmpn_aerea" class="form-control" value="{{ $airline->nm_cmpn_aerea ?? old('nm_cmpn_aerea') }}">
 
         @error('nm_cmpn_aerea')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -31,7 +31,7 @@
         </select>
 
         @error('cd_pais')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror

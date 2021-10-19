@@ -12,7 +12,7 @@
         </select>
 
         @error('cd_psgr')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -28,7 +28,7 @@
         </select>
 
         @error('nr_voo')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -39,7 +39,7 @@
         <input type="number" name="pc_desc_pasg" id="pc_desc_pasg" class="form-control" value="{{ $booking->pc_desc_pasg ?? old('pc_desc_pasg') }}">
 
         @error('pc_desc_pasg')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror

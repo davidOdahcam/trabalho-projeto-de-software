@@ -4,7 +4,7 @@
         <input type="text" name="cd_arpt" id="cd_arpt" class="form-control" value="{{ $airport->cd_arpt ?? old('cd_arpt') }}">
 
         @error('cd_arpt')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -20,7 +20,7 @@
         </select>
 
         @error('cd_pais')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -36,7 +36,7 @@
         </select>
 
         @error('sg_uf')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -47,7 +47,7 @@
         <input type="text" name="nm_cidd" id="nm_cidd" class="form-control" value="{{ $airport->nm_cidd ?? old('nm_cidd') }}">
 
         @error('nm_cidd')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror

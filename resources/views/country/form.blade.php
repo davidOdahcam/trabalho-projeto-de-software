@@ -4,7 +4,7 @@
         <input type="text" name="cd_pais" id="cd_pais" class="form-control" value="{{ $country->cd_pais ?? old('cd_pais') }}">
 
         @error('cd_pais')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -15,7 +15,7 @@
         <input type="text" name="nm_pais" id="nm_pais" class="form-control" value="{{ $country->nm_pais ?? old('nm_pais') }}">
 
         @error('nm_pais')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -26,7 +26,7 @@
         <input type="number" name="qt_pplc_pais" id="qt_pplc_pais" class="form-control" value="{{ $country->qt_pplc_pais ?? old('qt_pplc_pais') }}">
 
         @error('qt_pplc_pais')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror

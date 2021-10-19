@@ -4,7 +4,7 @@
         <input type="number" name="nr_voo" id="nr_voo" class="form-control" value="{{ $flight->nr_voo ?? old('nr_voo') }}">
 
         @error('nr_voo')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -15,7 +15,7 @@
         <input type="date" name="dt_saida_voo" id="dt_saida_voo" class="form-control" value="{{ (isset($flight)) ? date(config('general.format.date'), strtotime($flight->dt_saida_voo)) : old('dt_saida_voo') }}">
 
         @error('dt_saida_voo')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -33,7 +33,7 @@
         </select>
 
         @error('nr_rota_voo')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -51,7 +51,7 @@
         </select>
 
         @error('cd_arnv')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror

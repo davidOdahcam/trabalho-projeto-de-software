@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookingRequest;
 use App\Models\Booking;
 use App\Models\Flight;
 use App\Models\Passenger;
-use Illuminate\Http\Request;
-use DB;
-use Session;
-use Redirect;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class BookingController extends Controller
 {
@@ -48,7 +48,7 @@ class BookingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookingRequest $request)
     {
         DB::beginTransaction();
 
@@ -109,7 +109,7 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $cd_psgr, $nr_voo, $dt_saida_voo)
+    public function update(BookingRequest $request, $cd_psgr, $nr_voo, $dt_saida_voo)
     {
         DB::beginTransaction();
 

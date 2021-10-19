@@ -34,12 +34,12 @@ class AircroftRequest extends FormRequest
     public function messages()
     {
         return [
-            'required'                  => 'Campo não preenchido',
-
             'cd_arnv.max'               => 'Não ultrapasse 5 caracteres',
             'cd_arnv.unique'            => 'O código já está em uso',
+
             'cd_eqpt.max'               => 'Não ultrapasse 3 caracteres',
             'cd_eqpt.required'          => 'Você deve selecionar um equipamento',
+
             'cd_cmpn_aerea.max'         => 'Não ultrapasse 2 caracteres',
             'cd_cmpn_aerea.required'    => 'Você deve selecionar uma companhia aérea'
         ];

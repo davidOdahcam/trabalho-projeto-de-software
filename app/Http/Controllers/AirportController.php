@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AirportRequest;
 use App\Models\Airport;
 use App\Models\Country;
 use App\Models\State;
-use Illuminate\Http\Request;
-use DB;
-use Session;
-use Redirect;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class AirportController extends Controller
 {
@@ -48,7 +48,7 @@ class AirportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AirportRequest $request)
     {
         DB::beginTransaction();
 
@@ -108,7 +108,7 @@ class AirportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AirportRequest $request, $id)
     {
         DB::beginTransaction();
 

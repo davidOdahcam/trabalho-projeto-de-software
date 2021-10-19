@@ -4,7 +4,7 @@
         <input type="text" name="sg_uf" id="sg_uf" class="form-control" value="{{ $airport->sg_uf ?? old('sg_uf') }}">
 
         @error('sg_uf')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -15,7 +15,7 @@
         <input type="text" name="nm_uf" id="nm_uf" class="form-control" value="{{ $airport->nm_uf ?? old('nm_uf') }}">
 
         @error('nm_uf')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror

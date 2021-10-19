@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AirlineRequest;
 use App\Models\Airline;
 use App\Models\Country;
-use Illuminate\Http\Request;
-use DB;
-use Session;
-use Redirect;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class AirlineController extends Controller
 {
@@ -45,7 +45,7 @@ class AirlineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AirlineRequest $request)
     {
         DB::beginTransaction();
 
@@ -103,7 +103,7 @@ class AirlineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AirlineRequest $request, $id)
     {
         DB::beginTransaction();
 

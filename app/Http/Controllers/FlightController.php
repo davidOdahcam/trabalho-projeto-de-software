@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FlightRequest;
 use App\Models\Aircroft;
 use App\Models\Flight;
 use App\Models\Route;
-use Illuminate\Http\Request;
-use DB;
-use Session;
-use Redirect;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class FlightController extends Controller
 {
@@ -48,7 +48,7 @@ class FlightController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FlightRequest $request)
     {
         DB::beginTransaction();
 
@@ -108,7 +108,7 @@ class FlightController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $nr_voo, $dt_saida_voo)
+    public function update(FlightRequest $request, $nr_voo, $dt_saida_voo)
     {
         DB::beginTransaction();
 

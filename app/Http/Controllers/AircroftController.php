@@ -6,10 +6,9 @@ use App\Http\Requests\AircroftRequest;
 use App\Models\Aircroft;
 use App\Models\Airline;
 use App\Models\Equipment;
-use Illuminate\Http\Request;
-use DB;
-use Session;
-use Redirect;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class AircroftController extends Controller
 {

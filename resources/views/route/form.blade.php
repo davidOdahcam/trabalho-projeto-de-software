@@ -4,7 +4,7 @@
         <input type="text" name="nr_rota_voo" id="nr_rota_voo" class="form-control" value="{{ $route->nr_rota_voo ?? old('nr_rota_voo') }}">
 
         @error('nr_rota_voo')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -20,7 +20,7 @@
         </select>
 
         @error('cd_arpt_orig')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -36,7 +36,7 @@
         </select>
 
         @error('cd_arpt_dest')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
@@ -47,7 +47,7 @@
         <input type="number" name="vr_pasg" id="vr_pasg" class="form-control" value="{{ $route->vr_pasg ?? old('vr_pasg') }}">
 
         @error('vr_pasg')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
