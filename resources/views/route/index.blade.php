@@ -123,7 +123,8 @@
                 '.form-delete-route',
                 'Tem certeza de que deseja deletar esta rota de voo?',
                 'Você não poderá voltar atrás!',
-                'warning'
+                'warning',
+                'Deletada'
             );
         });
     </script>

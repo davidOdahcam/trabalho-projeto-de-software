@@ -121,7 +121,8 @@
                 '.form-delete-aircroft',
                 'Tem certeza de que deseja deletar esta aeronave?',
                 'Você não poderá voltar atrás!',
-                'warning'
+                'warning',
+                'Deletada'
             );
         });
     </script>

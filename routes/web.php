@@ -47,7 +47,7 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], fu
     Route::resource('/equipamentos', 'EquipmentController')->names('equipment')->parameters(['equipamento' => 'equipment']);
     // Route::resource('/voos', 'FlightController')->names('flight')->parameters(['voo' => 'flight']);
     Route::resource('/passageiros', 'PassengerController')->names('passenger')->parameters(['passageiro' => 'passenger']);
-    Route::resource('/rotas', 'RouteController')->names('route')->parameters(['rota' => 'route']);
+    Route::resource('/rotas-de-voo', 'RouteController')->names('route')->parameters(['rota' => 'route']);
     Route::resource('/unidades-federais', 'StateController')->names('state')->parameters(['uf' => 'uf']);
 });
 

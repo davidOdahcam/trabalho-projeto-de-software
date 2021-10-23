@@ -121,7 +121,8 @@
                 '.form-delete-airline',
                 'Tem certeza de que deseja deletar esta companhia aérea?',
                 'Você não poderá voltar atrás!',
-                'warning'
+                'warning',
+                'Deletada'
             );
         });
     </script>

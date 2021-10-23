@@ -51,6 +51,8 @@ class AirlineController extends Controller
 
         $input = $request->all();
 
+        dd($request, $input);
+
         $created = Airline::create($input);
 
         if ($created) {

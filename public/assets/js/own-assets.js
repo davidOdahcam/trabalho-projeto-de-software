@@ -95,11 +95,12 @@ class PSDelete {
      *
      * @return DataTable
      */
-    constructor(selector, title, form, action) {
+    constructor(selector, title, form, action, operation) {
         this.selector = selector;
         this.title = title;
         this.form = form;
         this.action = action;
+        this.operation = operation;
 
         this.init();
     }
@@ -139,7 +140,7 @@ class PSDelete {
                                 $("#main-datatable").DataTable().row(tr).remove().draw();
                                 Swal.fire({
                                     icon: 'success',
-                                    title: 'Deletada!',
+                                    title: `${self.operation}!`,
                                     text: response.message,
                                     showConfirmButton: false,
                                     timer: 1500

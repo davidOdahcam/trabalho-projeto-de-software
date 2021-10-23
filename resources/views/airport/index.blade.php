@@ -121,9 +121,10 @@
 
             const ps_delete = new PSDelete(
                 '.form-delete-airport',
-                'Tem certeza de que deseja deletar esta aeroporto?',
+                'Tem certeza de que deseja deletar este aeroporto?',
                 'Você não poderá voltar atrás!',
-                'warning'
+                'warning',
+                'Deletado'
             );
         });
     </script>

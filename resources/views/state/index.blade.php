@@ -117,9 +117,10 @@
 
             const ps_delete = new PSDelete(
                 '.form-delete-state',
-                'Tem certeza de que deseja deletar esta estado?',
+                'Tem certeza de que deseja deletar este estado?',
                 'Você não poderá voltar atrás!',
-                'warning'
+                'warning',
+                'Deletado'
             );
         });
     </script>

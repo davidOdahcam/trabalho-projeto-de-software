@@ -121,9 +121,10 @@
 
             const ps_delete = new PSDelete(
                 '.form-delete-flight',
-                'Tem certeza de que deseja deletar esta voo?',
+                'Tem certeza de que deseja deletar este voo?',
                 'Você não poderá voltar atrás!',
-                'warning'
+                'warning',
+                'Deletado'
             );
         });
     </script>

@@ -119,9 +119,10 @@
 
             const ps_delete = new PSDelete(
                 '.form-delete-equipment',
-                'Tem certeza de que deseja deletar esta equipamento?',
+                'Tem certeza de que deseja deletar este equipamento?',
                 'Você não poderá voltar atrás!',
-                'warning'
+                'warning',
+                'Deletado'
             );
         });
     </script>

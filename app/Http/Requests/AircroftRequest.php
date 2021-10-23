@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\AircroftUnique;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AircroftRequest extends FormRequest
@@ -23,8 +24,11 @@ class AircroftRequest extends FormRequest
      */
     public function rules()
     {
+        $method = $this->method;
+        $id = $this->all()['cd_arnv'];
+
         return [
-            'cd_arnv'       => 'required|max:5|unique:itr_arnv,cd_arnv',
+            'cd_arnv'       => ['required','max:5', new AircroftUnique('itr_arnv', $id, $method)],
             'cd_eqpt'       => 'required|max:3',
             'cd_cmpn_aerea' => 'required|max:2'
         ];

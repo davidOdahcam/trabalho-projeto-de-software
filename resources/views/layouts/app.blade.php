@@ -255,4 +255,3 @@
         @stack('js')
     </body>
 </html>
-</html>

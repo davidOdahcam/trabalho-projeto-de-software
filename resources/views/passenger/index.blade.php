@@ -121,9 +121,10 @@
 
             const ps_delete = new PSDelete(
                 '.form-delete-passenger',
-                'Tem certeza de que deseja deletar esta passageiro?',
+                'Tem certeza de que deseja deletar este passageiro?',
                 'Você não poderá voltar atrás!',
-                'warning'
+                'warning',
+                'Deletado'
             );
         });
     </script>

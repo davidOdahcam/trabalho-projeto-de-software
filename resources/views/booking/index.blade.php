@@ -61,7 +61,8 @@
                             <tr>
                                 <td>{{ $booking->passenger->nm_psgr ?? config('general.format.empty') }}</td>
                                 <td>
-                                    {{ $flight->route->origin->cd_arpt }} <small>({{ $flight->route->origin->nm_cidd }})</small> — {{ $flight->route->origin->cd_arpt }} <small>({{ $flight->route->destiny->nm_cidd }})</small></td>
+                                    {{ $flight->route->origin->cd_arpt ?? '' }} <small>({{ $flight->route->origin->nm_cidd ?? 'Aeroporto deletado' }})</small> — {{ $flight->route->destiny->cd_arpt ?? '' }} <small>({{ $flight->route->destiny->nm_cidd ?? 'Aeroporto deletado' }})</small>
+                                </td>
                                 <td>{{ date(config('general.format.dateBR'), strtotime($booking->dt_saida_voo)) ?? config('general.format.empty') }}</td>
                                 <td>{{ number_format($booking->pc_desc_pasg, 2) ?? config('general.format.empty') }}</td>
                                 <td>
@@ -132,7 +133,8 @@
                 '.form-delete-booking',
                 'Tem certeza de que deseja deletar esta reserva?',
                 'Você não poderá voltar atrás!',
-                'warning'
+                'warning',
+                'Deletada'
             );
         });
     </script>

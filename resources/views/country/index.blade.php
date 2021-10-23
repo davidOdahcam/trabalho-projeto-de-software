@@ -119,9 +119,10 @@
 
             const ps_delete = new PSDelete(
                 '.form-delete-country',
-                'Tem certeza de que deseja deletar esta país?',
+                'Tem certeza de que deseja deletar este país?',
                 'Você não poderá voltar atrás!',
-                'warning'
+                'warning',
+                'Deletado'
             );
         });
     </script>
