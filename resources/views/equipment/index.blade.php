@@ -41,18 +41,18 @@
                 <table id="main-datatable" class="table table-striped text-center" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Código</th>
                             <th>Nome</th>
                             <th>Tipo</th>
+                            <th>Quantidade de passageiros</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($equipments as $equipment)
                             <tr>
-                                <td>{{ $equipment->cd_eqpt ?? config('general.format.empty') }}</td>
                                 <td>{{ $equipment->nm_eqpt ?? config('general.format.empty') }}</td>
-                                <td>{{ $equipment->ic_tipo_prps ?? config('general.format.empty') }}</td>
+                                <td>{{ $equipment->dc_tipo_eqpt ?? config('general.format.empty') }}</td>
+                                <td>{{ $equipment->qt_psgr ?? config('general.format.empty') }}</td>
                                 <td>
                                     <a href="{{ route('equipment.show', $equipment->cd_eqpt) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar equipamento">
                                         <i class="fas fa-eye"></i>

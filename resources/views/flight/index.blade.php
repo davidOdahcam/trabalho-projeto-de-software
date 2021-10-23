@@ -41,7 +41,6 @@
                 <table id="main-datatable" class="table table-striped text-center" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Número do voo</th>
                             <th>Data de saída</th>
                             <th>Rota</th>
                             <th>Aeronave</th>
@@ -51,7 +50,6 @@
                     <tbody>
                         @foreach ($flights as $flight)
                             <tr>
-                                <td>{{ $flight->nr_voo ?? config('general.format.empty') }}</td>
                                 <td>{{ date(config('general.format.dateBR'), strtotime($flight->dt_saida_voo)) ?? config('general.format.empty') }}</td>
                                 <td>{{ $flight->route->origin->cd_arpt }} <small>({{ $flight->route->origin->nm_cidd }})</small> — {{ $flight->route->origin->cd_arpt }} <small>({{ $flight->route->destiny->nm_cidd }})</small></td>
                                 <td>{{ $flight->cd_arnv ?? config('general.format.empty') }}</td>

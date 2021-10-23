@@ -19,7 +19,7 @@ class FlightController extends Controller
      */
     public function index()
     {
-        $flights = Flight::orderBy('dt_saida_voo', 'DESC')->paginate(config('general.datatable.per_page'));
+        $flights = Flight::orderBy('dt_saida_voo', 'DESC')->paginate(config('general.datatable.per_page'))->onEachSide(0);
 
         return view('flight.index', [
             'flights' => $flights

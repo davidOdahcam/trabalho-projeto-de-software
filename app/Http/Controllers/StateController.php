@@ -17,7 +17,7 @@ class StateController extends Controller
      */
     public function index()
     {
-        $states = State::paginate(config('general.datatable.per_page'));
+        $states = State::orderBy('nm_uf', 'ASC')->paginate(config('general.datatable.per_page'))->onEachSide(0);
 
         return view('state.index', [
             'states' => $states

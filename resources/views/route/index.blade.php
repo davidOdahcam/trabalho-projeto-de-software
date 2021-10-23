@@ -41,7 +41,6 @@
                 <table id="main-datatable" class="table table-striped text-center" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Código</th>
                             <th>Valor</th>
                             <th>Origem</th>
                             <th>Destino</th>
@@ -51,7 +50,6 @@
                     <tbody>
                         @foreach ($routes as $route)
                             <tr>
-                                <td>{{ $route->nr_rota_voo ?? config('general.format.empty') }}</td>
                                 <td>{{ config('general.format.currency') }} {{ number_format($route->vr_pasg, 2, ',', '.') ?? config('general.format.empty') }}</td>
                                 <td>{{ $route->origin->nm_cidd ?? config('general.format.empty') }}</td>
                                 <td>{{ $route->destiny->nm_cidd ?? config('general.format.empty') }}</td>

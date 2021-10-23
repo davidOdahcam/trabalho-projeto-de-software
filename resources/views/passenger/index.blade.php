@@ -41,7 +41,6 @@
                 <table id="main-datatable" class="table table-striped text-center" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Código</th>
                             <th>Nome</th>
                             <th>País</th>
                             <th>Responsável</th>
@@ -51,7 +50,6 @@
                     <tbody>
                         @foreach ($passengers as $passenger)
                             <tr>
-                                <td>{{ $passenger->cd_psgr ?? config('general.format.empty') }}</td>
                                 <td>{{ $passenger->nm_psgr ?? config('general.format.empty') }}</td>
                                 <td>{{ $passenger->country->nm_pais ?? config('general.format.empty') }}</td>
                                 <td>{{ $passenger->responsible->nm_psgr ?? config('general.format.empty') }}</td>

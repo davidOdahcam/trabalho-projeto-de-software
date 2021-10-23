@@ -19,7 +19,7 @@ class AirportController extends Controller
      */
     public function index()
     {
-        $airports = Airport::paginate(config('general.datatable.per_page'));
+        $airports = Airport::orderBy('cd_arpt', 'ASC')->paginate(config('general.datatable.per_page'))->onEachSide(0);
 
         return view('airport.index', [
             'airports' => $airports

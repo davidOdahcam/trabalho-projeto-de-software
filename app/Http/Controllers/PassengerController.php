@@ -18,7 +18,7 @@ class PassengerController extends Controller
      */
     public function index()
     {
-        $passengers = Passenger::orderBy('nm_psgr', 'ASC')->paginate(config('general.datatable.per_page'));
+        $passengers = Passenger::orderBy('nm_psgr', 'ASC')->paginate(config('general.datatable.per_page'))->onEachSide(0);
 
         return view('passenger.index', [
             'passengers' => $passengers

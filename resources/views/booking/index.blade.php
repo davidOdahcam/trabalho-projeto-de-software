@@ -45,9 +45,9 @@
                 <table id="main-datatable" class="table table-striped text-center" style="width:100%">
                     <thead>
                         <tr>
+                            <th>Data de saída</th>
                             <th>Passageiro</th>
                             <th>Voo <small>(origem — destino)</small></th>
-                            <th>Data de saída</th>
                             <th>Porcentagem de desconto <small>(%)</small></th>
                             <th>Ações</th>
                         </tr>
@@ -59,11 +59,11 @@
                             @endphp
 
                             <tr>
+                                <td>{{ date(config('general.format.dateBR'), strtotime($booking->dt_saida_voo)) ?? config('general.format.empty') }}</td>
                                 <td>{{ $booking->passenger->nm_psgr ?? config('general.format.empty') }}</td>
                                 <td>
                                     {{ $flight->route->origin->cd_arpt ?? '' }} <small>({{ $flight->route->origin->nm_cidd ?? 'Aeroporto deletado' }})</small> — {{ $flight->route->destiny->cd_arpt ?? '' }} <small>({{ $flight->route->destiny->nm_cidd ?? 'Aeroporto deletado' }})</small>
                                 </td>
-                                <td>{{ date(config('general.format.dateBR'), strtotime($booking->dt_saida_voo)) ?? config('general.format.empty') }}</td>
                                 <td>{{ number_format($booking->pc_desc_pasg, 2) ?? config('general.format.empty') }}</td>
                                 <td>
                                     <a href="{{ route('booking.show', ['cd_psgr' => $booking->cd_psgr, 'nr_voo' => $booking->nr_voo, 'dt_saida_voo' => date(config('general.format.date'), strtotime($booking->dt_saida_voo))]) }}" id="delete_{{ $booking->dt_saida_voo }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar reserva">
