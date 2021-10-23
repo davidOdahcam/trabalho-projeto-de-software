@@ -23,7 +23,7 @@ class PSDataTable {
     }
     init() {
         $(this.datatable).DataTable({
-            "dom": 'Bfri',
+            "dom": 'Bri',
             "responsive": true,
             "info": false,
             "autoWidth": false,
