@@ -15,50 +15,55 @@ class PSDataTable {
         this.columns = options.columns;
         this.lang = options.lang;
         this.datatable = (options.datatable) ? options.datatable : '#main-datatable';
+        this.dom = (options.dom) ? options.dom : 'Brti';
         this.buttons = (options.buttons) ? options.buttons : false;
         this.perPage = (options.perPage) ? options.perPage : 30;
+        this.paging = (options.paging) ? options.paging : true;
         this.domJquery;
 
         this.init();
     }
     init() {
+        const self = this;
+
         $(this.datatable).DataTable({
-            "dom": 'Bri',
+            "dom": self.dom,
             "responsive": true,
             "info": false,
             "autoWidth": false,
-            "pageLength": this.perPage,
+            "pageLength": self.perPage,
             "lengthChange": false,
+            "paging": self.paging,
             "language": {
-                "url": this.lang
+                "url": self.lang
             },
             "buttons": [
                 {
                     "extend": "csvHtml5",
-                    "title": this.title,
+                    "title": self.title,
                     "text": '<i class="fas fa-file-csv"></i>',
                     "className": "btn btn-dark",
                     "exportOptions": {
-                        "columns": this.columns
+                        "columns": self.columns
                     }
                 },
                 {
                     "extend": "excelHtml5",
-                    "title": this.title,
+                    "title": self.title,
                     "text": '<i class="fas fa-file-excel"></i>',
                     "className": "btn btn-success",
                     "exportOptions": {
-                        "columns": this.columns
+                        "columns": self.columns
                     }
                 },
                 {
                     "extend": "pdfHtml5",
-                    "title": this.title,
+                    "title": self.title,
                     "text": '<i class="fas fa-file-pdf"></i>',
                     "className": "btn btn-danger",
                     "pageSize": "A4",
                     "exportOptions": {
-                        "columns": this.columns
+                        "columns": self.columns
                     },
                     "customize": function (doc) {
                         doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
@@ -66,19 +71,18 @@ class PSDataTable {
                 },
                 {
                     "extend": "print",
-                    "title": this.title,
+                    "title": self.title,
                     "text": '<i class="fas fa-print"></i>',
                     "className": "btn btn-info",
                     "exportOptions": {
-                        "columns": this.columns
+                        "columns": self.columns
                     },
                 }
             ]
         });
 
-        if (this.buttons) {
-            console.log(this.buttons);
-            $(this.datatable).DataTable().buttons().container().appendTo(this.buttons);
+        if (self.buttons) {
+            $(self.datatable).DataTable().buttons().container().appendTo(self.buttons);
         }
     }
 }

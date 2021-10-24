@@ -49,22 +49,9 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], fu
     Route::resource('/passageiros', 'PassengerController')->names('passenger')->parameters(['passageiro' => 'passenger']);
     Route::resource('/rotas-de-voo', 'RouteController')->names('route')->parameters(['rota' => 'route']);
     Route::resource('/unidades-federais', 'StateController')->names('state')->parameters(['uf' => 'uf']);
+
+    Route::group(['prefix' => '/relatorios'], function() {
+        Route::get('/companhias-estrangeiras', 'ReportController@foreingAirline')->name('report.foreing_airline');
+        Route::get('/reservas-de-clientes-de-id-abaixo-de-300', 'ReportController@bookingsPassengers300')->name('report.bookings_passengers_300');
+    });
 });
-
-
-// Route::get('/seed', function () {
-//     $group = State::all();
-
-//     foreach ($group as $item) {
-//         echo 'State::create([<br/>';
-//         foreach ($item->getAttributes() as $attribute => $value) {
-//             if ((gettype($item[$attribute]) === 'string') || (gettype($item[$attribute]) === 'object'))
-//                 echo "&nbsp;&nbsp;&nbsp;&nbsp;'{$attribute}' => '{$value}',<br/>";
-//             elseif ($value == null)
-//                 echo "&nbsp;&nbsp;&nbsp;&nbsp;'{$attribute}' => null,<br/>";
-//             else
-//                 echo "&nbsp;&nbsp;&nbsp;&nbsp;'{$attribute}' => {$value},<br/>";
-//         }
-//         echo "]);<br/><br/>";
-//     }
-// });

@@ -48,4 +48,10 @@ class Passenger extends Model
     {
         return $this->hasOne(Country::class, 'cd_pais', 'cd_pais');
     }
+
+    // Country
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'cd_psgr', 'cd_psgr');
+    }
 }

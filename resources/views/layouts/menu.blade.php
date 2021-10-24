@@ -78,6 +78,33 @@
                     <p>Unidades federais</p>
                 </a>
             </li>
+
+            {{-- RELATÓRIOS --}}
+            <li class="nav-item {{ activeMenu('relatorios*', true) }}">
+                <a href="#" class="nav-link {{ activeMenu('relatorios*') }}">
+                    <i class="fas fa-folder nav-icon"></i>
+                    <p>
+                        Relatórios
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('report.foreing_airline') }}" class="nav-link">
+                            <i class="fas fa-file nav-icon"></i>
+                            <p>Companhias estrangeiras</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('report.bookings_passengers_300') }}" class="nav-link">
+                            <i class="fas fa-file nav-icon"></i>
+                            <p>Reservas de clientes de id abaixo de 300</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </nav>
     <!-- /.sidebar-menu -->
