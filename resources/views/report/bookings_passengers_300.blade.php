@@ -18,14 +18,14 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Reservas de passageiros de id abaixo de 300</h1>
+                <h1 class="m-0">Reservas de passageiros</h1>
             </div>
 
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Painel</a></li>
                     <li class="breadcrumb-item">Relatórios</li>
-                    <li class="breadcrumb-item active">Reservas de passageiros de id abaixo de 300</li>
+                    <li class="breadcrumb-item active">Reservas de passageiros</li>
                 </ol>
             </div>
         </div>
@@ -34,8 +34,13 @@
 
 
 <section class="content">
+    <blockquote class="quote-second">
+        <h5><i class="fas fa-info"></i> Observação:</h5>
+        <p>O propósito desta página é listar todos os passageiros que possuam um <strong>código de identificação menor do que 300</strong> e suas respectivas reservas.</strong>.</p>
+    </blockquote>
+
     <div class="container-fluid">
-        <div class="card card-primary card-outline">
+        <div class="card card-second card-outline">
             <div class="card-body">
                 <div id="export-datatable"></div>
                 <table id="main-datatable" class="table table-striped text-center" style="width:100%">
@@ -97,7 +102,7 @@
     <script>
         $(document).ready(function () {
             const ps_datatable = new PSDataTable({
-                title: '{{ config("app.name") }} - Reservas de passageiros de id abaixo de 300',
+                title: '{{ config("app.name") }} - Reservas de passageiros',
                 columns: [1, 2],
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',

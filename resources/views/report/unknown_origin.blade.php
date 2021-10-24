@@ -30,8 +30,13 @@
 
 
 <section class="content">
+    <blockquote class="quote-second">
+        <h5><i class="fas fa-info"></i> Observação:</h5>
+        <p>O propósito desta página é listar todas as companhias aéreas de <strong>origem desconhecida</strong>.</p>
+    </blockquote>
+
     <div class="container-fluid">
-        <div class="card card-primary card-outline">
+        <div class="card card-second card-outline">
             <div class="card-body">
                 <div id="export-datatable"></div>
 

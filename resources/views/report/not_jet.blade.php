@@ -28,10 +28,14 @@
     </div>
 </div>
 
-
 <section class="content">
+    <blockquote class="quote-second">
+        <h5><i class="fas fa-info"></i> Observação:</h5>
+        <p>O propósito desta página é listar todos os equipamentos que não sejam do tipo <strong>"JATO"</strong> e possuam capacidade para até <strong>100 passageiros</strong>.</p>
+    </blockquote>
+
     <div class="container-fluid">
-        <div class="card card-primary card-outline">
+        <div class="card card-second card-outline">
             <div class="card-body">
                 <div id="export-datatable"></div>
 

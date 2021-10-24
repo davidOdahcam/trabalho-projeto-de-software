@@ -100,7 +100,7 @@
                     <li class="nav-item">
                         <a href="{{ route('report.bookings_passengers_300') }}" class="nav-link">
                             <i class="fas fa-file nav-icon"></i>
-                            <p>Reservas de passageiros de id abaixo de 300</p>
+                            <p>Reservas de passageiros</p>
                         </a>
                     </li>
 

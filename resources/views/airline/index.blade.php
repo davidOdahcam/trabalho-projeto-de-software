@@ -34,7 +34,7 @@
             <a href="{{ route('airline.create') }}" class="btn bg-gradient-primary px-5">Nova companhia aérea</a>
         </div>
 
-        <div class="card card-primary card-outline">
+        <div class="card card-second card-outline">
             <div class="card-body">
                 <div id="export-datatable"></div>
 
