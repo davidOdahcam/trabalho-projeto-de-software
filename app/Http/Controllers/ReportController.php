@@ -46,4 +46,14 @@ class ReportController extends Controller
             'equipments' => $equipments
         ]);
     }
+
+
+    public function equipments()
+    {
+        $equipments = Equipment::all();
+
+        return view('report.equipments', [
+            'equipments' => $equipments
+        ]);
+    }
 }

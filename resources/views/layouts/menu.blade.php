@@ -117,6 +117,13 @@
                             <p>Equipamentos diferentes de jato com capacidade até 100 passageiros</p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('report.equipments') }}" class="nav-link">
+                            <i class="fas fa-file nav-icon"></i>
+                            <p>Equipamentos</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>
