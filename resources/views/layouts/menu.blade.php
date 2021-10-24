@@ -124,6 +124,13 @@
                             <p>Equipamentos</p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('report.passengers') }}" class="nav-link">
+                            <i class="fas fa-file nav-icon"></i>
+                            <p>Passageiros</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>

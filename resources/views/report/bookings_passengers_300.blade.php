@@ -62,7 +62,7 @@
                                             $flight = Flight::where(['nr_voo' => $booking->nr_voo, 'dt_saida_voo' => $booking->dt_saida_voo])->first();
                                         @endphp
 
-                                        {{ date('d/m/Y', strtotime($booking->dt_saida_voo)) ?? config('general.format.empty') }}, {{ $flight->route->origin->cd_arpt ?? '' }} <small>({{ $flight->route->origin->nm_cidd ?? 'Aeroporto deletado' }})</small> — {{ $flight->route->destiny->cd_arpt ?? '' }} <small>({{ $flight->route->destiny->nm_cidd ?? 'Aeroporto deletado' }})</small>
+                                        {{ date(config('general.format.dateBR'), strtotime($booking->dt_saida_voo)) ?? config('general.format.empty') }}, {{ $flight->route->origin->cd_arpt ?? '' }} <small>({{ $flight->route->origin->nm_cidd ?? 'Aeroporto deletado' }})</small> — {{ $flight->route->destiny->cd_arpt ?? '' }} <small>({{ $flight->route->destiny->nm_cidd ?? 'Aeroporto deletado' }})</small>
                                         <br/>
                                     @endforeach
                                 </td>

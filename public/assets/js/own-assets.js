@@ -19,6 +19,7 @@ class PSDataTable {
         this.buttons = (options.buttons) ? options.buttons : false;
         this.perPage = (options.perPage) ? options.perPage : 30;
         this.paging = (options.paging) ? options.paging : true;
+        this.order = (options.order) ? options.order : [[ 0, "asc" ]];
         this.domJquery;
 
         this.init();
@@ -34,6 +35,7 @@ class PSDataTable {
             "pageLength": self.perPage,
             "lengthChange": false,
             "paging": self.paging,
+            "order": self.order,
             "language": {
                 "url": self.lang
             },

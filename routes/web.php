@@ -56,5 +56,6 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], fu
         Route::get('/companhias-de-origem-desconhecida', 'ReportController@unknownOrigin')->name('report.unknown_origin');
         Route::get('/equipamentos-diferentes-de-jato-com-capacidade-ate-100-passageiros', 'ReportController@notJet')->name('report.not_jet');
         Route::get('/equipamentos', 'ReportController@equipments')->name('report.equipments');
+        Route::get('/passageiros', 'ReportController@passengers')->name('report.passengers');
     });
 });

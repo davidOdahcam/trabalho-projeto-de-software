@@ -56,4 +56,14 @@ class ReportController extends Controller
             'equipments' => $equipments
         ]);
     }
+
+
+    public function passengers()
+    {
+        $passengers = Passenger::orderBy('nm_psgr', 'ASC')->get();
+
+        return view('report.passengers', [
+            'passengers' => $passengers
+        ]);
+    }
 }
