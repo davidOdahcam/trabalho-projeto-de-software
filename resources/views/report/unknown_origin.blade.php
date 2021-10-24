@@ -14,14 +14,14 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Companhias estrangeiras</h1>
+                <h1 class="m-0">Companhias de origem desconhecida</h1>
             </div>
 
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Painel</a></li>
                     <li class="breadcrumb-item">Relatórios</li>
-                    <li class="breadcrumb-item active">Companhias estrangeiras</li>
+                    <li class="breadcrumb-item active">Companhias de origem desconhecida</li>
                 </ol>
             </div>
         </div>
@@ -39,14 +39,12 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>País</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($airlines as $airline)
                             <tr>
                                 <td>{{ $airline->nm_cmpn_aerea ?? config('general.format.empty') }}</td>
-                                <td>{{ $airline->country->nm_pais ?? config('general.format.empty') }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -83,8 +81,8 @@
     <script>
         $(document).ready(function () {
             const ps_datatable = new PSDataTable({
-                title: '{{ config("app.name") }} - Companhias estrangeiras',
-                columns: [0, 1],
+                title: '{{ config("app.name") }} - Companhias de origem desconhecida',
+                columns: [0],
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',
                 buttons: '#export-datatable',

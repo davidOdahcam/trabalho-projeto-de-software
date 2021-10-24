@@ -18,14 +18,14 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Reservas de clientes de id abaixo de 300</h1>
+                <h1 class="m-0">Reservas de passageiros de id abaixo de 300</h1>
             </div>
 
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Painel</a></li>
                     <li class="breadcrumb-item">Relatórios</li>
-                    <li class="breadcrumb-item active">Reservas de clientes de id abaixo de 300</li>
+                    <li class="breadcrumb-item active">Reservas de passageiros de id abaixo de 300</li>
                 </ol>
             </div>
         </div>
@@ -97,7 +97,7 @@
     <script>
         $(document).ready(function () {
             const ps_datatable = new PSDataTable({
-                title: '{{ config("app.name") }} - Reservas de clientes de id abaixo de 300',
+                title: '{{ config("app.name") }} - Reservas de passageiros de id abaixo de 300',
                 columns: [1, 2],
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',

@@ -25,4 +25,14 @@ class ReportController extends Controller
             'passengers' => $passengers
         ]);
     }
+
+
+    public function unknownOrigin()
+    {
+        $airlines = Airline::where('cd_pais', null)->orderBy('nm_cmpn_aerea', 'ASC')->get();
+
+        return view('report.unknown_origin', [
+            'airlines' => $airlines
+        ]);
+    }
 }

@@ -100,7 +100,14 @@
                     <li class="nav-item">
                         <a href="{{ route('report.bookings_passengers_300') }}" class="nav-link">
                             <i class="fas fa-file nav-icon"></i>
-                            <p>Reservas de clientes de id abaixo de 300</p>
+                            <p>Reservas de passageiros de id abaixo de 300</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('report.unknown_origin') }}" class="nav-link">
+                            <i class="fas fa-file nav-icon"></i>
+                            <p>Companhias de origem desconhecida</p>
                         </a>
                     </li>
                 </ul>
