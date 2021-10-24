@@ -31,7 +31,24 @@
 <section class="content">
     <blockquote class="quote-second">
         <h5><i class="fas fa-info"></i> Observação:</h5>
-        <p>O propósito desta página é listar todos os <strong>passageiros em ordem alfabética</strong> e mostrando a <strong>data de nascimento de passageiros solteiros</strong>.</p>
+        <p>O propósito desta página é listar todos os <strong>passageiros em ordem alfabética</strong> seguindo as seguintes regras:
+            <ol>
+                <li>
+                    <strong>Passageiros solteiros:</strong>
+                    <ul>
+                        <li>Nome</li>
+                        <li>Idade</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Passageiros casados:</strong>
+                    <ul>
+                        <li>Nome</li>
+                        <li>Data de nascimento</li>
+                    </ul>
+                </li>
+            </ol>
+        </p>
     </blockquote>
 
     <div class="container-fluid">
@@ -44,7 +61,7 @@
                         <tr>
                             <th>Nome</th>
                             <th>Estado civil</th>
-                            <th>Data de nascimento</th>
+                            <th>Data de nascimento / Idade</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,11 +70,15 @@
                                 <td>{{ $passenger->nm_psgr ?? config('general.format.empty') }}</td>
                                 <td>{{ ($passenger->ic_estd_civil === 'C') ? 'Casado' : 'Solteiro' }}</td>
                                 <td>
-                                    @if ($passenger->ic_estd_civil === 'S')
-                                        {{ date(config('general.format.dateBR'), strtotime($passenger->dt_nasc_psgr)) ?? config('general.format.empty') }}
-                                    @else
-                                        {{ config('general.format.empty') }}
-                                    @endif
+                                    @php
+                                        if ($passenger->ic_estd_civil === 'S') {
+                                            $birthdate = new DateTime(date(config('general.format.date'), strtotime($passenger->dt_nasc_psgr)));
+                                            $age = $birthdate->diff(new DateTime());
+                                            echo $age->format('%y anos');
+                                        } else {
+                                            echo (date(config('general.format.dateBR'), strtotime($passenger->dt_nasc_psgr)) ?? config('general.format.empty'));
+                                        }
+                                    @endphp
                                 </td>
                             </tr>
                         @endforeach
