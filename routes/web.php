@@ -54,5 +54,6 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], fu
         Route::get('/companhias-estrangeiras', 'ReportController@foreingAirline')->name('report.foreing_airline');
         Route::get('/reservas-de-passageiros-de-id-abaixo-de-300', 'ReportController@bookingsPassengers300')->name('report.bookings_passengers_300');
         Route::get('/companhias-de-origem-desconhecida', 'ReportController@unknownOrigin')->name('report.unknown_origin');
+        Route::get('/equipamentos-diferentes-de-jato-com-capacidade-ate-100-passageiros', 'ReportController@notJet')->name('report.not_jet');
     });
 });

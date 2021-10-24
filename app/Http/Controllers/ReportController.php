@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Airline;
+use App\Models\Equipment;
 use App\Models\Passenger;
 
 class ReportController extends Controller
@@ -33,6 +34,16 @@ class ReportController extends Controller
 
         return view('report.unknown_origin', [
             'airlines' => $airlines
+        ]);
+    }
+
+
+    public function notJet()
+    {
+        $equipments = Equipment::where('qt_psgr', '<=', 100)->where('dc_tipo_eqpt', '!=', 'JATO')->orderBy('nm_eqpt', 'ASC')->get();
+
+        return view('report.not_jet', [
+            'equipments' => $equipments
         ]);
     }
 }

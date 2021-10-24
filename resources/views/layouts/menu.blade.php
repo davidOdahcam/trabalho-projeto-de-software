@@ -110,6 +110,13 @@
                             <p>Companhias de origem desconhecida</p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('report.not_jet') }}" class="nav-link">
+                            <i class="fas fa-file nav-icon"></i>
+                            <p>Equipamentos diferentes de jato com capacidade até 100 passageiros</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>
