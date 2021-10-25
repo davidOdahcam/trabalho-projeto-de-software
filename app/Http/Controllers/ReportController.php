@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Airline;
 use App\Models\Equipment;
+use App\Models\Flight;
 use App\Models\Passenger;
+use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
@@ -64,6 +66,22 @@ class ReportController extends Controller
 
         return view('report.passengers', [
             'passengers' => $passengers
+        ]);
+    }
+
+
+    public function flightsCity()
+    {
+        $flights = DB::table('itr_voo')
+                     ->selectRaw('`itr_arpt`.`nm_cidd`, COUNT(`itr_voo`.`nr_voo`) AS `quantity`')
+                     ->join('itr_rota_voo', 'itr_voo.nr_rota_voo', '=', 'itr_rota_voo.nr_rota_voo')
+                     ->join('itr_arpt', 'itr_rota_voo.cd_arpt_orig', '=', 'itr_arpt.cd_arpt')
+                    //  ->where('itr_arpt.nm_cidd', 'Rio de Janeiro')
+                     ->groupBy('itr_arpt.nm_cidd')
+                     ->get();
+
+        return view('report.flights_city', [
+            'flights' => $flights
         ]);
     }
 }

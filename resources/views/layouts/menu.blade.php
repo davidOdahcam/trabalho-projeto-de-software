@@ -131,6 +131,13 @@
                             <p>Passageiros</p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('report.flights_city') }}" class="nav-link">
+                            <i class="fas fa-file nav-icon"></i>
+                            <p>Voos por cidade</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>
