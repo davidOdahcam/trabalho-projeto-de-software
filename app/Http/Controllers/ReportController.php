@@ -84,4 +84,19 @@ class ReportController extends Controller
             'flights' => $flights
         ]);
     }
+
+
+    public function aircroftsByAirline()
+    {
+        $airlines = DB::table('itr_cmpn_aerea')
+                      ->selectRaw('`itr_cmpn_aerea`.`nm_cmpn_aerea`, SUM(`itr_eqpt`.`qt_psgr`) AS `total`, IF (`itr_cmpn_aerea`.`cd_pais` = "US", true, false) AS `american`')
+                      ->join('itr_arnv', 'itr_cmpn_aerea.cd_cmpn_aerea', '=', 'itr_arnv.cd_cmpn_aerea')
+                      ->join('itr_eqpt', 'itr_arnv.cd_eqpt', '=', 'itr_eqpt.cd_eqpt')
+                      ->groupBy('itr_cmpn_aerea.nm_cmpn_aerea')
+                      ->get();
+
+        return view('report.aircrofts_by_airline', [
+            'airlines' => $airlines
+        ]);
+    }
 }

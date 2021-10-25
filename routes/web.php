@@ -58,5 +58,6 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], fu
         Route::get('/equipamentos', 'ReportController@equipments')->name('report.equipments');
         Route::get('/passageiros', 'ReportController@passengers')->name('report.passengers');
         Route::get('/voos-por-cidade', 'ReportController@flightsCity')->name('report.flights_city');
+        Route::get('/aeronaves-por-companhia', 'ReportController@aircroftsByAirline')->name('report.aircrofts_by_airline');
     });
 });

@@ -138,6 +138,13 @@
                             <p>Voos por cidade</p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('report.aircrofts_by_airline') }}" class="nav-link">
+                            <i class="fas fa-file nav-icon"></i>
+                            <p>Aeronaves por companhia</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>
