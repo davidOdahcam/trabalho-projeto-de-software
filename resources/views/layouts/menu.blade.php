@@ -145,6 +145,13 @@
                             <p>Aeronaves por companhia</p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('report.bigger_than_average') }}" class="nav-link">
+                            <i class="fas fa-file nav-icon"></i>
+                            <p>Passageiros com idade acima da média</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>
