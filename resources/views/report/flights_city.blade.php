@@ -49,7 +49,7 @@
                 <form action="{{ route('report.flights_city') }}" method="GET" class="mb-4">
                     <div class="form-row">
                         <div class="form-group col-md-10">
-                            <select name="cities[]" id="cities" aria-placeholder="Selecione uma cidade" class="w-100 mr-0 select2" aria-placeholder="Selecione cidades" multiple>
+                            <select name="cities[]" id="cities" class="w-100 mr-0 select2" multiple>
                                 @foreach ($cities as $city)
                                     <option value="{{ $city->nm_cidd }}" {{ (isset($selected_cities) && in_array($city->nm_cidd, $selected_cities)) ? 'Selected' : '' }}>{{ $city->nm_cidd }}</option>
                                 @endforeach
@@ -128,7 +128,8 @@
 
             $('.select2').select2({
                 theme: 'bootstrap4',
-                placeholder: "Selecione cidades"
+                placeholder: "Filtrar cidades",
+                closeOnSelect: false
             });
         });
     </script>

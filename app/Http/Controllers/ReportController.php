@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Airline;
+use App\Models\Country;
 use App\Models\Equipment;
 use App\Models\Flight;
 use App\Models\Passenger;
@@ -12,12 +13,24 @@ use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
-    public function foreingAirline()
+    public function airlineByCountry(Request $request)
     {
-        $airlines = Airline::where('cd_pais', '!=', 'BR')->get();
+        $selected_countries = $request->countries;
 
-        return view('report.foreing_airline', [
-            'airlines' => $airlines
+        $countries = Country::all();
+        $airlines = Airline::orderBy('nm_cmpn_aerea', 'ASC');
+
+        if ($selected_countries) {
+            $airlines = Airline::whereIn('cd_pais', $selected_countries);
+            if (in_array('unknown', $selected_countries)) {
+                $airlines->orWhereNull('cd_pais');
+            }
+        }
+
+        return view('report.airline_by_country', [
+            'countries' => $countries,
+            'airlines' => $airlines->get(),
+            'selected_countries' => $selected_countries
         ]);
     }
 
@@ -28,16 +41,6 @@ class ReportController extends Controller
 
         return view('report.bookings_passengers_300', [
             'passengers' => $passengers
-        ]);
-    }
-
-
-    public function unknownOrigin()
-    {
-        $airlines = Airline::where('cd_pais', null)->orderBy('nm_cmpn_aerea', 'ASC')->get();
-
-        return view('report.unknown_origin', [
-            'airlines' => $airlines
         ]);
     }
 

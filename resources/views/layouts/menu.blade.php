@@ -91,7 +91,7 @@
 
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ route('report.foreing_airline') }}" class="nav-link">
+                        <a href="{{ route('report.airline_by_country') }}" class="nav-link">
                             <i class="fas fa-file nav-icon"></i>
                             <p>Companhias estrangeiras</p>
                         </a>
@@ -101,13 +101,6 @@
                         <a href="{{ route('report.bookings_passengers_300') }}" class="nav-link">
                             <i class="fas fa-file nav-icon"></i>
                             <p>Reservas de passageiros</p>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ route('report.unknown_origin') }}" class="nav-link">
-                            <i class="fas fa-file nav-icon"></i>
-                            <p>Companhias de origem desconhecida</p>
                         </a>
                     </li>
 
