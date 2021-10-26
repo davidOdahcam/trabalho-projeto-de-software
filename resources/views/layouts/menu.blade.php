@@ -91,14 +91,14 @@
 
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ route('report.airline_by_country') }}" class="nav-link">
+                        <a href="{{ route('report.airline_by_country') }}" class="nav-link {{ activeMenu('relatorios/companhias-por-paises*') }}">
                             <i class="fas fa-file nav-icon"></i>
                             <p>Companhias por países</p>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('report.bookings_passengers_300') }}" class="nav-link">
+                        <a href="{{ route('report.bookings_passengers_300') }}" class="nav-link {{ activeMenu('relatorios/reservas-de-passageiros*') }}">
                             <i class="fas fa-file nav-icon"></i>
                             <p>Reservas de passageiros</p>
                         </a>
@@ -112,21 +112,21 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('report.equipments') }}" class="nav-link">
+                        <a href="{{ route('report.equipments') }}" class="nav-link {{ activeMenu('relatorios/equipamentos*') }}">
                             <i class="fas fa-file nav-icon"></i>
                             <p>Equipamentos</p>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('report.passengers') }}" class="nav-link">
+                        <a href="{{ route('report.passengers') }}" class="nav-link {{ activeMenu('relatorios/passageiros*') }}">
                             <i class="fas fa-file nav-icon"></i>
                             <p>Passageiros</p>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('report.flights_city') }}" class="nav-link">
+                        <a href="{{ route('report.flights_city') }}" class="nav-link {{ activeMenu('relatorios/voos-por-cidade*') }}">
                             <i class="fas fa-file nav-icon"></i>
                             <p>Voos por cidade</p>
                         </a>

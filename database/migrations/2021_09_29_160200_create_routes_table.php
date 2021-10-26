@@ -14,7 +14,7 @@ class CreateRoutesTable extends Migration
     public function up()
     {
         Schema::create('itr_rota_voo', function (Blueprint $table) {
-            $table->decimal('nr_rota_voo');
+            $table->decimal('nr_rota_voo', 3, 0);
             $table->string('cd_arpt_orig', 3);
             $table->string('cd_arpt_dest', 3);
             $table->decimal('vr_pasg', 8, 2)->nullable();

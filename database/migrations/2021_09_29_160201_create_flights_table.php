@@ -20,6 +20,7 @@ class CreateFlightsTable extends Migration
             $table->string('cd_arnv', 5);
 
             $table->primary(['nr_voo', 'dt_saida_voo']);
+            $table->foreign('nr_rota_voo')->references('nr_rota_voo')->on('itr_rota_voo');
             $table->foreign('cd_arnv')->references('cd_arnv')->on('itr_arnv');
         });
     }
