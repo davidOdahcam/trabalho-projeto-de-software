@@ -31,7 +31,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="text-right mb-3">
-            <a href="{{ route('aircroft.create') }}" class="btn bg-gradient-primary px-5">Nova aeronave</a>
+            <a href="{{ route('aircraft.create') }}" class="btn bg-gradient-primary px-5">Nova aeronave</a>
         </div>
 
         <div class="card card-second card-outline">
@@ -48,22 +48,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($aircrofts as $aircroft)
+                        @foreach ($aircrafts as $aircraft)
                             <tr>
-                                <td>{{ $aircroft->cd_arnv ?? config('general.format.empty') }}</td>
-                                <td>{{ $aircroft->equipment->nm_eqpt ?? config('general.format.empty') }}</td>
-                                <td>{{ $aircroft->airline->nm_cmpn_aerea ?? config('general.format.empty') }}</td>
+                                <td>{{ $aircraft->cd_arnv ?? config('general.format.empty') }}</td>
+                                <td>{{ $aircraft->equipment->nm_eqpt ?? config('general.format.empty') }}</td>
+                                <td>{{ $aircraft->airline->nm_cmpn_aerea ?? config('general.format.empty') }}</td>
                                 <td>
-                                    <a href="{{ route('aircroft.show', $aircroft->cd_arnv) }}" class="btn btn-success btn-sm"  data-toggle="tooltip" title="Visualizar aeronave">
+                                    <a href="{{ route('aircraft.show', $aircraft->cd_arnv) }}" class="btn btn-success btn-sm"  data-toggle="tooltip" title="Visualizar aeronave">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('aircroft.edit', $aircroft->cd_arnv) }}" class="btn btn-info btn-sm"  data-toggle="tooltip" title="Editar aeronave">
+                                    <a href="{{ route('aircraft.edit', $aircraft->cd_arnv) }}" class="btn btn-info btn-sm"  data-toggle="tooltip" title="Editar aeronave">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ $aircroft->cd_arnv }}" value="{{ $aircroft->cd_arnv }}" data-toggle="tooltip" title="Excluir aeronave">
+                                    <button type="submit" class="btn btn-danger btn-sm" form="delete_{{ $aircraft->cd_arnv }}" value="{{ $aircraft->cd_arnv }}" data-toggle="tooltip" title="Excluir aeronave">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                    <form method="post" action="{{ route('aircroft.destroy', $aircroft->cd_arnv) }}" id="delete_{{ $aircroft->cd_arnv }}" class="form-delete-aircroft">
+                                    <form method="post" action="{{ route('aircraft.destroy', $aircraft->cd_arnv) }}" id="delete_{{ $aircraft->cd_arnv }}" class="form-delete-aircraft">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                     </form>
@@ -73,7 +73,7 @@
                     </tbody>
                 </table>
 
-                {{ $aircrofts->links('includes.pagination', ['paginator' => $aircrofts]) }}
+                {{ $aircrafts->links('includes.pagination', ['paginator' => $aircrafts]) }}
             </div>
         </div>
     </div>
@@ -109,7 +109,7 @@
     <script>
         $(document).ready(function () {
             const ps_datatable = new PSDataTable({
-                title: '{{ config("app.name") }} - Aeronaves, página {{ $aircrofts->currentPage() }}',
+                title: '{{ config("app.name") }} - Aeronaves, página {{ $aircrafts->currentPage() }}',
                 columns: [0, 1, 2],
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',
@@ -118,7 +118,7 @@
             });
 
             const ps_delete = new PSDelete(
-                '.form-delete-aircroft',
+                '.form-delete-aircraft',
                 'Tem certeza de que deseja deletar esta aeronave?',
                 'Você não poderá voltar atrás!',
                 'warning',

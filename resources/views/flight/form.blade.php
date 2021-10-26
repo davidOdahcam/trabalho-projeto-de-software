@@ -43,9 +43,9 @@
         <label for="cd_arnv">Aeronave</label>
         <select name="cd_arnv" id="cd_arnv" class="form-control">
             <option value="">- Selecione um país -</option>
-            @foreach ($aircrofts as $aircroft)
-                <option value="{{ $aircroft->cd_arnv }}" @if (isset($flight->cd_arnv) && $flight->cd_arnv == $aircroft->cd_arnv) selected @endif>
-                    {{ $aircroft->cd_arnv }}
+            @foreach ($aircrafts as $aircraft)
+                <option value="{{ $aircraft->cd_arnv }}" @if (isset($flight->cd_arnv) && $flight->cd_arnv == $aircraft->cd_arnv) selected @endif>
+                    {{ $aircraft->cd_arnv }}
                 </option>
             @endforeach
         </select>

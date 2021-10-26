@@ -36,8 +36,8 @@ class Airline extends Model
         return $this->hasOne(Country::class, 'cd_pais', 'cd_pais');
     }
 
-    public function aircrofts()
+    public function aircrafts()
     {
-        return $this->belongsTo(Aircroft::class, 'cd_cmpn_aerea', 'cd_cmpn_aerea');
+        return $this->belongsTo(Aircraft::class, 'cd_cmpn_aerea', 'cd_cmpn_aerea');
     }
 }

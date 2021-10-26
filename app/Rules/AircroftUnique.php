@@ -5,7 +5,7 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
-class AircroftUnique implements Rule
+class AircraftUnique implements Rule
 {
 
     private $table, $column, $columnValue, $method;

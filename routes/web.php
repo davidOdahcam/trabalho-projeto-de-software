@@ -20,7 +20,7 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], fu
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::resource('/aeronaves', 'AircroftController')->names('aircroft')->parameters(['aeronave' => 'aircroft']);
+    Route::resource('/aeronaves', 'AircraftController')->names('aircraft')->parameters(['aeronave' => 'aircraft']);
     Route::resource('/companhias-aereas', 'AirlineController')->names('airline')->parameters(['companhias_aerea' => 'airline']);
     Route::resource('/aeroportos', 'AirportController')->names('airport')->parameters(['aeroporto' => 'airport']);
 
@@ -57,7 +57,7 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], fu
         Route::get('/equipamentos', 'ReportController@equipments')->name('report.equipments');
         Route::get('/passageiros', 'ReportController@passengers')->name('report.passengers');
         Route::get('/voos-por-cidade', 'ReportController@flightsCity')->name('report.flights_city');
-        Route::get('/aeronaves-por-companhia', 'ReportController@aircroftsByAirline')->name('report.aircrofts_by_airline');
+        Route::get('/aeronaves-por-companhia', 'ReportController@aircraftsByAirline')->name('report.aircrafts_by_airline');
         Route::get('/passageiros-com-idade-acima-da-media', 'ReportController@biggerThanAverage')->name('report.bigger_than_average');
     });
 });

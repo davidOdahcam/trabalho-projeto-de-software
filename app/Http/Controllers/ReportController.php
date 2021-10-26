@@ -114,7 +114,7 @@ class ReportController extends Controller
     }
 
 
-    public function aircroftsByAirline()
+    public function aircraftsByAirline()
     {
         $airlines = DB::table('itr_cmpn_aerea')
                       ->selectRaw('`itr_cmpn_aerea`.`nm_cmpn_aerea`, SUM(`itr_eqpt`.`qt_psgr`) AS `total`, IF (`itr_cmpn_aerea`.`cd_pais` = "US", true, false) AS `american`')
@@ -123,7 +123,7 @@ class ReportController extends Controller
                       ->groupBy('itr_cmpn_aerea.nm_cmpn_aerea')
                       ->get();
 
-        return view('report.aircrofts_by_airline', [
+        return view('report.aircrafts_by_airline', [
             'airlines' => $airlines
         ]);
     }

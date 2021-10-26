@@ -1,7 +1,7 @@
 <div class="form-row">
     <div class="form-group col-md-4">
         <label for="cd_arnv">Código da aeronave</label>
-        <input type="text" name="cd_arnv" id="cd_arnv" class="form-control" value="{{ $aircroft->cd_arnv ?? old('cd_arnv') }}">
+        <input type="text" name="cd_arnv" id="cd_arnv" class="form-control" value="{{ $aircraft->cd_arnv ?? old('cd_arnv') }}">
         @error('cd_arnv')
             <span class="invalid-feedback d-block" role="alert">
                 <strong>{{ $message }}</strong>
@@ -14,7 +14,7 @@
         <select name="cd_eqpt" id="cd_eqpt" class="form-control">
             <option value="">- Selecione um equipamento -</option>
             @foreach ($equipments as $equipment)
-                <option value="{{ $equipment->cd_eqpt }}" @if ((isset($aircroft->cd_eqpt) && $aircroft->cd_eqpt == $equipment->cd_eqpt) || $equipment->cd_eqpt == old('cd_eqpt')) selected @endif>{{ $equipment->nm_eqpt }}</option>
+                <option value="{{ $equipment->cd_eqpt }}" @if ((isset($aircraft->cd_eqpt) && $aircraft->cd_eqpt == $equipment->cd_eqpt) || $equipment->cd_eqpt == old('cd_eqpt')) selected @endif>{{ $equipment->nm_eqpt }}</option>
             @endforeach
         </select>
 
@@ -30,7 +30,7 @@
         <select name="cd_cmpn_aerea" id="cd_cmpn_aerea" class="form-control">
             <option value="">- Selecione uma companhia aérea -</option>
             @foreach ($airlines as $airline)
-                <option value="{{ $airline->cd_cmpn_aerea }}" @if ((isset($aircroft->cd_cmpn_aerea) && $aircroft->cd_cmpn_aerea == $airline->cd_cmpn_aerea) || $airline->cd_cmpn_aerea == old('cd_cmpn_aerea')) selected @endif>{{ $airline->nm_cmpn_aerea }}</option>
+                <option value="{{ $airline->cd_cmpn_aerea }}" @if ((isset($aircraft->cd_cmpn_aerea) && $aircraft->cd_cmpn_aerea == $airline->cd_cmpn_aerea) || $airline->cd_cmpn_aerea == old('cd_cmpn_aerea')) selected @endif>{{ $airline->nm_cmpn_aerea }}</option>
             @endforeach
         </select>
 

@@ -11,7 +11,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}">Painel</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('aircroft.index') }}">Aeronaves</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('aircraft.index') }}">Aeronaves</a></li>
                         <li class="breadcrumb-item active">Adicionar</li>
                     </ol>
                 </div>
@@ -26,16 +26,16 @@
                 <h3 class="card-title">Formulário de cadastro</h3>
                 </div>
 
-                <form action="{{ route('aircroft.update', $aircroft->cd_arnv) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('aircraft.update', $aircraft->cd_arnv) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     {{ method_field('PUT') }}
 
                     <div class="card-body">
-                        @include('aircroft.form')
+                        @include('aircraft.form')
                     </div>
 
                     <div class="card-footer">
-                        <a href="{{ route('aircroft.index') }}" class="btn btn-sm bg-gradient-danger">Cancelar</a>
+                        <a href="{{ route('aircraft.index') }}" class="btn btn-sm bg-gradient-danger">Cancelar</a>
                         <button class="btn btn-sm bg-gradient-second">Adicionar</button>
                     </div>
                 </form>

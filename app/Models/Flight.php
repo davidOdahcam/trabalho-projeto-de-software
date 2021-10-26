@@ -30,9 +30,9 @@ class Flight extends Model
     /**
      * Relationships
      */
-    public function aircroft()
+    public function aircraft()
     {
-        return $this->hasOne(Aircroft::class, 'cd_arnv', 'cd_arnv');
+        return $this->hasOne(Aircraft::class, 'cd_arnv', 'cd_arnv');
     }
 
 

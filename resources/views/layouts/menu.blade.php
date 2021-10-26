@@ -10,7 +10,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="{{ route('aircroft.index') }}" class="nav-link {{ activeMenu('aeronaves*') }}">
+                <a href="{{ route('aircraft.index') }}" class="nav-link {{ activeMenu('aeronaves*') }}">
                     <i class="fas fa-plane nav-icon"></i>
                     <p>Aeronaves</p>
                 </a>
@@ -133,7 +133,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('report.aircrofts_by_airline') }}" class="nav-link">
+                        <a href="{{ route('report.aircrafts_by_airline') }}" class="nav-link">
                             <i class="fas fa-file nav-icon"></i>
                             <p>Aeronaves por companhia</p>
                         </a>

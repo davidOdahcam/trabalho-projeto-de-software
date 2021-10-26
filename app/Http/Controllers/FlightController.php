@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FlightRequest;
-use App\Models\Aircroft;
+use App\Models\Aircraft;
 use App\Models\Flight;
 use App\Models\Route;
 use Illuminate\Support\Facades\DB;
@@ -33,11 +33,11 @@ class FlightController extends Controller
      */
     public function create()
     {
-        $aircrofts = Aircroft::all();
+        $aircrafts = Aircraft::all();
         $routes = Route::all();
 
         return view('flight.create', [
-            'aircrofts' => $aircrofts,
+            'aircrafts' => $aircrafts,
             'routes' => $routes
         ]);
     }
@@ -91,12 +91,12 @@ class FlightController extends Controller
     public function edit($nr_voo, $dt_saida_voo)
     {
         $flight = Flight::where(['nr_voo' => $nr_voo, 'dt_saida_voo' => $dt_saida_voo])->first();
-        $aircrofts = Aircroft::all();
+        $aircrafts = Aircraft::all();
         $routes = Route::all();
 
         return view('flight.edit', [
             'flight' => $flight,
-            'aircrofts' => $aircrofts,
+            'aircrafts' => $aircrafts,
             'routes' => $routes
         ]);
     }

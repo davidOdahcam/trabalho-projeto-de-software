@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\AircroftUnique;
+use App\Rules\AircraftUnique;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AircroftRequest extends FormRequest
+class AircraftRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +28,7 @@ class AircroftRequest extends FormRequest
         $id = $this->all()['cd_arnv'];
 
         return [
-            'cd_arnv'       => ['required','max:5', new AircroftUnique('itr_arnv', $id, $method)],
+            'cd_arnv'       => ['required','max:5', new AircraftUnique('itr_arnv', $id, $method)],
             'cd_eqpt'       => 'required|max:3',
             'cd_cmpn_aerea' => 'required|max:2'
         ];
