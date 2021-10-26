@@ -7,6 +7,7 @@ use App\Models\Equipment;
 use App\Models\Flight;
 use App\Models\Passenger;
 use DateTime;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
@@ -71,18 +72,28 @@ class ReportController extends Controller
     }
 
 
-    public function flightsCity()
+    public function flightsCity(Request $request)
     {
+        $selected_cities = $request->cities;
+
+        $cities = DB::table('itr_arpt')
+                    ->select('nm_cidd')
+                    ->distinct('nm_cidd')
+                    ->orderBy('nm_cidd', 'ASC')
+                    ->get();
+
         $flights = DB::table('itr_voo')
                      ->selectRaw('`itr_arpt`.`nm_cidd`, COUNT(`itr_voo`.`nr_voo`) AS `quantity`')
                      ->join('itr_rota_voo', 'itr_voo.nr_rota_voo', '=', 'itr_rota_voo.nr_rota_voo')
-                     ->join('itr_arpt', 'itr_rota_voo.cd_arpt_orig', '=', 'itr_arpt.cd_arpt')
-                    //  ->where('itr_arpt.nm_cidd', 'Rio de Janeiro')
-                     ->groupBy('itr_arpt.nm_cidd')
-                     ->get();
+                     ->join('itr_arpt', 'itr_rota_voo.cd_arpt_orig', '=', 'itr_arpt.cd_arpt');
+
+        if ($selected_cities)
+            $flights->whereIn('itr_arpt.nm_cidd', $selected_cities);
 
         return view('report.flights_city', [
-            'flights' => $flights
+            'cities' => $cities,
+            'selected_cities' => $selected_cities,
+            'flights' => $flights->groupBy('itr_arpt.nm_cidd')->get()
         ]);
     }
 

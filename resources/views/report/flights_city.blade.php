@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+
+    <style>
+        .select2.select2-container.select2-container--bootstrap4 {
+            width: 100% !important;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -37,6 +45,25 @@
     <div class="container-fluid">
         <div class="card card-second card-outline">
             <div class="card-body">
+                <h5>Filtrar por:</h5>
+                <form action="{{ route('report.flights_city') }}" method="GET" class="mb-4">
+                    <div class="form-row">
+                        <div class="form-group col-md-10">
+                            <select name="cities[]" id="cities" aria-placeholder="Selecione uma cidade" class="w-100 mr-0 select2" aria-placeholder="Selecione cidades" multiple>
+                                @foreach ($cities as $city)
+                                    <option value="{{ $city->nm_cidd }}" {{ (isset($selected_cities) && in_array($city->nm_cidd, $selected_cities)) ? 'Selected' : '' }}>{{ $city->nm_cidd }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <button class="btn btn-second btn-block">
+                                Filtrar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
                 <div id="export-datatable"></div>
 
                 <table id="main-datatable" class="table table-striped text-center" style="width:100%">
@@ -82,6 +109,9 @@
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
+    {{-- Select2 --}}
+    <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+
     {{-- Custom --}}
     <script src="{{ asset('assets/js/own-assets.js') }}"></script>
     <script>
@@ -94,6 +124,11 @@
                 buttons: '#export-datatable',
                 perPage: -1,
                 paging: false
+            });
+
+            $('.select2').select2({
+                theme: 'bootstrap4',
+                placeholder: "Selecione cidades"
             });
         });
     </script>
