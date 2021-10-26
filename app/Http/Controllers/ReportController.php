@@ -35,12 +35,25 @@ class ReportController extends Controller
     }
 
 
-    public function bookingsPassengers300()
+    public function bookingsPassengers300(Request $request)
     {
-        $passengers = Passenger::where('cd_psgr', '<', 300)->orderBy('nm_psgr', 'ASC')->get();
+        $start = $request->start;
+        $end = $request->end;
+
+        $passengers = Passenger::orderBy('nm_psgr', 'ASC');
+
+        if ($start) {
+            $passengers->where('cd_psgr', '>=', $start);
+        }
+
+        if ($end) {
+            $passengers->where('cd_psgr', '<=', $end);
+        }
 
         return view('report.bookings_passengers_300', [
-            'passengers' => $passengers
+            'passengers' => $passengers->get(),
+            'start' => $start,
+            'end' => $end
         ]);
     }
 

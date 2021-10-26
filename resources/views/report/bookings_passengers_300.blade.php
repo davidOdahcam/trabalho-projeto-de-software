@@ -42,13 +42,32 @@
     <div class="container-fluid">
         <div class="card card-second card-outline">
             <div class="card-body">
+                <h5>Filtrar por:</h5>
+                <form action="{{ route('report.bookings_passengers_300') }}" method="GET" class="mb-4">
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                            <input type="number" name="start" id="start" class="form-control" placeholder="Código inicial" value="{{ $start ?? '' }}"/>
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <input type="number" name="end" id="end" class="form-control" placeholder="Código final" value="{{ $end ?? '' }}"/>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <button class="btn btn-second btn-block">
+                                Filtrar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
                 <div id="export-datatable"></div>
                 <table id="main-datatable" class="table table-striped text-center" style="width:100%">
                     <thead>
                         <tr>
                             <th>Código do passageiro</th>
                             <th>Nome do passageiro</th>
-                            <th>Reservas <small>(data de saída, origem — destino)</small></th>
+                            <th>Reservas <small>(Número do voo: data de saída, origem — destino)</small></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,8 +80,7 @@
                                         @php
                                             $flight = Flight::where(['nr_voo' => $booking->nr_voo, 'dt_saida_voo' => $booking->dt_saida_voo])->first();
                                         @endphp
-
-                                        {{ date(config('general.format.dateBR'), strtotime($booking->dt_saida_voo)) ?? config('general.format.empty') }}, {{ $flight->route->origin->cd_arpt ?? '' }} <small>({{ $flight->route->origin->nm_cidd ?? 'Aeroporto deletado' }})</small> — {{ $flight->route->destiny->cd_arpt ?? '' }} <small>({{ $flight->route->destiny->nm_cidd ?? 'Aeroporto deletado' }})</small>
+                                        <strong>{{ $booking->nr_voo }}:</strong> {{ date(config('general.format.dateBR'), strtotime($booking->dt_saida_voo)) ?? config('general.format.empty') }}, {{ $flight->route->origin->cd_arpt ?? '' }} <small>({{ $flight->route->origin->nm_cidd ?? 'Aeroporto deletado' }})</small> — {{ $flight->route->destiny->cd_arpt ?? '' }} <small>({{ $flight->route->destiny->nm_cidd ?? 'Aeroporto deletado' }})</small>
                                         <br/>
                                     @endforeach
                                 </td>

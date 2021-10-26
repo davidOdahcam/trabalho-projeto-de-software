@@ -93,7 +93,7 @@
                     <li class="nav-item">
                         <a href="{{ route('report.airline_by_country') }}" class="nav-link">
                             <i class="fas fa-file nav-icon"></i>
-                            <p>Companhias estrangeiras</p>
+                            <p>Companhias por países</p>
                         </a>
                     </li>
 

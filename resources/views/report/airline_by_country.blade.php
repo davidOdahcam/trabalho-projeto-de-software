@@ -72,6 +72,7 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
+                            <th>Código do país</th>
                             <th>País</th>
                         </tr>
                     </thead>
@@ -79,6 +80,7 @@
                         @foreach ($airlines as $airline)
                             <tr>
                                 <td>{{ $airline->nm_cmpn_aerea ?? config('general.format.empty') }}</td>
+                                <td>{{ $airline->country->cd_pais ?? 'DESCONHECIDO' }}</td>
                                 <td>{{ $airline->country->nm_pais ?? 'DESCONHECIDO' }}</td>
                             </tr>
                         @endforeach
@@ -130,7 +132,7 @@
 
             $('.select2').select2({
                 theme: 'bootstrap4',
-                placeholder: "Filtrar origem",
+                placeholder: "Origem",
                 closeOnSelect: false
             });
         });
