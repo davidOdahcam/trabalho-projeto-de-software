@@ -57,7 +57,7 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], fu
         Route::get('/equipamentos', 'ReportController@equipments')->name('report.equipments');
         Route::get('/passageiros', 'ReportController@passengers')->name('report.passengers');
         Route::get('/voos-por-cidade', 'ReportController@flightsCity')->name('report.flights_city');
-        Route::get('/aeronaves-por-companhia', 'ReportController@aircraftsByAirline')->name('report.aircrafts_by_airline');
+        Route::get('/capacidade-de-transporte', 'ReportController@carryingCapacity')->name('report.carrying_capacity');
         Route::get('/passageiros-com-idade-acima-da-media', 'ReportController@biggerThanAverage')->name('report.bigger_than_average');
     });
 });

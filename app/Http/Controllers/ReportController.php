@@ -114,17 +114,29 @@ class ReportController extends Controller
     }
 
 
-    public function aircraftsByAirline()
+    public function carryingCapacity(Request $request)
     {
+        $selected_countries = $request->countries;
+
+        $countries = Country::orderBy('nm_pais')->get();
+
         $airlines = DB::table('itr_cmpn_aerea')
                       ->selectRaw('`itr_cmpn_aerea`.`nm_cmpn_aerea`, SUM(`itr_eqpt`.`qt_psgr`) AS `total`, IF (`itr_cmpn_aerea`.`cd_pais` = "US", true, false) AS `american`')
                       ->join('itr_arnv', 'itr_cmpn_aerea.cd_cmpn_aerea', '=', 'itr_arnv.cd_cmpn_aerea')
                       ->join('itr_eqpt', 'itr_arnv.cd_eqpt', '=', 'itr_eqpt.cd_eqpt')
-                      ->groupBy('itr_cmpn_aerea.nm_cmpn_aerea')
-                      ->get();
+                      ->groupBy('itr_cmpn_aerea.nm_cmpn_aerea');
 
-        return view('report.aircrafts_by_airline', [
-            'airlines' => $airlines
+        if ($selected_countries) {
+            $airlines->whereIn('itr_cmpn_aerea.cd_pais', $selected_countries);
+            if (in_array('unknown', $selected_countries)) {
+                $airlines->orWhereNull('itr_cmpn_aerea.cd_pais');
+            }
+        }
+
+        return view('report.carrying_capacity', [
+            'airlines' => $airlines->get(),
+            'countries' => $countries,
+            'selected_countries' => $selected_countries
         ]);
     }
 

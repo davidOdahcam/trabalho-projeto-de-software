@@ -133,9 +133,9 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('report.aircrafts_by_airline') }}" class="nav-link">
+                        <a href="{{ route('report.carrying_capacity') }}" class="nav-link">
                             <i class="fas fa-file nav-icon"></i>
-                            <p>Aeronaves por companhia</p>
+                            <p>Capacidade de transporte</p>
                         </a>
                     </li>
 
