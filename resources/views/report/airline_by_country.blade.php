@@ -80,7 +80,7 @@
                         @foreach ($airlines as $airline)
                             <tr>
                                 <td>{{ $airline->nm_cmpn_aerea ?? config('general.format.empty') }}</td>
-                                <td>{{ $airline->country->cd_pais ?? 'DESCONHECIDO' }}</td>
+                                <td>{{ $airline->country->cd_pais ?? config('general.format.empty') }}</td>
                                 <td>{{ $airline->country->nm_pais ?? 'DESCONHECIDO' }}</td>
                             </tr>
                         @endforeach
@@ -122,7 +122,7 @@
         $(document).ready(function () {
             const ps_datatable = new PSDataTable({
                 title: '{{ config("app.name") }} - Companhias por países',
-                columns: [0, 1],
+                columns: [0, 1, 2],
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',
                 buttons: '#export-datatable',

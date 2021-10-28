@@ -14,14 +14,14 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Passageiros com idade acima da média</h1>
+                <h1 class="m-0">Média de idade</h1>
             </div>
 
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Painel</a></li>
                     <li class="breadcrumb-item">Relatórios</li>
-                    <li class="breadcrumb-item active">Passageiros com idade acima da média</li>
+                    <li class="breadcrumb-item active">Média de idade</li>
                 </ol>
             </div>
         </div>
@@ -38,8 +38,34 @@
     <div class="container-fluid">
         <div class="card card-second card-outline">
             <div class="card-body">
-                <div id="export-datatable"></div>
+                <h5>Filtrar por:</h5>
+                <form action="{{ route('report.average_age') }}" method="GET" class="mb-4">
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                            <select name="ic_sexo_psgr" id="ic_sexo_psgr" class="form-control">
+                                <option value="">Estado civil</option>
+                                <option value="M" {{ (isset($ic_sexo_psgr) && $ic_sexo_psgr === 'M') ? 'Selected' : '' }}>Masculino</option>
+                                <option value="F" {{ (isset($ic_sexo_psgr) && $ic_sexo_psgr === 'F') ? 'Selected' : '' }}>Feminino</option>
+                            </select>
+                        </div>
 
+                        <div class="form-group col-md-5">
+                            <select name="ic_estd_civil" id="ic_estd_civil" class="form-control">
+                                <option value="">Sexo</option>
+                                <option value="S" {{ (isset($ic_estd_civil) && $ic_estd_civil === 'S') ? 'Selected' : '' }}>Solteiro</option>
+                                <option value="C" {{ (isset($ic_estd_civil) && $ic_estd_civil === 'C') ? 'Selected' : '' }}>Casado</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <button class="btn btn-second btn-block">
+                                Filtrar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <div id="export-datatable"></div>
                 <table id="main-datatable" class="table table-striped text-center" style="width:100%">
                     <thead>
                         <tr>
@@ -98,7 +124,7 @@
     <script>
         $(document).ready(function () {
             const ps_datatable = new PSDataTable({
-                title: '{{ config("app.name") }} - Passageiros com idade acima da média',
+                title: '{{ config("app.name") }} - Média de idade',
                 columns: [0, 1],
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',

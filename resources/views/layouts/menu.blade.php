@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar bg-first">
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column nav-legacy nav-flat" data-widget="treeview" role="menu" data-accordion="false">
@@ -140,9 +140,9 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('report.bigger_than_average') }}" class="nav-link {{ activeMenu('relatorios/companhias-por-paises*') }}">
+                        <a href="{{ route('report.average_age') }}" class="nav-link {{ activeMenu('relatorios/media-de-idade*') }}">
                             <i class="fas fa-file nav-icon"></i>
-                            <p>Passageiros com idade acima da média</p>
+                            <p>Média de idade</p>
                         </a>
                     </li>
                 </ul>

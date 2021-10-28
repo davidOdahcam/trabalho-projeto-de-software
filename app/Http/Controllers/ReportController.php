@@ -141,18 +141,27 @@ class ReportController extends Controller
     }
 
 
-    public function biggerThanAverage()
+    public function averageAge(Request $request)
     {
-        $passengers = Passenger::where(['ic_sexo_psgr' => 'M', 'ic_estd_civil' => 'S'])->get();
+        $ic_sexo_psgr = $request->ic_sexo_psgr;
+        $ic_estd_civil = $request->ic_estd_civil;
+
+        $passengers = Passenger::orderBy('nm_psgr');
+
+        if ($ic_sexo_psgr)
+            $passengers->where('ic_sexo_psgr', $ic_sexo_psgr);
+
+        if ($ic_estd_civil)
+            $passengers->where('ic_estd_civil', $ic_estd_civil);
+
+        $passengers = $passengers->get();
 
         $average = 0;
-
         foreach ($passengers as $passenger) {
             $birthdate = new DateTime(date(config('general.format.date'), strtotime($passenger->dt_nasc_psgr)));
             $age = $birthdate->diff(new DateTime());
             $average = $average + (int) $age->format('%y');
         }
-
         $average = $average / count($passengers);
 
         foreach ($passengers as $i => $passenger) {
@@ -162,9 +171,11 @@ class ReportController extends Controller
                 unset($passengers[$i]);
         }
 
-        return view('report.bigger_than_average', [
+        return view('report.average_age', [
             'passengers' => $passengers,
-            'average' => $average
+            'average' => $average,
+            'ic_sexo_psgr' => $ic_sexo_psgr,
+            'ic_estd_civil' => $ic_estd_civil
         ]);
     }
 }
