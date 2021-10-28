@@ -12,7 +12,7 @@
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}">Painel</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('equipment.index') }}">Equipamentos</a></li>
-                        <li class="breadcrumb-item active">Adicionar</li>
+                        <li class="breadcrumb-item active">Editar</li>
                     </ol>
                 </div>
             </div>
@@ -36,7 +36,7 @@
 
                     <div class="card-footer">
                         <a href="{{ route('equipment.index') }}" class="btn btn-sm bg-gradient-danger">Cancelar</a>
-                        <button class="btn btn-sm bg-gradient-second">Adicionar</button>
+                        <button class="btn btn-sm bg-gradient-second">Editar</button>
                     </div>
                 </form>
             </div>

@@ -12,7 +12,7 @@
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}">Painel</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('route.index') }}">Rotas de voo</a></li>
-                        <li class="breadcrumb-item active">Adicionar</li>
+                        <li class="breadcrumb-item active">Editar</li>
                     </ol>
                 </div>
             </div>
