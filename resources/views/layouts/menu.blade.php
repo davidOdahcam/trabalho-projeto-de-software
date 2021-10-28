@@ -133,14 +133,14 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('report.carrying_capacity') }}" class="nav-link">
+                        <a href="{{ route('report.carrying_capacity') }}" class="nav-link {{ activeMenu('relatorios/capacidade-de-transporte*') }}">
                             <i class="fas fa-file nav-icon"></i>
                             <p>Capacidade de transporte</p>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('report.bigger_than_average') }}" class="nav-link">
+                        <a href="{{ route('report.bigger_than_average') }}" class="nav-link {{ activeMenu('relatorios/companhias-por-paises*') }}">
                             <i class="fas fa-file nav-icon"></i>
                             <p>Passageiros com idade acima da média</p>
                         </a>

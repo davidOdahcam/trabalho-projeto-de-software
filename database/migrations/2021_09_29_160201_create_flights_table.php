@@ -14,9 +14,9 @@ class CreateFlightsTable extends Migration
     public function up()
     {
         Schema::create('itr_voo', function (Blueprint $table) {
-            $table->decimal('nr_voo', 3, 0);
+            $table->bigInteger('nr_voo');
             $table->date('dt_saida_voo');
-            $table->decimal('nr_rota_voo', 3, 0);
+            $table->bigInteger('nr_rota_voo');
             $table->string('cd_arnv', 5);
 
             $table->primary(['nr_voo', 'dt_saida_voo']);

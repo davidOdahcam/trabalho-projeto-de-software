@@ -1,16 +1,5 @@
 <div class="form-row">
     <div class="form-group col-md-4">
-        <label for="cd_psgr">Código</label>
-        <input type="number" name="cd_psgr" id="cd_psgr" class="form-control" value="{{ $passenger->cd_psgr ?? old('cd_psgr') }}">
-
-        @error('cd_psgr')
-            <span class="invalid-feedback d-block" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-    </div>
-
-    <div class="form-group col-md-4">
         <label for="nm_psgr">Nome</label>
         <input type="text" name="nm_psgr" id="nm_psgr" class="form-control" value="{{ $passenger->nm_psgr ?? old('nm_psgr') }}">
 

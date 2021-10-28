@@ -14,8 +14,8 @@ class CreateBookingsTable extends Migration
     public function up()
     {
         Schema::create('itr_resv', function (Blueprint $table) {
-            $table->decimal('cd_psgr', 4, 0);
-            $table->decimal('nr_voo', 3, 0);
+            $table->bigInteger('cd_psgr');
+            $table->bigInteger('nr_voo');
             $table->date('dt_saida_voo');
             $table->decimal('pc_desc_pasg', 5, 2)->nullable();
 

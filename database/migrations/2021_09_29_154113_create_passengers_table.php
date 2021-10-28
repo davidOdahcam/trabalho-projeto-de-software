@@ -14,16 +14,16 @@ class CreatePassengersTable extends Migration
     public function up()
     {
         Schema::create('itr_psgr', function (Blueprint $table) {
-            $table->decimal('cd_psgr', 4, 0);
+            $table->bigInteger('cd_psgr', true);
             $table->string('nm_psgr', 30);
             $table->string('ic_sexo_psgr', 1)->nullable();
             $table->date('dt_nasc_psgr')->nullable();
             $table->string('cd_pais', 2)->nullable();
             $table->string('ic_estd_civil', 1);
-            $table->decimal('cd_psgr_resp', 4, 0)->nullable(); // Auto Relacionamento
+            $table->bigInteger('cd_psgr_resp')->nullable();
 
-            $table->primary('cd_psgr');
             $table->foreign('cd_pais')->references('cd_pais')->on('itr_pais');
+            $table->foreign('cd_psgr_resp')->references('cd_psgr')->on('itr_psgr');
         });
     }
 
