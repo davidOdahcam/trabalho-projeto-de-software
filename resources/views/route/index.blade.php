@@ -51,8 +51,8 @@
                         @foreach ($routes as $route)
                             <tr>
                                 <td>{{ config('general.format.currency') }} {{ number_format($route->vr_pasg, 2, ',', '.') ?? config('general.format.empty') }}</td>
-                                <td>{{ $route->origin->nm_cidd ?? config('general.format.empty') }}</td>
-                                <td>{{ $route->destiny->nm_cidd ?? config('general.format.empty') }}</td>
+                                <td>{{ $route->origin->cd_arpt ?? '' }} <small>({{ $route->origin->nm_cidd ?? 'Aeroporto deletado' }})</small></td>
+                                <td>{{ $route->destiny->cd_arpt ?? '' }} <small>({{ $route->destiny->nm_cidd ?? 'Aeroporto deletado' }})</small></td>
                                 <td>
                                     {{-- <a href="{{ route('route.show', $route->nr_rota_voo) }}" class="btn btn-success btn-sm"  data-toggle="tooltip" title="Visualizar rota de voo">
                                         <i class="fas fa-eye"></i>

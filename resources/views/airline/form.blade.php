@@ -26,7 +26,7 @@
         <select name="cd_pais" id="cd_pais" class="form-control">
             <option value="">- Selecione um país -</option>
             @foreach ($countries as $country)
-                <option value="{{ $country->cd_pais }}" @if (isset($airline->cd_pais) && $airline->cd_pais == $country->cd_pais) selected @endif>{{ $country->nm_pais }}</option>
+                <option value="{{ $country->cd_pais }}" @if ((isset($airline->cd_pais) && $airline->cd_pais == $country->cd_pais) || ($country->cd_pais == old('cd_pais'))) selected @endif>{{ $country->nm_pais }}</option>
             @endforeach
         </select>
 

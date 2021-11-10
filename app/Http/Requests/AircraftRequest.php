@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\AircraftUnique;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AircraftRequest extends FormRequest
@@ -24,11 +23,10 @@ class AircraftRequest extends FormRequest
      */
     public function rules()
     {
-        $method = $this->method;
-        $id = $this->all()['cd_arnv'];
+        $cd_arnv = $this->segment(2);
 
         return [
-            'cd_arnv'       => ['required','max:5', new AircraftUnique('itr_arnv', $id, $method)],
+            'cd_arnv'       => "required|max:5|unique:itr_arnv,cd_arnv,{$cd_arnv},cd_arnv",
             'cd_eqpt'       => 'required|max:3',
             'cd_cmpn_aerea' => 'required|max:2'
         ];
@@ -38,6 +36,8 @@ class AircraftRequest extends FormRequest
     public function messages()
     {
         return [
+            'required'                  => 'O preenchimento deste campo é obrigatório',
+
             'cd_arnv.max'               => 'Não ultrapasse 5 caracteres',
             'cd_arnv.unique'            => 'O código já está em uso',
 

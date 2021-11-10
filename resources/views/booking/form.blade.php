@@ -7,7 +7,7 @@
         <select name="cd_psgr" id="cd_psgr" class="form-control">
             <option value="">- Selecione um passageiro -</option>
             @foreach ($passengers as $passenger)
-                <option value="{{ $passenger->cd_psgr }}" @if (isset($booking->cd_psgr) && $booking->cd_psgr == $passenger->cd_psgr) selected @endif>{{ $passenger->nm_psgr }}</option>
+                <option value="{{ $passenger->cd_psgr }}" @if ((isset($booking->cd_psgr) && $booking->cd_psgr == $passenger->cd_psgr) || ($passenger->cd_psgr == old('cd_psgr'))) selected @endif>{{ $passenger->nm_psgr }}</option>
             @endforeach
         </select>
 
@@ -36,7 +36,7 @@
 
     <div class="form-group col-md-4">
         <label for="pc_desc_pasg">Porcentagem de desconto</label>
-        <input type="number" name="pc_desc_pasg" id="pc_desc_pasg" class="form-control" value="{{ $booking->pc_desc_pasg ?? old('pc_desc_pasg') }}">
+        <input type="number" name="pc_desc_pasg" id="pc_desc_pasg" class="form-control" step="0.1" value="{{ $booking->pc_desc_pasg ?? old('pc_desc_pasg') }}">
 
         @error('pc_desc_pasg')
             <span class="invalid-feedback d-block" role="alert">

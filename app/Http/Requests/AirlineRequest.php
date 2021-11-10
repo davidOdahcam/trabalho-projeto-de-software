@@ -23,8 +23,10 @@ class AirlineRequest extends FormRequest
      */
     public function rules()
     {
+        $cd_cmpn_aerea = $this->segment(2);
+
         return [
-            'cd_cmpn_aerea' => 'required|max:2|unique:itr_cmpn_aerea,cd_cmpn_aerea',
+            'cd_cmpn_aerea' => "required|max:2|unique:itr_cmpn_aerea,cd_cmpn_aerea,{$cd_cmpn_aerea},cd_cmpn_aerea",
             'nm_cmpn_aerea' => 'required|max:22',
             'cd_pais'       => 'max:2'
         ];
@@ -34,7 +36,7 @@ class AirlineRequest extends FormRequest
     public function messages()
     {
         return [
-            'required'               => 'Campo não preenchido',
+            'required'               => 'O preenchimento deste campo é obrigatório',
 
             'cd_cmpn_aerea.max'      => 'Não ultrapasse 2 caracteres',
             'cd_cmpn_aerea.unique'   => 'O código já está em uso',
@@ -42,7 +44,7 @@ class AirlineRequest extends FormRequest
             'nm_cmpn_aerea.max'      => 'Não ultrapasse 22 caracteres',
             'nm_cmpn_aerea.required' => 'Você deve digitar um nome',
 
-            'cd_pais.max'            => 'Não ultrapasse 2 caracteres',
+            'cd_pais.max'            => 'Não ultrapasse 2 caracteres'
         ];
     }
 }

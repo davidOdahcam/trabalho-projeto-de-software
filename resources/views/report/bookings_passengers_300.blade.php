@@ -76,6 +76,7 @@
                                 <td>{{ $passenger->cd_psgr ?? config('general.format.empty') }}</td>
                                 <td>{{ $passenger->nm_psgr ?? config('general.format.empty') }}</td>
                                 <td>
+                                    @if (count($passenger->bookings))
                                     @foreach ($passenger->bookings as $booking)
                                         @php
                                             $flight = Flight::where(['nr_voo' => $booking->nr_voo, 'dt_saida_voo' => $booking->dt_saida_voo])->first();
@@ -83,6 +84,9 @@
                                         <strong>{{ $booking->nr_voo }}:</strong> {{ date(config('general.format.dateBR'), strtotime($booking->dt_saida_voo)) ?? config('general.format.empty') }}, {{ $flight->route->origin->cd_arpt ?? '' }} <small>({{ $flight->route->origin->nm_cidd ?? 'Aeroporto deletado' }})</small> — {{ $flight->route->destiny->cd_arpt ?? '' }} <small>({{ $flight->route->destiny->nm_cidd ?? 'Aeroporto deletado' }})</small>
                                         <br/>
                                     @endforeach
+                                    @else
+                                    <span class="text-muted">Não possui reservas</span>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
