@@ -45,7 +45,11 @@
 
     <div class="form-group col-md-4">
         <label for="ic_tipo_prps">Tipo de propulsor</label>
-        <input type="number" name="ic_tipo_prps" id="ic_tipo_prps" class="form-control" value="{{ $equipment->ic_tipo_prps ?? old('ic_tipo_prps') }}">
+        <select name="ic_tipo_prps" id="ic_tipo_prps" class="form-control">
+            <option value="">- Selecione um tipo de propulsor -</option>
+            <option value="R" @if (isset($equipment->ic_tipo_prps) && $equipment->ic_tipo_prps == 'R') selected @endif>R</option>
+            <option value="M" @if (isset($equipment->ic_tipo_prps) && $equipment->ic_tipo_prps == 'M') selected @endif>M</option>
+        </select>
 
         @error('ic_tipo_prps')
             <span class="invalid-feedback d-block" role="alert">

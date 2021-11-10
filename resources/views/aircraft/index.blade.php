@@ -54,9 +54,9 @@
                                 <td>{{ $aircraft->equipment->nm_eqpt ?? config('general.format.empty') }}</td>
                                 <td>{{ $aircraft->airline->nm_cmpn_aerea ?? config('general.format.empty') }}</td>
                                 <td>
-                                    <a href="{{ route('aircraft.show', $aircraft->cd_arnv) }}" class="btn btn-success btn-sm"  data-toggle="tooltip" title="Visualizar aeronave">
+                                    {{-- <a href="{{ route('aircraft.show', $aircraft->cd_arnv) }}" class="btn btn-success btn-sm"  data-toggle="tooltip" title="Visualizar aeronave">
                                         <i class="fas fa-eye"></i>
-                                    </a>
+                                    </a> --}}
                                     <a href="{{ route('aircraft.edit', $aircraft->cd_arnv) }}" class="btn btn-info btn-sm"  data-toggle="tooltip" title="Editar aeronave">
                                         <i class="fas fa-edit"></i>
                                     </a>

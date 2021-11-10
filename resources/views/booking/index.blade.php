@@ -66,9 +66,9 @@
                                 </td>
                                 <td>{{ number_format($booking->pc_desc_pasg, 2) ?? config('general.format.empty') }}</td>
                                 <td>
-                                    <a href="{{ route('booking.show', ['cd_psgr' => $booking->cd_psgr, 'nr_voo' => $booking->nr_voo, 'dt_saida_voo' => date(config('general.format.date'), strtotime($booking->dt_saida_voo))]) }}" id="delete_{{ $booking->dt_saida_voo }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar reserva">
+                                    {{-- <a href="{{ route('booking.show', ['cd_psgr' => $booking->cd_psgr, 'nr_voo' => $booking->nr_voo, 'dt_saida_voo' => date(config('general.format.date'), strtotime($booking->dt_saida_voo))]) }}" id="delete_{{ $booking->dt_saida_voo }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar reserva">
                                         <i class="fas fa-eye"></i>
-                                    </a>
+                                    </a> --}}
                                     <a href="{{ route('booking.edit', ['cd_psgr' => $booking->cd_psgr, 'nr_voo' => $booking->nr_voo, 'dt_saida_voo' => date(config('general.format.date'), strtotime($booking->dt_saida_voo))]) }}" id="delete_{{ $booking->dt_saida_voo }}" class="btn btn-info btn-sm" data-toggle="tooltip" title="Editar reserva">
                                         <i class="fas fa-edit"></i>
                                     </a>

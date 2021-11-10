@@ -164,13 +164,6 @@ class ReportController extends Controller
         }
         $average = $average / count($passengers);
 
-        foreach ($passengers as $i => $passenger) {
-            $birthdate = new DateTime(date(config('general.format.date'), strtotime($passenger->dt_nasc_psgr)));
-            $age = $birthdate->diff(new DateTime())->format('%y');
-            if ($age < $average)
-                unset($passengers[$i]);
-        }
-
         return view('report.average_age', [
             'passengers' => $passengers,
             'average' => $average,

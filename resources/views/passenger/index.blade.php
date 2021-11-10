@@ -54,9 +54,9 @@
                                 <td>{{ $passenger->country->nm_pais ?? config('general.format.empty') }}</td>
                                 <td>{{ $passenger->responsible->nm_psgr ?? config('general.format.empty') }}</td>
                                 <td>
-                                    <a href="{{ route('passenger.show', $passenger->cd_psgr) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar passageiro">
+                                    {{-- <a href="{{ route('passenger.show', $passenger->cd_psgr) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar passageiro">
                                         <i class="fas fa-eye"></i>
-                                    </a>
+                                    </a> --}}
                                     <a href="{{ route('passenger.edit', $passenger->cd_psgr) }}" class="btn btn-info btn-sm" data-toggle="tooltip" title="Editar passageiro">
                                         <i class="fas fa-edit"></i>
                                     </a>

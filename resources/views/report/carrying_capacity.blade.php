@@ -51,7 +51,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-10">
                             <select name="countries[]" id="countries" class="w-100 mr-0 select2" multiple>
-                                <option value="unknown" {{ (isset($selected_countries) && in_array('unknown', $selected_countries)) ? 'Selected' : '' }}>Origem desconhecida</option>
+                                <option value="unknown" {{ (isset($selected_countries) && in_array('unknown', $selected_countries)) ? 'Selected' : '' }}>ORIGEM DESCONHECIDA</option>
                                 @foreach ($countries as $country)
                                     <option value="{{ $country->cd_pais }}" {{ (isset($selected_countries) && in_array($country->cd_pais, $selected_countries)) ? 'Selected' : '' }}>{{ $country->nm_pais }}</option>
                                 @endforeach

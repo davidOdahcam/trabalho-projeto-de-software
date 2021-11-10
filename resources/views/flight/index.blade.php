@@ -54,9 +54,9 @@
                                 <td>{{ $flight->route->origin->cd_arpt }} <small>({{ $flight->route->origin->nm_cidd }})</small> — {{ $flight->route->origin->cd_arpt }} <small>({{ $flight->route->destiny->nm_cidd }})</small></td>
                                 <td>{{ $flight->cd_arnv ?? config('general.format.empty') }}</td>
                                 <td>
-                                    <a href="{{ route('flight.show', ['nr_voo' => $flight->nr_voo, 'dt_saida_voo' => date(config('general.format.date'), strtotime($flight->dt_saida_voo))]) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar voo">
+                                    {{-- <a href="{{ route('flight.show', ['nr_voo' => $flight->nr_voo, 'dt_saida_voo' => date(config('general.format.date'), strtotime($flight->dt_saida_voo))]) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar voo">
                                         <i class="fas fa-eye"></i>
-                                    </a>
+                                    </a> --}}
                                     <a href="{{ route('flight.edit', ['nr_voo' => $flight->nr_voo, 'dt_saida_voo' => date(config('general.format.date'), strtotime($flight->dt_saida_voo))]) }}" class="btn btn-info btn-sm" data-toggle="tooltip" title="Editar voo">
                                         <i class="fas fa-edit"></i>
                                     </a>

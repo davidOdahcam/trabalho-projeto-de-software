@@ -54,9 +54,9 @@
                                 <td>{{ $equipment->dc_tipo_eqpt ?? config('general.format.empty') }}</td>
                                 <td>{{ $equipment->qt_psgr ?? config('general.format.empty') }}</td>
                                 <td>
-                                    <a href="{{ route('equipment.show', $equipment->cd_eqpt) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar equipamento">
+                                    {{-- <a href="{{ route('equipment.show', $equipment->cd_eqpt) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar equipamento">
                                         <i class="fas fa-eye"></i>
-                                    </a>
+                                    </a> --}}
                                     <a href="{{ route('equipment.edit', $equipment->cd_eqpt) }}" class="btn btn-info btn-sm" data-toggle="tooltip" title="Editar equipamento">
                                         <i class="fas fa-edit"></i>
                                     </a>

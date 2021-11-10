@@ -54,9 +54,9 @@
                                 <td>{{ $airline->nm_cmpn_aerea ?? config('general.format.empty') }}</td>
                                 <td>{{ $airline->country->nm_pais ?? config('general.format.empty') }}</td>
                                 <td>
-                                    <a href="{{ route('airline.show', $airline->cd_cmpn_aerea) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar companhia aérea">
+                                    {{-- <a href="{{ route('airline.show', $airline->cd_cmpn_aerea) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar companhia aérea">
                                         <i class="fas fa-eye"></i>
-                                    </a>
+                                    </a> --}}
                                     <a href="{{ route('airline.edit', $airline->cd_cmpn_aerea) }}" class="btn btn-info btn-sm" data-toggle="tooltip" title="Editar companhia aérea">
                                         <i class="fas fa-edit"></i>
                                     </a>

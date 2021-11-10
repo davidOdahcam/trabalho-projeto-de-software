@@ -54,9 +54,9 @@
                                 <td>{{ $country->nm_pais ?? config('general.format.empty') }}</td>
                                 <td>{{ ($country->qt_pplc_pais) ? number_format($country->qt_pplc_pais, 0, '', '.') : config('general.format.empty') }}</td>
                                 <td>
-                                    <a href="{{ route('country.show', $country->cd_pais) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar país">
+                                    {{-- <a href="{{ route('country.show', $country->cd_pais) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar país">
                                         <i class="fas fa-eye"></i>
-                                    </a>
+                                    </a> --}}
                                     <a href="{{ route('country.edit', $country->cd_pais) }}" class="btn btn-info btn-sm" data-toggle="tooltip" title="Editar país">
                                         <i class="fas fa-edit"></i>
                                     </a>

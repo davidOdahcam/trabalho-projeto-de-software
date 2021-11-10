@@ -52,9 +52,9 @@
                                 <td>{{ $state->sg_uf ?? config('general.format.empty') }}</td>
                                 <td>{{ $state->nm_uf ?? config('general.format.empty') }}</td>
                                 <td>
-                                    <a href="{{ route('state.show', $state->sg_uf) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar estado">
+                                    {{-- <a href="{{ route('state.show', $state->sg_uf) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar estado">
                                         <i class="fas fa-eye"></i>
-                                    </a>
+                                    </a> --}}
                                     <a href="{{ route('state.edit', $state->sg_uf) }}" class="btn btn-info btn-sm" data-toggle="tooltip" title="Editar estado">
                                         <i class="fas fa-edit"></i>
                                     </a>

@@ -56,9 +56,9 @@
                                 <td>{{ $airport->state->nm_uf ?? config('general.format.empty') }}</td>
                                 <td>{{ $airport->nm_cidd ?? config('general.format.empty') }}</td>
                                 <td>
-                                    <a href="{{ route('airport.show', $airport->cd_arpt) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar aeroporto">
+                                    {{-- <a href="{{ route('airport.show', $airport->cd_arpt) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar aeroporto">
                                         <i class="fas fa-eye"></i>
-                                    </a>
+                                    </a> --}}
                                     <a href="{{ route('airport.edit', $airport->cd_arpt) }}" class="btn btn-info btn-sm" data-toggle="tooltip" title="Editar aeroporto">
                                         <i class="fas fa-edit"></i>
                                     </a>

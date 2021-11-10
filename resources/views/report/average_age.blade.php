@@ -31,7 +31,7 @@
 <section class="content">
     <blockquote class="quote-second">
         <h5><i class="fas fa-info"></i> Observação:</h5>
-        <p>O propósito desta página é listar os passageiros solteiros e do sexo masculino que estejam com a idade acima da média entre si.</p>
+        <p>O propósito desta página é listar os passageiros filtrando por seu sexo e estado civil e, além disso, deve indicar se o passageiro está acima da idade média de seu grupo.</p>
         <p><strong>Idade média:</strong> {{ number_format($average, 2) }} anos</p>
     </blockquote>
 
@@ -43,7 +43,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-5">
                             <select name="ic_sexo_psgr" id="ic_sexo_psgr" class="form-control">
-                                <option value="">Estado civil</option>
+                                <option value="">Sexo</option>
                                 <option value="M" {{ (isset($ic_sexo_psgr) && $ic_sexo_psgr === 'M') ? 'Selected' : '' }}>Masculino</option>
                                 <option value="F" {{ (isset($ic_sexo_psgr) && $ic_sexo_psgr === 'F') ? 'Selected' : '' }}>Feminino</option>
                             </select>
@@ -51,7 +51,7 @@
 
                         <div class="form-group col-md-5">
                             <select name="ic_estd_civil" id="ic_estd_civil" class="form-control">
-                                <option value="">Sexo</option>
+                                <option value="">Estado civil</option>
                                 <option value="S" {{ (isset($ic_estd_civil) && $ic_estd_civil === 'S') ? 'Selected' : '' }}>Solteiro</option>
                                 <option value="C" {{ (isset($ic_estd_civil) && $ic_estd_civil === 'C') ? 'Selected' : '' }}>Casado</option>
                             </select>
@@ -71,6 +71,7 @@
                         <tr>
                             <th>Nome</th>
                             <th>Idade</th>
+                            <th>Média</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,14 +80,17 @@
                                 <td>{{ $passenger->nm_psgr ?? config('general.format.empty') }}</td>
                                 <td>
                                     @php
-                                        if ($passenger->ic_estd_civil === 'S') {
-                                            $birthdate = new DateTime(date(config('general.format.date'), strtotime($passenger->dt_nasc_psgr)));
-                                            $age = $birthdate->diff(new DateTime());
-                                            echo $age->format('%y anos');
-                                        } else {
-                                            echo (date(config('general.format.dateBR'), strtotime($passenger->dt_nasc_psgr)) ?? config('general.format.empty'));
-                                        }
+                                        $birthdate = new DateTime(date(config('general.format.date'), strtotime($passenger->dt_nasc_psgr)));
+                                        $age = (int) $birthdate->diff(new DateTime())->format('%y anos');
+                                        echo $age;
                                     @endphp
+                                </td>
+                                <td>
+                                    @if ($age > $average)
+                                        ACIMA
+                                    @else
+                                        ABAIXO
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

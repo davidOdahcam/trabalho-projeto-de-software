@@ -54,9 +54,9 @@
                                 <td>{{ $route->origin->nm_cidd ?? config('general.format.empty') }}</td>
                                 <td>{{ $route->destiny->nm_cidd ?? config('general.format.empty') }}</td>
                                 <td>
-                                    <a href="{{ route('route.show', $route->nr_rota_voo) }}" class="btn btn-success btn-sm"  data-toggle="tooltip" title="Visualizar rota de voo">
+                                    {{-- <a href="{{ route('route.show', $route->nr_rota_voo) }}" class="btn btn-success btn-sm"  data-toggle="tooltip" title="Visualizar rota de voo">
                                         <i class="fas fa-eye"></i>
-                                    </a>
+                                    </a> --}}
                                     <a href="{{ route('route.edit', $route->nr_rota_voo) }}" class="btn btn-info btn-sm"  data-toggle="tooltip" title="Editar rota de voo">
                                         <i class="fas fa-edit"></i>
                                     </a>
