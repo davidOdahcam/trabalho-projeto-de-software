@@ -2,11 +2,7 @@ class PSDataTable {
     /**
      * Instance of PSDataTable
      *
-     * @param string title
-     * @param array  columns
-     * @param string lang
-     * @param string datatable
-     * @param string buttons
+     * @param object options
      *
      * @return DataTable
      */
@@ -93,20 +89,16 @@ class PSDelete {
     /**
      * Instance of PSDataTable
      *
-     * @param string title
-     * @param array  columns
-     * @param string lang
-     * @param string datatable
-     * @param string buttons
+     * @param object options
      *
      * @return DataTable
      */
-    constructor(selector, title, form, action, operation) {
-        this.selector = selector;
-        this.title = title;
-        this.form = form;
-        this.action = action;
-        this.operation = operation;
+    constructor(options) {
+        this.selector = options.selector;
+        this.title = options.title;
+        this.form = options.form;
+        this.action = options.action;
+        this.operation = options.operation;
 
         this.init();
     }
@@ -115,6 +107,7 @@ class PSDelete {
 
         $(self.selector).on('submit', function (e) {
             e.preventDefault();
+
             const form = e.currentTarget;
             const tr = $(form).parents('tr');
             const action = form.action;

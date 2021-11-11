@@ -119,13 +119,13 @@
                 perPage: {{ config('general.datatable.per_page') }}
             });
 
-            const ps_delete = new PSDelete(
-                '.form-delete-airport',
-                'Tem certeza de que deseja deletar este aeroporto?',
-                'Você não poderá voltar atrás!',
-                'warning',
-                'Deletado'
-            );
+            const ps_delete = new PSDelete({
+                selector: '.form-delete-airport',
+                title: 'Tem certeza de que deseja deletar este aeroporto?',
+                form: 'Você não poderá voltar atrás!',
+                action: 'warning',
+                operation: 'Deletado'
+            });
         });
     </script>
 @endpush

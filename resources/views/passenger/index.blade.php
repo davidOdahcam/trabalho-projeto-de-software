@@ -117,13 +117,13 @@
                 perPage: {{ config('general.datatable.per_page') }}
             });
 
-            const ps_delete = new PSDelete(
-                '.form-delete-passenger',
-                'Tem certeza de que deseja deletar este passageiro?',
-                'Você não poderá voltar atrás!',
-                'warning',
-                'Deletado'
-            );
+            const ps_delete = new PSDelete({
+                selector: '.form-delete-passenger',
+                title: 'Tem certeza de que deseja deletar este passageiro?',
+                form: 'Você não poderá voltar atrás!',
+                action: 'warning',
+                operation: 'Deletado'
+            });
         });
     </script>
 @endpush

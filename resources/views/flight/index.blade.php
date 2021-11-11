@@ -119,13 +119,13 @@
                 perPage: {{ config('general.datatable.per_page') }}
             });
 
-            const ps_delete = new PSDelete(
-                '.form-delete-flight',
-                'Tem certeza de que deseja deletar este voo?',
-                'Você não poderá voltar atrás!',
-                'warning',
-                'Deletado'
-            );
+            const ps_delete = new PSDelete({
+                selector: '.form-delete-flight',
+                title: 'Tem certeza de que deseja deletar este voo?',
+                form: 'Você não poderá voltar atrás!',
+                action: 'warning',
+                operation: 'Deletado'
+            });
         });
     </script>
 @endpush

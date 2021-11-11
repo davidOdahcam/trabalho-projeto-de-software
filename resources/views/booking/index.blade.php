@@ -129,13 +129,13 @@
                 perPage: {{ config('general.datatable.per_page') }}
             });
 
-            const ps_delete = new PSDelete(
-                '.form-delete-booking',
-                'Tem certeza de que deseja deletar esta reserva?',
-                'Você não poderá voltar atrás!',
-                'warning',
-                'Deletada'
-            );
+            const ps_delete = new PSDelete({
+                selector: '.form-delete-booking',
+                title: 'Tem certeza de que deseja deletar esta reserva?',
+                form: 'Você não poderá voltar atrás!',
+                action: 'warning',
+                operation: 'Deletada'
+            });
         });
     </script>
 @endpush

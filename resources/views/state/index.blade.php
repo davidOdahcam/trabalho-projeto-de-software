@@ -115,13 +115,13 @@
                 perPage: {{ config('general.datatable.per_page') }}
             });
 
-            const ps_delete = new PSDelete(
-                '.form-delete-state',
-                'Tem certeza de que deseja deletar este estado?',
-                'Você não poderá voltar atrás!',
-                'warning',
-                'Deletado'
-            );
+            const ps_delete = new PSDelete({
+                selector: '.form-delete-state',
+                title: 'Tem certeza de que deseja deletar este estado?',
+                form: 'Você não poderá voltar atrás!',
+                action: 'warning',
+                operation: 'Deletado'
+            });
         });
     </script>
 @endpush

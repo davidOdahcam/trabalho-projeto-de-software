@@ -117,13 +117,13 @@
                 perPage: {{ config('general.datatable.per_page') }}
             });
 
-            const ps_delete = new PSDelete(
-                '.form-delete-airline',
-                'Tem certeza de que deseja deletar esta companhia aérea?',
-                'Você não poderá voltar atrás!',
-                'warning',
-                'Deletada'
-            );
+            const ps_delete = new PSDelete({
+                selector: '.form-delete-airline',
+                title: 'Tem certeza de que deseja deletar esta companhia aérea?',
+                form: 'Você não poderá voltar atrás!',
+                action: 'warning',
+                operation: 'Deletada'
+            });
         });
     </script>
 @endpush

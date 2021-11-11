@@ -117,13 +117,13 @@
                 perPage: {{ config('general.datatable.per_page') }}
             });
 
-            const ps_delete = new PSDelete(
-                '.form-delete-aircraft',
-                'Tem certeza de que deseja deletar esta aeronave?',
-                'Você não poderá voltar atrás!',
-                'warning',
-                'Deletada'
-            );
+            const ps_delete = new PSDelete({
+                selector: '.form-delete-aircraft',
+                title: 'Tem certeza de que deseja deletar esta aeronave?',
+                form: 'Você não poderá voltar atrás!',
+                action: 'warning',
+                operation: 'Deletada'
+            });
         });
     </script>
 @endpush
