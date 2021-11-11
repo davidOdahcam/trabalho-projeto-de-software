@@ -46,13 +46,7 @@ class BookingRequest extends FormRequest
         return [
             'required'               => 'O preenchimento deste campo é obrigatório',
 
-            'cd_cmpn_aerea.max'      => 'Não ultrapasse 2 caracteres',
-            'cd_cmpn_aerea.unique'   => 'O código já está em uso',
-
-            'nm_cmpn_aerea.max'      => 'Não ultrapasse 22 caracteres',
-            'nm_cmpn_aerea.required' => 'Você deve digitar um nome',
-
-            'cd_pais.max'            => 'Não ultrapasse 2 caracteres'
+            'cd_psgr.required'       => 'Você deve selecionar um passageiro',
         ];
     }
 }
