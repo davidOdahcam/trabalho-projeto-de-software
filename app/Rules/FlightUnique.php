@@ -5,7 +5,7 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
-class BookingUnique implements Rule
+class FlightUnique implements Rule
 {
     private $table, $columns, $columnsValues, $request;
 
@@ -14,12 +14,11 @@ class BookingUnique implements Rule
      *
      * @return void
      */
-    public function __construct($table, $columnsValues = null, $request = null, $columns = ['cd_psgr', 'nr_voo', 'dt_saida_voo'])
+    public function __construct($table, $columnsValues = null, $request = null, $columns = ['nr_voo', 'dt_saida_voo'])
     {
         $this->table = $table;
         if (isset($columnsValues)) {
             $this->columnsValues = [
-                'cd_psgr' => $columnsValues['cd_psgr'],
                 'nr_voo' => $columnsValues['nr_voo'],
                 'dt_saida_voo' => $columnsValues['dt_saida_voo']
             ];
@@ -41,17 +40,17 @@ class BookingUnique implements Rule
         $where = $this->request;
         unset($where['_token']);
         unset($where['_method']);
-        unset($where['pc_desc_pasg']);
+        unset($where['nr_rota_voo']);
+        unset($where['cd_arnv']);
 
         $result = DB::table($this->table)->where($this->columnsValues)->first();
 
         if ($result) {
-            $cd_psgr = $this->columnsValues['cd_psgr'];
             $nr_voo = $this->columnsValues['nr_voo'];
             $dt_saida_voo = $this->columnsValues['dt_saida_voo'];
 
-            if (($result->cd_psgr == $cd_psgr) && ($result->nr_voo == $nr_voo) && ($result->dt_saida_voo == $dt_saida_voo)) {
-                if (($where['cd_psgr'] == $cd_psgr) && ($where['nr_voo'] == $nr_voo) && ($where['dt_saida_voo'] == $dt_saida_voo)) {
+            if (($result->nr_voo == $nr_voo) && ($result->dt_saida_voo == $dt_saida_voo)) {
+                if (($where['nr_voo'] == $nr_voo) && ($where['dt_saida_voo'] == $dt_saida_voo)) {
                     return true;
                 }
             }
@@ -69,6 +68,6 @@ class BookingUnique implements Rule
      */
     public function message()
     {
-        return 'Este passageiro já possui uma reserva cadastrada para este voo';
+        return 'Já existe um voo com o mesmo código de data de saída';
     }
 }

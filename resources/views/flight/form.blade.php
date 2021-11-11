@@ -2,12 +2,6 @@
     <div class="form-group col-md-4">
         <label for="nr_voo">Número do voo</label>
         <input type="number" name="nr_voo" id="nr_voo" class="form-control" value="{{ $flight->nr_voo ?? old('nr_voo') }}">
-
-        @error('nr_voo')
-            <span class="invalid-feedback d-block" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
     </div>
 
     <div class="form-group col-md-4">

@@ -23,8 +23,12 @@ class CountryRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $cd_pais = $this->segment(2);
 
+        return [
+            'cd_pais'      => "required|max:2|unique:itr_pais,cd_pais,{$cd_pais},cd_pais",
+            'nm_pais'      => 'required|max:25',
+            'qt_pplc_pais' => 'numeric'
         ];
     }
 
@@ -32,7 +36,10 @@ class CountryRequest extends FormRequest
     public function messages()
     {
         return [
-
+            'required'    => 'O preenchimento deste campo é obrigatório',
+            'numeric'     => 'O valor deste campo deve ser numérico',
+            'cd_pais.max' => 'Não ultrapasse 2 caracteres',
+            'nm_pais.max' => 'Não ultrapasse 25 caracteres',
         ];
     }
 }

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}">
+@endpush
+
 @section('content')
     <div class="content-header">
         <div class="container-fluid">
@@ -43,3 +47,18 @@
         </div>
     </section>
 @endsection
+
+@push('js')
+    <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+
+    @error('nr_voo')
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '{{ $message }}',
+            confirmButtonText: 'Fechar'
+        });
+    </script>
+    @enderror
+@endpush

@@ -37,14 +37,11 @@ class AirportRequest extends FormRequest
     public function messages()
     {
         return [
-            'required'                  => 'O preenchimento deste campo é obrigatório',
-
-            'cd_arpt.max'               => 'Não ultrapasse 3 caracteres',
-            'cd_arpt.unique'            => 'O código já está em uso',
-
-            'sg_uf.max'                 => 'Não ultrapasse 2 caracteres',
-
-            'nm_cidd.max'               => 'Não ultrapasse 30 caracteres'
+            'required'       => 'O preenchimento deste campo é obrigatório',
+            'cd_arpt.unique' => 'O código já está em uso',
+            'cd_arpt.max'    => 'Não ultrapasse 3 caracteres',
+            'sg_uf.max'      => 'Não ultrapasse 2 caracteres',
+            'nm_cidd.max'    => 'Não ultrapasse 30 caracteres'
         ];
     }
 }

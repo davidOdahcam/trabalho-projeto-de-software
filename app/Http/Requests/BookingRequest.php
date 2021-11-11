@@ -44,9 +44,10 @@ class BookingRequest extends FormRequest
     public function messages()
     {
         return [
-            'required'               => 'O preenchimento deste campo é obrigatório',
-
-            'cd_psgr.required'       => 'Você deve selecionar um passageiro',
+            'required'         => 'O preenchimento deste campo é obrigatório',
+            'numeric'          => 'O valor deste campo deve ser numérico',
+            'cd_psgr.required' => 'Você deve selecionar um passageiro',
+            'cd_psgr.unique'   => 'O código já está em uso',
         ];
     }
 }

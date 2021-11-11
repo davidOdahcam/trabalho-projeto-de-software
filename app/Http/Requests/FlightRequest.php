@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\FlightUnique;
 use Illuminate\Foundation\Http\FormRequest;
 
 class FlightRequest extends FormRequest
@@ -23,8 +24,20 @@ class FlightRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $cd_voo = $this->segment(2);
 
+        $data = [
+            'nr_voo' => $this->segment(2),
+            'dt_saida_voo' => $this->segment(3)
+        ];
+
+        $request = $this->request->all();
+
+        return [
+            'nr_voo'        => ['required', 'numeric', new FlightUnique('itr_voo', $data, $request)],
+            'dt_saida_voo'  => 'required|date',
+            'nr_rota_voo'   => 'required|numeric',
+            'cd_arnv'       => 'required|max:5'
         ];
     }
 
@@ -32,7 +45,11 @@ class FlightRequest extends FormRequest
     public function messages()
     {
         return [
-
+            'required'          => 'O preenchimento deste campo é obrigatório',
+            'numeric'           => 'O valor deste campo deve ser numérico',
+            'nr_voo.numeric'    => 'O número do voo deve conter apenas números',
+            'cd_arnv.required'  => 'Você deve selecionar uma aeronave',
+            'cd_arnv.max'       => 'Selecione uma aeronave válida'
         ];
     }
 }

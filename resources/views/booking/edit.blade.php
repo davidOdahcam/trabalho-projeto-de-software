@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}">
+@endpush
+
 @section('content')
     <div class="content-header">
         <div class="container-fluid">
@@ -43,3 +47,26 @@
         </div>
     </section>
 @endsection
+
+@push('js')
+    <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+
+    <script>
+        $('#nr_voo').on('change', function () {
+            const values = $(this).val().split('/');
+
+            $('[name="nr_voo"]').val(values[0]);
+            $('[name="dt_saida_voo"]').val(values[1]);
+
+        });
+
+        @error('cd_psgr')
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '{{ $message }}',
+                confirmButtonText: 'Fechar'
+            });
+        @enderror
+    </script>
+@endpush
