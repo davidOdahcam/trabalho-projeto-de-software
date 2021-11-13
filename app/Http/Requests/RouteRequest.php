@@ -24,7 +24,9 @@ class RouteRequest extends FormRequest
     public function rules()
     {
         return [
-
+            'cd_arpt_orig'  => 'required|max:3',
+            'cd_arpt_dest'  => 'required|max:3',
+            'vr_pasg'       => 'numeric'
         ];
     }
 
@@ -32,7 +34,10 @@ class RouteRequest extends FormRequest
     public function messages()
     {
         return [
-
+            'required'              => 'O preenchimento deste campo é obrigatório',
+            'numeric'               => 'O valor deste campo deve ser numérico',
+            'cd_arpt_orig.required' => 'Selecione um aeroporto válido',
+            'cd_arpt_dest.required'          => 'Selecione um aeroporto válido',
         ];
     }
 }

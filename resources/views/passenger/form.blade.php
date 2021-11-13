@@ -55,9 +55,9 @@
     <div class="form-group col-md-4">
         <label for="ic_estd_civil">Estado civil</label>
         <select name="ic_estd_civil" id="ic_estd_civil" class="form-control">
-            <option value="">- Selecione um país -</option>
-            <option value="C" @if (isset($passenger->ic_estd_civil) && $passenger->ic_estd_civil == 'C') selected @endif>Casado</option>
-            <option value="S" @if (isset($passenger->ic_estd_civil) && $passenger->ic_estd_civil == 'S') selected @endif>Solteiro</option>
+            <option value="">- Selecione um estado civil -</option>
+            <option value="C" @if ((isset($passenger->ic_estd_civil) && $passenger->ic_estd_civil == 'C') || (old('ic_estd_civil') == 'C'))  selected @endif>Casado</option>
+            <option value="S" @if ((isset($passenger->ic_estd_civil) && $passenger->ic_estd_civil == 'S') || (old('ic_estd_civil') == 'S'))  selected @endif>Solteiro</option>
         </select>
 
         @error('ic_estd_civil')

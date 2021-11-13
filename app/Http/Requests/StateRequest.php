@@ -24,7 +24,8 @@ class StateRequest extends FormRequest
     public function rules()
     {
         return [
-
+            'sg_uf' => 'required|max:2',
+            'nm_uf' => 'required|max:25',
         ];
     }
 
@@ -32,7 +33,9 @@ class StateRequest extends FormRequest
     public function messages()
     {
         return [
-
+            'required'  => 'O preenchimento deste campo é obrigatório',
+            'sg_uf.max' => 'Não ultrapasse 2 caracteres',
+            'nm_uf.max' => 'Não ultrapasse 25 caracteres'
         ];
     }
 }
