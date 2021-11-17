@@ -50,7 +50,7 @@
                 <table id="main-datatable" class="table table-striped text-center" style="width:100%">
                     <thead>
                         <tr>
-                            <td>Rota <small>(origem - Destino)</small></td>
+                            <td>Rota <small>(Origem - Destino)</small></td>
                             <th>Quantidade de voos</th>
                         </tr>
                     </thead>
@@ -104,7 +104,8 @@
                 datatable: '#main-datatable',
                 buttons: '#export-datatable',
                 perPage: -1,
-                paging: false
+                paging: false,
+                order : [[ 1, "asc" ]]
             });
 
             $('.select2').select2({

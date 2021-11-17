@@ -35,7 +35,7 @@ class FlightRequest extends FormRequest
 
         return [
             'nr_voo'        => ['required', 'numeric', new FlightUnique('itr_voo', $data, $request)],
-            'dt_saida_voo'  => 'required|date',
+            'dt_saida_voo'  => 'required|date|after:today',
             'nr_rota_voo'   => 'required|numeric',
             'cd_arnv'       => 'required|max:5'
         ];
@@ -45,11 +45,12 @@ class FlightRequest extends FormRequest
     public function messages()
     {
         return [
-            'required'          => 'O preenchimento deste campo é obrigatório',
-            'numeric'           => 'O valor deste campo deve ser numérico',
-            'nr_voo.numeric'    => 'O número do voo deve conter apenas números',
-            'cd_arnv.required'  => 'Você deve selecionar uma aeronave',
-            'cd_arnv.max'       => 'Selecione uma aeronave válida'
+            'required'           => 'O preenchimento deste campo é obrigatório',
+            'numeric'            => 'O valor deste campo deve ser numérico',
+            'dt_saida_voo.after' => 'A data de saída não pode ser retroativa',
+            'nr_voo.numeric'     => 'O número do voo deve conter apenas números',
+            'cd_arnv.required'   => 'Você deve selecionar uma aeronave',
+            'cd_arnv.max'        => 'Selecione uma aeronave válida'
         ];
     }
 }
