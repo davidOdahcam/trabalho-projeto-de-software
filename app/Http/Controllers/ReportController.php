@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\Equipment;
 use App\Models\Flight;
 use App\Models\Passenger;
+use App\Models\Route;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -169,6 +170,21 @@ class ReportController extends Controller
             'average' => $average,
             'ic_sexo_psgr' => $ic_sexo_psgr,
             'ic_estd_civil' => $ic_estd_civil
+        ]);
+    }
+
+
+    public function flightsByRoute(Request $request)
+    {
+        // $routes = DB::select('SELECT `itr_voo`.`nr_rota_voo` AS `route`, COUNT(*) AS `bookings` FROM `itr_rota_voo`
+        //                    INNER JOIN `itr_voo` ON `itr_rota_voo`.`nr_rota_voo` = `itr_voo`.`nr_rota_voo`
+        //                    INNER JOIN `itr_resv` ON `itr_resv`.`nr_voo` = `itr_voo`.`nr_voo` AND `itr_resv`.`dt_saida_voo` = `itr_voo`.`dt_saida_voo`
+        //                    GROUP BY `itr_rota_voo`.`nr_rota_voo`');
+
+        $routes = Route::all();
+
+        return view('report.flights_by_route', [
+            'routes' => $routes
         ]);
     }
 }

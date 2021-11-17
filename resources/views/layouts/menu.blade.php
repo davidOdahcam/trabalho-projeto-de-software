@@ -145,6 +145,13 @@
                             <p>Média de idade</p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('report.flights_by_route') }}" class="nav-link {{ activeMenu('relatorios/voos-por-rota*') }}">
+                            <i class="fas fa-file nav-icon"></i>
+                            <p>Voos por rota</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>

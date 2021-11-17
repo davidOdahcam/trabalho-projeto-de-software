@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Route extends Model
 {
@@ -39,5 +40,15 @@ class Route extends Model
     public function destiny()
     {
         return $this->hasOne(Airport::class, 'cd_arpt', 'cd_arpt_dest');
+    }
+
+
+    public function total_bookings()
+    {
+        $query = DB::selectOne("SELECT COUNT(*) AS `total` FROM `itr_resv`
+                                INNER JOIN `itr_voo` ON `itr_resv`.`nr_voo` = `itr_voo`.`nr_voo` AND `itr_resv`.`dt_saida_voo` = `itr_voo`.`dt_saida_voo`
+                                WHERE `itr_voo`.`nr_rota_voo` = {$this->nr_rota_voo}");
+
+        return $query->total;
     }
 }

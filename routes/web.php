@@ -59,5 +59,6 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], fu
         Route::get('/voos-por-cidade', 'ReportController@flightsCity')->name('report.flights_city');
         Route::get('/capacidade-de-transporte', 'ReportController@carryingCapacity')->name('report.carrying_capacity');
         Route::get('/media-de-idade', 'ReportController@averageAge')->name('report.average_age');
+        Route::get('/voos-por-rota', 'ReportController@flightsByRoute')->name('report.flights_by_route');
     });
 });
