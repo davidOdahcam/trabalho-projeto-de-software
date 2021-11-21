@@ -31,7 +31,7 @@ class BookingController extends Controller
     public function create()
     {
         $passengers = Passenger::select(['cd_psgr', 'nm_psgr'])->get();
-        $flights = Flight::all();
+        $flights = Flight::where('dt_saida_voo', '>=', date('Y-m-d'))->orderBy('dt_saida_voo', 'DESC')->get();
 
         return view('admin.booking.create', [
             'passengers' => $passengers,
