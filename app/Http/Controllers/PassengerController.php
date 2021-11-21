@@ -134,34 +134,28 @@ class PassengerController extends Controller
      */
     public function destroy($id)
     {
-        // DB::beginTransaction();
+        try {
+            $passenger = Passenger::findOrFail($id);
+            $deleted = $passenger->delete();
 
-        // $passenger = Passenger::findOrFail($id);
-        // $deleted = $passenger->delete();
-
-        // if ($deleted) {
-        //     DB::commit();
-        //     Session::flash('success', 'Aeronave deletada com sucesso!');
-        // } else {
-        //     DB::rollBack();
-        //     Session::flash('error', 'Erro ao deletar a aeronave!');
-        // }
-
-        // return Redirect::route('passenger.index');
-
-        $passenger = Passenger::findOrFail($id);
-        $deleted = $passenger->delete();
-
-        if ($deleted) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Companhia aérea deletada com sucesso!'
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Ocorreu uma falha ao deletar a companhia aérea!'
-            ]);
+            if ($deleted) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Passageiro deletado com sucesso!'
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Ocorreu uma falha ao deletar o passageiro!'
+                ]);
+            }
+        } catch (\Throwable $th) {
+            if ($th->getCode() === '23000') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Impossível deletar este passageiro, pois ele está relacionada a outras entidades!'
+                ]);
+            }
         }
     }
 }

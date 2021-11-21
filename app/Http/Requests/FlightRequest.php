@@ -35,7 +35,7 @@ class FlightRequest extends FormRequest
 
         return [
             'nr_voo'        => ['required', 'numeric', new FlightUnique('itr_voo', $data, $request)],
-            'dt_saida_voo'  => 'required|date|after:today',
+            'dt_saida_voo'  => 'required|date|after_or_equal:today',
             'nr_rota_voo'   => 'required|numeric',
             'cd_arnv'       => 'required|max:5'
         ];

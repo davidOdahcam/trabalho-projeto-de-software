@@ -35,7 +35,7 @@ class BookingRequest extends FormRequest
         return [
             'cd_psgr'       => ['required', new BookingUnique('itr_resv', $data, $request)],
             'nr_voo'        => 'required|numeric',
-            'dt_saida_voo'  => 'required',
+            'dt_saida_voo'  => 'required|date|after_or_equal:today',
             'pc_desc_pasg'  => ''
         ];
     }
