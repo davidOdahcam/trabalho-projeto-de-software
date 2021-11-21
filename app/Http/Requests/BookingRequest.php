@@ -36,7 +36,7 @@ class BookingRequest extends FormRequest
             'cd_psgr'       => ['required', new BookingUnique('itr_resv', $data, $request)],
             'nr_voo'        => 'required|numeric',
             'dt_saida_voo'  => 'required|date|after_or_equal:today',
-            'pc_desc_pasg'  => ''
+            'pc_desc_pasg'  => 'between:0,100'
         ];
     }
 
@@ -44,10 +44,12 @@ class BookingRequest extends FormRequest
     public function messages()
     {
         return [
-            'required'         => 'O preenchimento deste campo é obrigatório',
-            'numeric'          => 'O valor deste campo deve ser numérico',
-            'cd_psgr.required' => 'Você deve selecionar um passageiro',
-            'cd_psgr.unique'   => 'O código já está em uso',
+            'required'                    => 'O preenchimento deste campo é obrigatório',
+            'numeric'                     => 'O valor deste campo deve ser numérico',
+            'cd_psgr.required'            => 'Você deve selecionar um passageiro',
+            'cd_psgr.unique'              => 'O código já está em uso',
+            'dt_saida_voo.after_or_equal' => 'A data de saída deve código já está em uso',
+            'pc_desc_pasg.between'        => 'A porcentagem de desconto deve estar entre 0% e 100%',
         ];
     }
 }

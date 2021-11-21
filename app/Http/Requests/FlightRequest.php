@@ -45,12 +45,12 @@ class FlightRequest extends FormRequest
     public function messages()
     {
         return [
-            'required'           => 'O preenchimento deste campo é obrigatório',
-            'numeric'            => 'O valor deste campo deve ser numérico',
-            'dt_saida_voo.after' => 'A data de saída não pode ser retroativa',
-            'nr_voo.numeric'     => 'O número do voo deve conter apenas números',
-            'cd_arnv.required'   => 'Você deve selecionar uma aeronave',
-            'cd_arnv.max'        => 'Selecione uma aeronave válida'
+            'required'                    => 'O preenchimento deste campo é obrigatório',
+            'numeric'                     => 'O valor deste campo deve ser numérico',
+            'dt_saida_voo.after_or_equal' => 'A data de saída não pode ser retroativa',
+            'nr_voo.numeric'              => 'O número do voo deve conter apenas números',
+            'cd_arnv.required'            => 'Você deve selecionar uma aeronave',
+            'cd_arnv.max'                 => 'Selecione uma aeronave válida'
         ];
     }
 }
