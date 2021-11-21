@@ -40,7 +40,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
     });
 
     Route::group(['prefix' => '/paises'], function() {
-        Route::delete('/{cd_pais}/deletar', 'CountryController@destroy')->name('api.flight.destroy');
+        Route::delete('/{cd_pais}/deletar', 'CountryController@destroy')->name('api.country.destroy');
     });
 
     Route::group(['prefix' => '/equipamentos'], function() {
