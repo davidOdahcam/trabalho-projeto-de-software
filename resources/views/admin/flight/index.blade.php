@@ -112,7 +112,7 @@
         $(document).ready(function () {
             const ps_datatable = new PSDataTable({
                 title: '{{ config("app.name") }} - Voos, página {{ $flights->currentPage() }}',
-                columns: [0, 1, 2],
+                columns: [0, 1, 2, 3],
                 lang: "<?= asset('assets/lang/datatable/pt_BR.json') ?>",
                 datatable: '#main-datatable',
                 buttons: '#export-datatable',
