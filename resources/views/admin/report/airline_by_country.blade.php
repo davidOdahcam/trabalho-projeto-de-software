@@ -58,6 +58,15 @@
                             </select>
                         </div>
 
+                        <div class="form-group col-md-12 clearfix">
+                            <div class="icheck-first d-inline">
+                                <input type="checkbox" type="checkbox" name="stranger" id="stranger" />
+                                <label for="stranger">
+                                    Selecionar todas as companhias estrangeiras
+                                </label>
+                            </div>
+                        </div>
+
                         <div class="form-group col-md-2">
                             <button class="btn btn-second btn-block">
                                 Filtrar
@@ -134,6 +143,22 @@
                 theme: 'bootstrap4',
                 placeholder: "Origem",
                 closeOnSelect: false
+            });
+
+            $('#stranger').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#countries option').each(function (i, option) {
+                        if (option.value !== 'BR')
+                            $(option).prop('selected', true);
+                    });
+                } else {
+                    $('#countries option').each(function (i, option) {
+                        if (option.value !== 'BR')
+                            $(option).prop('selected', false);
+                    });
+                }
+
+                $('#countries').trigger("change");
             });
         });
     </script>
