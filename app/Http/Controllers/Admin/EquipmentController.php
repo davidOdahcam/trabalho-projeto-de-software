@@ -16,7 +16,7 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        $equipments = Equipment::orderBy('nm_eqpt', 'ASC')->paginate(config('general.datatable.per_page'))->onEachSide(0);
+        $equipments = Equipment::orderBy('nm_eqpt', 'ASC')->paginate(config('general.datatable.per_page'));
 
         return view('admin.equipment.index', [
             'equipments' => $equipments

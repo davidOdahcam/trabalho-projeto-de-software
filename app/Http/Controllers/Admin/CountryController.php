@@ -16,7 +16,7 @@ class CountryController extends Controller
      */
     public function index()
     {
-        $countries = Country::orderBy('nm_pais', 'ASC')->paginate(config('general.datatable.per_page'))->onEachSide(0);
+        $countries = Country::orderBy('nm_pais', 'ASC')->paginate(config('general.datatable.per_page'));
 
         return view('admin.country.index', [
             'countries' => $countries

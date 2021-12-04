@@ -16,7 +16,7 @@ class AircraftController extends Controller
      */
     public function index()
     {
-        $aircrafts = Aircraft::paginate(config('general.datatable.per_page'))->onEachSide(0);
+        $aircrafts = Aircraft::paginate(config('general.datatable.per_page'));
 
         return view('admin.aircraft.index', [
             'aircrafts' => $aircrafts

@@ -16,7 +16,7 @@ class RouteController extends Controller
      */
     public function index()
     {
-        $routes = Route::orderBy('vr_pasg', 'ASC')->paginate(config('general.datatable.per_page'))->onEachSide(0);
+        $routes = Route::orderBy('vr_pasg', 'ASC')->paginate(config('general.datatable.per_page'));
 
         return view('admin.route.index', [
             'routes' => $routes

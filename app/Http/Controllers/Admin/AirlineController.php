@@ -16,7 +16,7 @@ class AirlineController extends Controller
      */
     public function index()
     {
-        $airlines = Airline::orderBy('nm_cmpn_aerea', 'ASC')->paginate(config('general.datatable.per_page'))->onEachSide(0);
+        $airlines = Airline::orderBy('nm_cmpn_aerea', 'ASC')->paginate(config('general.datatable.per_page'));
 
         return view('admin.airline.index', [
             'airlines' => $airlines

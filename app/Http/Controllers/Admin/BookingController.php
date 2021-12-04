@@ -16,7 +16,7 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::orderBy('dt_saida_voo', 'DESC')->paginate(config('general.datatable.per_page'))->onEachSide(0);
+        $bookings = Booking::orderBy('dt_saida_voo', 'DESC')->paginate(config('general.datatable.per_page'));
 
         return view('admin.booking.index', [
             'bookings' => $bookings
