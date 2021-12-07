@@ -55,12 +55,26 @@ class ReportController extends Controller
     }
 
 
-    public function notJet()
+    public function notJet(Request $request)
     {
-        $equipments = Equipment::where('qt_psgr', '<=', 100)->where('dc_tipo_eqpt', '!=', 'JATO')->orderBy('nm_eqpt', 'ASC')->get();
+        $selected_dc_tipo_eqpt = $request->selected_dc_tipo_eqpt;
+        $capacity = $request->capacity;
+
+        // $equipments = Equipment::where('qt_psgr', '<=', 100)->where('dc_tipo_eqpt', '!=', 'JATO')->orderBy('nm_eqpt', 'ASC')->get();
+        $equipments = Equipment::orderBy('nm_eqpt', 'ASC');
+
+        if ($selected_dc_tipo_eqpt)
+            $equipments->whereIn('dc_tipo_eqpt', $selected_dc_tipo_eqpt);
+
+        if ($capacity)
+            $equipments->where('qt_psgr', '<=', $capacity);
+
+        $equipments = $equipments->get();
 
         return view('admin.report.not_jet', [
-            'equipments' => $equipments
+            'equipments' => $equipments,
+            'selected_dc_tipo_eqpt' => $selected_dc_tipo_eqpt,
+            'capacity' => $capacity
         ]);
     }
 
