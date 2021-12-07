@@ -36,7 +36,7 @@
 <section class="content">
     <blockquote class="quote-second">
         <h5><i class="fas fa-info"></i> Observação:</h5>
-        <p>O propósito desta página é listar todos os passageiros que possuam um <strong>código de identificação menor do que 300</strong> e suas respectivas reservas.</strong>.</p>
+        <p>O propósito desta página é atender ao requisito que lista todos os passageiros que possuam um <strong>código de identificação menor do que 300</strong> e suas respectivas reservas</strong>.</p>
     </blockquote>
 
     <div class="container-fluid">

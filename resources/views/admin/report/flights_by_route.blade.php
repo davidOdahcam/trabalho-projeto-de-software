@@ -50,7 +50,7 @@
                 <table id="main-datatable" class="table table-striped text-center" style="width:100%">
                     <thead>
                         <tr>
-                            <td>Rota <small>(Origem - Destino)</small></td>
+                            <th>Rota <small>(Origem - Destino)</small></th>
                             <th>Quantidade de voos</th>
                         </tr>
                     </thead>
