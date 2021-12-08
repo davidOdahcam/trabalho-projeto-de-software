@@ -32,7 +32,7 @@ class ReportController extends Controller
     }
 
 
-    public function bookingsPassengers300(Request $request)
+    public function bookingsPassengers(Request $request)
     {
         $start = $request->start;
         $end = $request->end;
@@ -47,7 +47,7 @@ class ReportController extends Controller
             $passengers->where('cd_psgr', '<=', $end);
         }
 
-        return view('admin.report.bookings_passengers_300', [
+        return view('admin.report.bookings_passengers', [
             'passengers' => $passengers->get(),
             'start' => $start,
             'end' => $end
@@ -55,7 +55,7 @@ class ReportController extends Controller
     }
 
 
-    public function notJet(Request $request)
+    public function capacityByEquipment(Request $request)
     {
         $selected_dc_tipo_eqpt = $request->selected_dc_tipo_eqpt;
         $capacity = $request->capacity;
@@ -71,7 +71,7 @@ class ReportController extends Controller
 
         $equipments = $equipments->get();
 
-        return view('admin.report.not_jet', [
+        return view('admin.report.capacity_by_equipment', [
             'equipments' => $equipments,
             'selected_dc_tipo_eqpt' => $selected_dc_tipo_eqpt,
             'capacity' => $capacity

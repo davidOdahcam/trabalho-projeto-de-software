@@ -37,8 +37,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin'], function() {
 
     Route::group(['prefix' => '/relatorios'], function() {
         Route::get('/companhias-por-paises', 'ReportController@airlineByCountry')->name('admin.report.airline_by_country');
-        Route::get('/reservas-de-passageiros', 'ReportController@bookingsPassengers300')->name('admin.report.bookings_passengers_300');
-        Route::get('/capacidade-por-equipamento', 'ReportController@notJet')->name('admin.report.not_jet');
+        Route::get('/reservas-de-passageiros', 'ReportController@bookingsPassengers')->name('admin.report.bookings_passengers_300');
+        Route::get('/capacidade-por-equipamento', 'ReportController@capacityByEquipment')->name('admin.report.not_jet');
         Route::get('/equipamentos', 'ReportController@equipments')->name('admin.report.equipments');
         Route::get('/passageiros', 'ReportController@passengers')->name('admin.report.passengers');
         Route::get('/voos-por-cidade', 'ReportController@flightsCity')->name('admin.report.flights_city');
