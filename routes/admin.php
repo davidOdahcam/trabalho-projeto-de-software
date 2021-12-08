@@ -6,9 +6,9 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'auth
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::resource('/aeronaves', 'AircraftController')->names('admin.aircraft')->parameters(['aeronave' => 'aircraft']);
-    Route::resource('/companhias-aereas', 'AirlineController')->names('admin.airline')->parameters(['companhias_aerea' => 'airline']);
-    Route::resource('/aeroportos', 'AirportController')->names('admin.airport')->parameters(['aeroporto' => 'airport']);
+    Route::resource('/aeronaves', 'AircraftController')->except(['show', 'destroy'])->names('admin.aircraft')->parameters(['aeronave' => 'aircraft']);
+    Route::resource('/companhias-aereas', 'AirlineController')->except(['show', 'destroy'])->names('admin.airline')->parameters(['companhias_aerea' => 'airline']);
+    Route::resource('/aeroportos', 'AirportController')->except(['show', 'destroy'])->names('admin.airport')->parameters(['aeroporto' => 'airport']);
 
 
     Route::get('/reservas', 'BookingController@index')->name('admin.booking.index');
@@ -29,11 +29,11 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'auth
     Route::delete('/voos/{nr_voo}/{dt_saida_voo}', 'FlightController@destroy')->name('admin.flight.destroy');
 
 
-    Route::resource('/paises', 'CountryController')->names('admin.country')->parameters(['pais' => 'country']);
-    Route::resource('/equipamentos', 'EquipmentController')->names('admin.equipment')->parameters(['equipamento' => 'equipment']);
-    Route::resource('/passageiros', 'PassengerController')->names('admin.passenger')->parameters(['passageiro' => 'passenger']);
-    Route::resource('/rotas-de-voo', 'RouteController')->names('admin.route')->parameters(['rota' => 'route']);
-    Route::resource('/unidades-federais', 'StateController')->names('admin.state')->parameters(['uf' => 'uf']);
+    Route::resource('/paises', 'CountryController')->except(['show', 'destroy'])->names('admin.country')->parameters(['pais' => 'country']);
+    Route::resource('/equipamentos', 'EquipmentController')->except(['show', 'destroy'])->names('admin.equipment')->parameters(['equipamento' => 'equipment']);
+    Route::resource('/passageiros', 'PassengerController')->except(['show', 'destroy'])->names('admin.passenger')->parameters(['passageiro' => 'passenger']);
+    Route::resource('/rotas-de-voo', 'RouteController')->except(['show', 'destroy'])->names('admin.route')->parameters(['rota' => 'route']);
+    Route::resource('/unidades-federais', 'StateController')->except(['show', 'destroy'])->names('admin.state')->parameters(['uf' => 'uf']);
 
     Route::group(['prefix' => '/relatorios'], function() {
         Route::get('/companhias-por-paises', 'ReportController@airlineByCountry')->name('admin.report.airline_by_country');

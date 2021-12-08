@@ -105,7 +105,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('admin.report.not_jet') }}" class="nav-link">
+                        <a href="{{ route('admin.report.not_jet') }}" class="nav-link {{ activeMenu('admin/relatorios/capacidade-por-equipamento') }}">
                             <i class="fas fa-file nav-icon"></i>
                             <p>Capacidade por equipamento</p>
                         </a>

@@ -73,6 +73,7 @@
                         <tr>
                             <th>Companhia</th>
                             <th>Capacidade de passageiros</th>
+                            <th>É americana?</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,11 +82,12 @@
                                 <td>{{ $airline->nm_cmpn_aerea ?? config('general.format.empty') }}</td>
                                 <td>
                                     @if ($airline->american)
-                                        {{ $airline->total + 10 }}
+                                    {{ $airline->total + 10 }} <small class="text-muted">(antes {{ $airline->total }})</small>
                                     @else
-                                        {{ $airline->total }}
+                                    {{ $airline->total }}
                                     @endif
                                 </td>
+                                <td>{{ ($airline->american) ? 'SIM' : 'NÃO' }}</td>
                             </tr>
                         @endforeach
                     </tbody>

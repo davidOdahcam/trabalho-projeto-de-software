@@ -31,7 +31,7 @@
 <section class="content">
     <blockquote class="quote-second">
         <h5><i class="fas fa-info"></i> Observação:</h5>
-        <p>O propósito desta página é listar todos os equipamentos, acrescentando um motor para equipamentos do tipo <strong>"JATO"</strong> e não tenham <strong>"DOUGLAS"</strong> em seu nome.</p>
+        <p>O propósito desta página é listar todos os equipamentos, acrescentando um motor para equipamentos do tipo <strong>"JATO"</strong> e tenham <strong>"DOUGLAS"</strong> em seu nome.</p>
     </blockquote>
 
     <div class="container-fluid">
@@ -56,7 +56,7 @@
                                 <td>{{ $equipment->dc_tipo_eqpt ?? config('general.format.empty') }}</td>
                                 <td>
                                     @if (($equipment->dc_tipo_eqpt === 'JATO') && str_contains($equipment->nm_eqpt, 'DOUGLAS'))
-                                        {{ $equipment->qt_motor + 1 }}
+                                        {{ $equipment->qt_motor + 1 }} <small class="text-muted">(antes {{ $equipment->qt_motor }})</small>
                                     @else
                                         {{ $equipment->qt_motor }}
                                     @endif

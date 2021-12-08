@@ -32,7 +32,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
     });
 
     Route::group(['prefix' => '/reservas'], function() {
-        Route::delete('/{cd_psgr}/{nr_voo}/{dt_saida_voo}/deletar', 'AircraftController@destroy')->name('api.booking.destroy');
+        Route::delete('/{cd_psgr}/{nr_voo}/{dt_saida_voo}/deletar', 'BookingController@destroy')->name('api.booking.destroy');
     });
 
     Route::group(['prefix' => '/voos'], function() {

@@ -55,28 +55,13 @@ class FlightController extends Controller
 
         if ($created) {
             DB::commit();
-            sessionFlash('success', 'Aeroporto cadastrado com sucesso!');
+            sessionFlash('success', 'Voo cadastrado com sucesso!');
         } else {
             DB::rollBack();
-            sessionFlash('error', 'Erro ao cadastrar o aeroporto!');
+            sessionFlash('error', 'Erro ao cadastrar o voo!');
         }
 
         return redirect(route('admin.flight.index'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($nr_voo, $dt_saida_voo)
-    {
-        $flight = Flight::where(['nr_voo' => $nr_voo, 'dt_saida_voo' => $dt_saida_voo])->first();
-
-        return view('admin.flight.show', [
-            'flight' => $flight
-        ]);
     }
 
     /**
@@ -115,45 +100,12 @@ class FlightController extends Controller
 
         if ($updated) {
             DB::commit();
-            sessionFlash('success', 'Aeroporto atualizado com sucesso!');
+            sessionFlash('success', 'Voo atualizado com sucesso!');
         } else {
             DB::rollBack();
-            sessionFlash('error', 'Erro ao atualizar o aeroporto!');
+            sessionFlash('error', 'Erro ao atualizar o voo!');
         }
 
         return redirect(route('admin.flight.index'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($nr_voo, $dt_saida_voo)
-    {
-        try {
-            $flight = Flight::where(['nr_voo' => $nr_voo, 'dt_saida_voo' => $dt_saida_voo])->first();
-            $deleted = $flight->delete();
-
-            if ($deleted) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Aeroporto deletado com sucesso!'
-                ]);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Ocorreu uma falha ao deletar  aeroporto!'
-                ]);
-            }
-        } catch (\Throwable $th) {
-            if ($th->getCode() === '23000') {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Impossível deletar este voo, pois ele está relacionado a outras entidades!'
-                ]);
-            }
-        }
     }
 }

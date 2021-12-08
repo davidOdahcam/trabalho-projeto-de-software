@@ -59,21 +59,6 @@ class StateController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $state = State::findOrFail($id);
-
-        return view('admin.state.show', [
-            'state' => $state
-        ]);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -112,38 +97,5 @@ class StateController extends Controller
         }
 
         return redirect(route('admin.state.index'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        try {
-            $state = State::findOrFail($id);
-            $deleted = $state->delete();
-
-            if ($deleted) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Aeroporto deletado com sucesso!'
-                ]);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Ocorreu uma falha ao deletar aeroporto!'
-                ]);
-            }
-        } catch (\Throwable $th) {
-            if ($th->getCode() === '23000') {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Impossível deletar este estado, pois ele está relacionado a outras entidades!'
-                ]);
-            }
-        }
     }
 }

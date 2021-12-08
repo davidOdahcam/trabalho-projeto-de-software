@@ -65,21 +65,6 @@ class PassengerController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $passenger = Passenger::findOrFail($id);
-
-        return view('admin.passenger.show', [
-            'passenger' => $passenger
-        ]);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -122,38 +107,5 @@ class PassengerController extends Controller
         }
 
         return redirect(route('admin.passenger.index'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        try {
-            $passenger = Passenger::findOrFail($id);
-            $deleted = $passenger->delete();
-
-            if ($deleted) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Passageiro deletado com sucesso!'
-                ]);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Ocorreu uma falha ao deletar o passageiro!'
-                ]);
-            }
-        } catch (\Throwable $th) {
-            if ($th->getCode() === '23000') {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Impossível deletar este passageiro, pois ele está relacionada a outras entidades!'
-                ]);
-            }
-        }
     }
 }

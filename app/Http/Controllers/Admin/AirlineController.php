@@ -63,21 +63,6 @@ class AirlineController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $airline = Airline::findOrFail($id);
-
-        return view('admin.airline.show', [
-            'airline' => $airline
-        ]);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -118,38 +103,5 @@ class AirlineController extends Controller
         }
 
         return redirect(route('admin.airline.index'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        try {
-            $airline = Airline::findOrFail($id);
-            $deleted = $airline->delete();
-
-            if ($deleted) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Companhia aérea deletada com sucesso!'
-                ]);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Ocorreu uma falha ao deletar a companhia aérea!'
-                ]);
-            }
-        } catch (\Throwable $th) {
-            if ($th->getCode() === '23000') {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Impossível deletar esta companhia aérea, pois ela está relacionada a outras entidades!'
-                ]);
-            }
-        }
     }
 }

@@ -53,7 +53,7 @@
                             <tr>
                                 <td>{{ $flight->nr_voo ?? config('general.format.empty') }}</td>
                                 <td>{{ date(config('general.format.dateBR'), strtotime($flight->dt_saida_voo)) ?? config('general.format.empty') }}</td>
-                                <td>{{ $flight->route->origin->cd_arpt }} <small>({{ $flight->route->origin->nm_cidd }})</small> — {{ $flight->route->origin->cd_arpt }} <small>({{ $flight->route->destiny->nm_cidd }})</small></td>
+                                <td>{{ $flight->route->origin->cd_arpt }} <small>({{ $flight->route->origin->nm_cidd }})</small> — {{ $flight->route->destiny->cd_arpt }} <small>({{ $flight->route->destiny->nm_cidd }})</small></td>
                                 <td>{{ $flight->cd_arnv ?? config('general.format.empty') }}</td>
                                 <td>
                                     {{-- <a href="{{ route('admin.flight.show', ['nr_voo' => $flight->nr_voo, 'dt_saida_voo' => date(config('general.format.date'), strtotime($flight->dt_saida_voo))]) }}" class="btn btn-success btn-sm" data-toggle="tooltip" title="Visualizar voo">

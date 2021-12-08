@@ -65,21 +65,6 @@ class AircraftController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $aircraft = Aircraft::findOrFail($id);
-
-        return view('admin.aircraft.show', [
-            'aircraft' => $aircraft
-        ]);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -122,38 +107,5 @@ class AircraftController extends Controller
         }
 
         return redirect(route('admin.aircraft.index'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        try {
-            $aircraft = Aircraft::findOrFail($id);
-            $deleted = $aircraft->delete();
-
-            if ($deleted) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Aeronave deletada com sucesso!'
-                ]);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Ocorreu uma falha ao deletar a aeronave!'
-                ]);
-            }
-        } catch (\Throwable $th) {
-            if ($th->getCode() === '23000') {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Impossível deletar esta aeronave, pois ela está relacionada a outras entidades!'
-                ]);
-            }
-        }
     }
 }

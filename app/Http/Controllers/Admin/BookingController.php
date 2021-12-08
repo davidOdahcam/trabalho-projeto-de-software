@@ -65,21 +65,6 @@ class BookingController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($cd_psgr, $nr_voo, $dt_saida_voo)
-    {
-        $booking = Booking::where(['cd_psgr' => $cd_psgr, 'nr_voo' => $nr_voo, 'dt_saida_voo' => $dt_saida_voo])->first();
-
-        return view('admin.booking.show', [
-            'booking' => $booking
-        ]);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -122,28 +107,5 @@ class BookingController extends Controller
         }
 
         return redirect(route('admin.booking.index'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($cd_psgr, $nr_voo, $dt_saida_voo)
-    {
-        $deleted = Booking::where(['cd_psgr' => $cd_psgr, 'nr_voo' => $nr_voo, 'dt_saida_voo' => $dt_saida_voo])->delete();
-
-        if ($deleted) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Reserva deletada com sucesso!'
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Ocorreu uma falha ao deletar a reserva!'
-            ]);
-        }
     }
 }

@@ -65,21 +65,6 @@ class AirportController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $airport = Airport::findOrFail($id);
-
-        return view('admin.airport.show', [
-            'airport' => $airport
-        ]);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -122,38 +107,5 @@ class AirportController extends Controller
         }
 
         return redirect(route('admin.airport.index'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        try {
-            $airport = Airport::findOrFail($id);
-            $deleted = $airport->delete();
-
-            if ($deleted) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Aeroporto deletado com sucesso!'
-                ]);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Ocorreu uma falha ao deletar  aeroporto!'
-                ]);
-            }
-        } catch (\Throwable $th) {
-            if ($th->getCode() === '23000') {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Impossível deletar este aeroporto, pois ele está relacionado a outras entidades!'
-                ]);
-            }
-        }
     }
 }

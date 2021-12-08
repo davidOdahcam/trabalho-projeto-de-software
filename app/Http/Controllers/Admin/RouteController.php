@@ -63,21 +63,6 @@ class RouteController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $route = Route::findOrFail($id);
-
-        return view('admin.route.show', [
-            'route' => $route
-        ]);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -118,38 +103,5 @@ class RouteController extends Controller
         }
 
         return redirect(route('admin.route.index'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        try {
-            $route = Route::findOrFail($id);
-            $deleted = $route->delete();
-
-            if ($deleted) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Rota de voo deletada com sucesso!'
-                ]);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Ocorreu uma falha ao deletar a rota de voo!'
-                ]);
-            }
-        } catch (\Throwable $th) {
-            if ($th->getCode() === '23000') {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Impossível deletar esta rota de voo, pois ela está relacionada a outras entidades!'
-                ]);
-            }
-        }
     }
 }
