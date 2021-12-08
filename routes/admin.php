@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => 'auth'], function() {
+Route::group(['namespace' => 'App\Http\Controllers\Admin'], function() {
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index')->name('home');
 
