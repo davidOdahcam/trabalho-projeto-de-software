@@ -14,7 +14,7 @@ O projeto de sistema consiste em documentar e implementar um sistema de controle
 
 Clone o repositório
 
-    git clone git@github.com:davidOdahcam/trabalho-projeto-de-software.git
+    git clone https://github.com/davidOdahcam/trabalho-projeto-de-software.git
 
 Navegue até a pasta do repositório
 
